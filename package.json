@@ -1,0 +1,19 @@
+{
+  "name": "cuestiones-tef",
+  "version": "1.0.0",
+  "description": "Quiz de Prácticas de Laboratorio - 3º Física",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "quiz",
+    "physics",
+    "laboratory"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@vercel/analytics": "^2.0.1"
+  }
+}
