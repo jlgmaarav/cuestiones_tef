@@ -846,6 +846,12 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-restart').addEventListener('click', () => resetQuiz(false));
     document.getElementById('btn-restart-failed').addEventListener('click', () => resetQuiz(true));
     document.getElementById('btn-restart-exam').addEventListener('click', () => resetQuiz(false));
+    
+    // Listeners del Leaderboard
+    document.getElementById('btn-share-score').addEventListener('click', toggleShareBox);
+    document.getElementById('btn-generate-card').addEventListener('click', generateShareCard);
+    document.getElementById('btn-copy-card').addEventListener('click', copyShareCard);
+    document.getElementById('btn-add-friend-score').addEventListener('click', addFriendScore);
 });
 
 // Selección de Modo
@@ -916,6 +922,11 @@ function resetQuiz(onlyFailed = false) {
     document.getElementById('exam-results-card').classList.add('hidden');
     document.getElementById('quiz-play-container').classList.remove('hidden');
     document.getElementById('review-board-card').classList.add('hidden');
+    document.getElementById('leaderboard-card').classList.add('hidden');
+    // Cerrar la caja de compartir
+    document.getElementById('share-box-container').classList.add('hidden');
+    document.getElementById('share-name-input').value = '';
+    document.getElementById('share-card-text').value = '';
     
     if (state.mode === 'exam') {
         // Ocultar verificación en modo examen
@@ -954,7 +965,9 @@ function initQuiz() {
                 document.getElementById('quiz-play-container').classList.add('hidden');
                 document.getElementById('exam-results-card').classList.remove('hidden');
                 document.getElementById('review-board-card').classList.remove('hidden');
+                document.getElementById('leaderboard-card').classList.remove('hidden');
                 renderReviewBoard();
+                renderLeaderboard();
             }
         } else {
             document.getElementById('btn-verify').classList.remove('hidden');
@@ -1263,6 +1276,8 @@ function submitExam() {
     
     renderReviewBoard();
     document.getElementById('review-board-card').classList.remove('hidden');
+    document.getElementById('leaderboard-card').classList.remove('hidden');
+    renderLeaderboard();
     saveStateToLocalStorage();
 }
 
@@ -1612,5 +1627,241 @@ function loadStateFromLocalStorage() {
     } catch (e) {
         console.error('Error al cargar el estado desde localStorage:', e);
         return false;
+    }
+}
+
+
+// --- CLASIFICACIÓN Y COMPARTIR RESULTADOS ---
+const LEADERBOARD_KEY = 'lab_physics_leaderboard_v1';
+
+// Generar código de verificación (Hash anti-trampa)
+function generateVerificationCode(name, score, time) {
+    const salt = "fisica_lab_3_secret_2026";
+    const str = `${name.trim().toLowerCase()}-${score}-${time}-${salt}`;
+    let hash = 0;
+    for (let i = 0; i < str.length; i++) {
+        const char = str.charCodeAt(i);
+        hash = ((hash << 5) - hash) + char;
+        hash = hash & hash;
+    }
+    return Math.abs(hash).toString(16);
+}
+
+// Alternar caja de compartir
+function toggleShareBox() {
+    const box = document.getElementById('share-box-container');
+    box.classList.toggle('hidden');
+}
+
+// Generar tarjeta
+function generateShareCard() {
+    const nameInput = document.getElementById('share-name-input');
+    const name = nameInput.value.trim();
+    if (!name) {
+        alert('Por favor, introduce tu nombre antes de generar la tarjeta.');
+        return;
+    }
+    
+    // Contar aciertos del examen finalizado
+    let correct = 0;
+    state.questions.forEach((q, idx) => {
+        if (state.userAnswers[idx] === q.correct_index) {
+            correct++;
+        }
+    });
+    
+    const time = state.examTimeElapsed;
+    const mins = Math.floor(time / 60);
+    const secs = time % 60;
+    
+    const code = generateVerificationCode(name, correct, time);
+    
+    const text = `🏆 QUIZ EXAMEN LAB III - RESULTADO 🏆\n👤 Estudiante: ${name}\n✅ Respuestas correctas: ${correct} de ${state.questions.length}\n⏱️ Tiempo empleado: ${mins}m ${secs}s (${time} segundos)\n🔑 Código de verificación: ${code}`;
+    
+    document.getElementById('share-card-text').value = text;
+    
+    // Agregar también al leaderboard local de este ordenador
+    saveToLeaderboard(name, correct, time);
+}
+
+// Copiar tarjeta
+function copyShareCard() {
+    const textEl = document.getElementById('share-card-text');
+    if (!textEl.value) {
+        alert('Genera primero la tarjeta antes de copiarla.');
+        return;
+    }
+    
+    textEl.select();
+    textEl.setSelectionRange(0, 99999); // Para móviles
+    
+    try {
+        navigator.clipboard.writeText(textEl.value);
+        alert('¡Tarjeta de puntuación copiada al portapapeles! Envíala a tus amigos por WhatsApp.');
+    } catch (err) {
+        // Fallback
+        document.execCommand('copy');
+        alert('¡Tarjeta de puntuación copiada al portapapeles!');
+    }
+}
+
+// Parsear y verificar tarjeta pegada
+function parseShareCard(text) {
+    const nameMatch = text.match(/👤 Estudiante:\s*([^\r\n]+)/);
+    const scoreMatch = text.match(/✅ Respuestas correctas:\s*(\d+)\s*de\s*\d+/);
+    const timeMatch = text.match(/⏱️ Tiempo empleado:\s*.*\((\d+)\s*segundos\)/);
+    const codeMatch = text.match(/🔑 Código de verificación:\s*([a-f0-9]+)/i);
+    
+    if (!nameMatch || !scoreMatch || !timeMatch || !codeMatch) {
+        return { error: "Formato de tarjeta no válido. Asegúrate de copiar el mensaje completo." };
+    }
+    
+    const name = nameMatch[1].trim();
+    const score = parseInt(scoreMatch[1], 10);
+    const time = parseInt(timeMatch[1], 10);
+    const code = codeMatch[1].trim();
+    
+    const computedCode = generateVerificationCode(name, score, time);
+    if (code !== computedCode) {
+        return { error: "¡Alerta de seguridad! El código de verificación no coincide. La puntuación ha sido modificada." };
+    }
+    
+    return { name, score, time };
+}
+
+// Guardar en el ranking local
+function saveToLeaderboard(name, score, time) {
+    let leaderboard = getLeaderboard();
+    
+    // Evitar duplicados idénticos en el mismo intento
+    const exists = leaderboard.some(entry => entry.name.toLowerCase() === name.toLowerCase() && entry.score === score && entry.time === time);
+    if (exists) return;
+    
+    // Si ya existe el mismo usuario con menor puntuación, o mayor tiempo, lo actualizamos o dejamos el mejor
+    const userIndex = leaderboard.findIndex(entry => entry.name.toLowerCase() === name.toLowerCase());
+    if (userIndex !== -1) {
+        const oldEntry = leaderboard[userIndex];
+        // Conservar el mejor intento (más aciertos, o igual aciertos pero menor tiempo)
+        if (score > oldEntry.score || (score === oldEntry.score && time < oldEntry.time)) {
+            leaderboard[userIndex] = { name, score, time, date: new Date().toLocaleDateString() };
+        }
+    } else {
+        leaderboard.push({ name, score, time, date: new Date().toLocaleDateString() });
+    }
+    
+    localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(leaderboard));
+    renderLeaderboard();
+}
+
+function getLeaderboard() {
+    const raw = localStorage.getItem(LEADERBOARD_KEY);
+    if (!raw) return [];
+    try {
+        return JSON.parse(raw);
+    } catch(e) {
+        return [];
+    }
+}
+
+// Añadir resultado de amigo pegado
+function addFriendScore() {
+    const pasteArea = document.getElementById('leaderboard-paste-area');
+    const text = pasteArea.value.trim();
+    if (!text) {
+        alert('Por favor, pega el mensaje de resultado de tu amigo.');
+        return;
+    }
+    
+    const result = parseShareCard(text);
+    if (result.error) {
+        alert(result.error);
+        return;
+    }
+    
+    saveToLeaderboard(result.name, result.score, result.time);
+    pasteArea.value = '';
+    alert(`¡Resultado de ${result.name} verificado y añadido al ranking!`);
+}
+
+// Eliminar entrada del ranking
+function deleteLeaderboardEntry(index) {
+    if (confirm('¿Estás seguro de que deseas eliminar este resultado de la clasificación?')) {
+        let leaderboard = getLeaderboard();
+        // Ordenar antes de borrar para borrar el índice correcto
+        leaderboard.sort((a, b) => {
+            if (b.score !== a.score) return b.score - a.score;
+            return a.time - b.time;
+        });
+        
+        leaderboard.splice(index, 1);
+        localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(leaderboard));
+        renderLeaderboard();
+    }
+}
+
+// Renderizar la tabla de clasificación
+function renderLeaderboard() {
+    const tbody = document.getElementById('leaderboard-tbody');
+    tbody.innerHTML = '';
+    
+    let leaderboard = getLeaderboard();
+    
+    // Ordenar: 1º por aciertos (descendente), 2º por tiempo (ascendente)
+    leaderboard.sort((a, b) => {
+        if (b.score !== a.score) {
+            return b.score - a.score;
+        }
+        return a.time - b.time;
+    });
+    
+    leaderboard.forEach((entry, idx) => {
+        const tr = document.createElement('tr');
+        tr.style.borderBottom = '1px solid var(--card-border)';
+        if (idx === 0) {
+            tr.style.background = 'rgba(245, 158, 11, 0.05)'; // Color oro para el 1º
+        }
+        
+        const rankTd = document.createElement('td');
+        rankTd.style.padding = '0.75rem 0.5rem; font-weight: 700;';
+        let medal = idx + 1;
+        if (idx === 0) medal = '🥇';
+        else if (idx === 1) medal = '🥈';
+        else if (idx === 2) medal = '🥉';
+        rankTd.innerHTML = medal;
+        
+        const nameTd = document.createElement('td');
+        nameTd.style.padding = '0.75rem 0.5rem;';
+        nameTd.textContent = entry.name;
+        if (idx === 0) nameTd.style.color = 'var(--color-orange)';
+        
+        const scoreTd = document.createElement('td');
+        scoreTd.style.padding = '0.75rem 0.5rem; text-align: center; font-weight: bold;';
+        scoreTd.textContent = `${entry.score} / 53`;
+        
+        const timeTd = document.createElement('td');
+        timeTd.style.padding = '0.75rem 0.5rem; text-align: center;';
+        timeTd.textContent = formatTime(entry.time);
+        
+        const actionTd = document.createElement('td');
+        actionTd.style.padding = '0.75rem 0.5rem; text-align: center;';
+        actionTd.innerHTML = `<button class="btn secondary-btn" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; border-radius: 4px;" onclick="deleteLeaderboardEntry(${idx})">Eliminar</button>`;
+        
+        tr.appendChild(rankTd);
+        tr.appendChild(nameTd);
+        tr.appendChild(scoreTd);
+        tr.appendChild(timeTd);
+        tr.appendChild(actionTd);
+        
+        tbody.appendChild(tr);
+    });
+    
+    if (leaderboard.length === 0) {
+        const tr = document.createElement('tr');
+        const td = document.createElement('td');
+        td.colSpan = 5;
+        td.style.padding = '2rem; text-align: center; color: var(--text-secondary); font-style: italic;';
+        td.textContent = 'No hay resultados registrados en la clasificación.';
+        tr.appendChild(td);
+        tbody.appendChild(tr);
     }
 }
