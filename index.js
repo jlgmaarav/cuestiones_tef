@@ -85,10 +85,10 @@ const QUIZ_DATABASE = [
       "Determinado los coeficientes de absorción y ejes de los polarizadores."
     ],
     "matched_page": 15,
-    "correct_index": 1,
-    "correct_text": "Caracterizado el estado de polarización de la luz de la lámpara que pasa a través de un filtro de color.",
+    "correct_index": 2,
+    "correct_text": "Caracterizado el estado de polarización de la luz procedente de un filtro de muestra.",
     "bold_span_matched": "Caracterizado el estado de polarización de la luz de la lámpara que pasa a través de un filtro de color.",
-    "justification": "El experimento de polarimetría consiste en caracterizar el estado de polarización de la luz de la lámpara (determinando sus parámetros de Stokes) que pasa a través de un polarizador y una muestra de material ópticamente activo, usando un filtro de color para garantizar la cuasimonocromaticidad."
+    "justification": "El guión de prácticas indica textualmente: 'La práctica nos va a servir para caracterizar la luz a la salida de la lámina polarizadora de muestra'. El objetivo fundamental de las medidas de intensidad tras disponer el analizador es determinar los parámetros de Stokes asociados a la caracterización del estado de polarización de la luz procedente de dicho filtro de muestra."
   },
   {
     "id": "O7",
@@ -796,6 +796,8 @@ const QUIZ_DATABASE = [
     "justification": "A diferencia del experimento clásico de Young de doble rendija, el biprisma de Fresnel es un método de interferencia por división de frente de onda que no bloquea parte del campo electromagnético. El dispositivo, compuesto por dos prismas de ángulo muy agudo unidos por su base, refracta el frente de onda divergente procedente de una única rendija real iluminada. Esta doble refracción genera dos focos virtuales desplazados espacialmente, que actúan geométricamente como dos fuentes secundarias coherentes (\\(S_1\\) y \\(S_2\\)) en fase, permitiendo la superposición de sus ondas y la consecuente interferencia en la zona de solapamiento."
   }
 ];
+
+
 
 
 
