@@ -821,6 +821,7 @@ let state = {
     activeReviewTab: 'all', // 'all', 'correct', 'failed'
     onlyFailedMode: false, // si estamos repasando solo fallos
     roomName: '',
+    userName: '',
     isSyncing: false,
     roomSyncInterval: null
 };
@@ -1290,8 +1291,10 @@ function submitExam() {
     renderLeaderboard();
     saveStateToLocalStorage();
     
-    // Sincronizar automáticamente con la sala si está conectada
-    if (state.roomName) {
+    // Guardar y sincronizar automáticamente si están conectados a una sala con usuario definido
+    if (state.roomName && state.userName) {
+        saveToLeaderboard(state.userName, correct, state.examTimeElapsed);
+    } else if (state.roomName) {
         syncOnlineLeaderboard(false);
     }
 }
@@ -1892,11 +1895,15 @@ const ONLINE_APP_KEY = "gfhy4gqr";
 
 function initRoomConnection() {
     const savedRoom = localStorage.getItem('lab_physics_room_name');
-    if (savedRoom) {
+    const savedUser = localStorage.getItem('lab_physics_user_name');
+    if (savedRoom && savedUser) {
         state.roomName = savedRoom;
+        state.userName = savedUser;
         const inputEl = document.getElementById('room-name-input');
         if (inputEl) inputEl.value = savedRoom;
-        updateRoomUIConnected(savedRoom);
+        const userEl = document.getElementById('user-name-input');
+        if (userEl) userEl.value = savedUser;
+        updateRoomUIConnected(savedRoom, savedUser);
         syncOnlineLeaderboard(false);
         startRoomPolling();
     } else {
@@ -1905,8 +1912,15 @@ function initRoomConnection() {
 }
 
 function connectRoom() {
-    const input = document.getElementById('room-name-input');
-    const room = input.value.trim();
+    const userInput = document.getElementById('user-name-input');
+    const roomInput = document.getElementById('room-name-input');
+    const user = userInput ? userInput.value.trim() : '';
+    const room = roomInput ? roomInput.value.trim() : '';
+    
+    if (!user) {
+        alert('Por favor, escribe tu nombre o alias.');
+        return;
+    }
     if (!room) {
         alert('Por favor, escribe un nombre de sala.');
         return;
@@ -1920,9 +1934,11 @@ function connectRoom() {
     }
     
     state.roomName = cleanRoomName;
+    state.userName = user;
     localStorage.setItem('lab_physics_room_name', cleanRoomName);
+    localStorage.setItem('lab_physics_user_name', user);
     
-    updateRoomUIConnected(cleanRoomName);
+    updateRoomUIConnected(cleanRoomName, user);
     syncOnlineLeaderboard(true);
     startRoomPolling();
 }
@@ -1930,10 +1946,15 @@ function connectRoom() {
 function disconnectRoom() {
     stopRoomPolling();
     state.roomName = '';
+    state.userName = '';
     localStorage.removeItem('lab_physics_room_name');
+    localStorage.removeItem('lab_physics_user_name');
     
     const inputEl = document.getElementById('room-name-input');
     if (inputEl) inputEl.value = '';
+    const userEl = document.getElementById('user-name-input');
+    if (userEl) userEl.value = '';
+    
     updateRoomUIDisconnected();
     renderLeaderboard();
 }
@@ -2070,7 +2091,7 @@ function syncOnlineLeaderboard(isManual = false) {
         if (indicator) {
             if (success) {
                 indicator.className = 'room-status connected';
-                indicator.querySelector('.status-text').textContent = `Conectado a la sala: ${state.roomName}`;
+                indicator.querySelector('.status-text').textContent = `Conectado como ${state.userName} en la sala: ${state.roomName}`;
             } else {
                 indicator.className = 'room-status disconnected';
                 indicator.querySelector('.status-text').textContent = `Error al sincronizar sala: ${state.roomName}`;
@@ -2098,17 +2119,19 @@ function stopRoomPolling() {
     }
 }
 
-function updateRoomUIConnected(roomName) {
+function updateRoomUIConnected(roomName, userName) {
     const indicator = document.getElementById('room-status-indicator');
     if (indicator) {
         indicator.className = 'room-status connected';
-        indicator.querySelector('.status-text').textContent = `Conectado a la sala: ${roomName}`;
+        indicator.querySelector('.status-text').textContent = `Conectado como ${userName} en la sala: ${roomName}`;
     }
     
     const btnConnect = document.getElementById('btn-connect-room');
     if (btnConnect) btnConnect.classList.add('hidden');
     const inputRoom = document.getElementById('room-name-input');
     if (inputRoom) inputRoom.classList.add('hidden');
+    const inputUser = document.getElementById('user-name-input');
+    if (inputUser) inputUser.classList.add('hidden');
     
     const btnSync = document.getElementById('btn-sync-room');
     if (btnSync) btnSync.classList.remove('hidden');
@@ -2127,6 +2150,8 @@ function updateRoomUIDisconnected() {
     if (btnConnect) btnConnect.classList.remove('hidden');
     const inputRoom = document.getElementById('room-name-input');
     if (inputRoom) inputRoom.classList.remove('hidden');
+    const inputUser = document.getElementById('user-name-input');
+    if (inputUser) inputUser.classList.remove('hidden');
     
     const btnSync = document.getElementById('btn-sync-room');
     if (btnSync) btnSync.classList.add('hidden');

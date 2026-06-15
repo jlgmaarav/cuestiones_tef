@@ -320,9 +320,12 @@
                                 <span class="status-text">Sin conectar a ninguna sala</span>
                             </div>
 
-                            <div style="display: flex; gap: 0.5rem; margin-top: 0.25rem;">
-                                <input type="text" id="room-name-input" placeholder="Nombre de la sala..." style="flex-grow: 1; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--card-border); background: rgba(0,0,0,0.2); color: #fff; font-size: 0.9rem;">
-                                <button class="btn primary-btn" id="btn-connect-room" style="padding: 0.5rem 1rem; font-size: 0.85rem; border-radius: var(--radius-sm);">Conectar</button>
+                            <div style="display: flex; flex-direction: column; gap: 0.5rem; margin-top: 0.25rem;">
+                                <input type="text" id="user-name-input" placeholder="Tu nombre o alias (ej. Pepe)..." style="width: 100%; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--card-border); background: rgba(0,0,0,0.2); color: #fff; font-size: 0.9rem;">
+                                <div style="display: flex; gap: 0.5rem;">
+                                    <input type="text" id="room-name-input" placeholder="Nombre de la sala..." style="flex-grow: 1; padding: 0.5rem 0.75rem; border-radius: var(--radius-sm); border: 1px solid var(--card-border); background: rgba(0,0,0,0.2); color: #fff; font-size: 0.9rem;">
+                                    <button class="btn primary-btn" id="btn-connect-room" style="padding: 0.5rem 1rem; font-size: 0.85rem; border-radius: var(--radius-sm);">Conectar</button>
+                                </div>
                             </div>
 
                             <div style="display: flex; gap: 0.5rem;">
