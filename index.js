@@ -819,7 +819,10 @@ let state = {
     examTimeElapsed: 0,
     examSubmitted: false,
     activeReviewTab: 'all', // 'all', 'correct', 'failed'
-    onlyFailedMode: false // si estamos repasando solo fallos
+    onlyFailedMode: false, // si estamos repasando solo fallos
+    roomName: '',
+    isSyncing: false,
+    roomSyncInterval: null
 };
 
 // Categorías
@@ -852,6 +855,11 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-generate-card').addEventListener('click', generateShareCard);
     document.getElementById('btn-copy-card').addEventListener('click', copyShareCard);
     document.getElementById('btn-add-friend-score').addEventListener('click', addFriendScore);
+    
+    // Listeners del Leaderboard Online
+    document.getElementById('btn-connect-room').addEventListener('click', connectRoom);
+    document.getElementById('btn-disconnect-room').addEventListener('click', disconnectRoom);
+    document.getElementById('btn-sync-room').addEventListener('click', () => syncOnlineLeaderboard(true));
 });
 
 // Selección de Modo
@@ -987,6 +995,9 @@ function initQuiz() {
     } else {
         resetQuiz(false);
     }
+    
+    // Inicializar conexión a sala si ya estaba guardada
+    initRoomConnection();
 }
 
 // Temporizador Modo Examen
@@ -1279,6 +1290,11 @@ function submitExam() {
     document.getElementById('leaderboard-card').classList.remove('hidden');
     renderLeaderboard();
     saveStateToLocalStorage();
+    
+    // Sincronizar automáticamente con la sala si está conectada
+    if (state.roomName) {
+        syncOnlineLeaderboard(false);
+    }
 }
 
 // Resultados en Modo Práctica
@@ -1732,6 +1748,7 @@ function parseShareCard(text) {
 // Guardar en el ranking local
 function saveToLeaderboard(name, score, time) {
     let leaderboard = getLeaderboard();
+    const code = generateVerificationCode(name, score, time);
     
     // Evitar duplicados idénticos en el mismo intento
     const exists = leaderboard.some(entry => entry.name.toLowerCase() === name.toLowerCase() && entry.score === score && entry.time === time);
@@ -1743,14 +1760,19 @@ function saveToLeaderboard(name, score, time) {
         const oldEntry = leaderboard[userIndex];
         // Conservar el mejor intento (más aciertos, o igual aciertos pero menor tiempo)
         if (score > oldEntry.score || (score === oldEntry.score && time < oldEntry.time)) {
-            leaderboard[userIndex] = { name, score, time, date: new Date().toLocaleDateString() };
+            leaderboard[userIndex] = { name, score, time, code, date: new Date().toLocaleDateString() };
         }
     } else {
-        leaderboard.push({ name, score, time, date: new Date().toLocaleDateString() });
+        leaderboard.push({ name, score, time, code, date: new Date().toLocaleDateString() });
     }
     
     localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(leaderboard));
     renderLeaderboard();
+    
+    // Si está conectado a una sala, sincronizar y subir a la nube
+    if (state.roomName) {
+        syncOnlineLeaderboard(false);
+    }
 }
 
 function getLeaderboard() {
@@ -1865,3 +1887,251 @@ function renderLeaderboard() {
         tbody.appendChild(tr);
     }
 }
+
+// --- FUNCIONALIDAD DE SALA ONLINE (SINCRONIZACIÓN AUTOMÁTICA) ---
+const ONLINE_APP_KEY = "gfhy4gqr";
+
+function initRoomConnection() {
+    const savedRoom = localStorage.getItem('lab_physics_room_name');
+    if (savedRoom) {
+        state.roomName = savedRoom;
+        const inputEl = document.getElementById('room-name-input');
+        if (inputEl) inputEl.value = savedRoom;
+        updateRoomUIConnected(savedRoom);
+        syncOnlineLeaderboard(false);
+        startRoomPolling();
+    } else {
+        updateRoomUIDisconnected();
+    }
+}
+
+function connectRoom() {
+    const input = document.getElementById('room-name-input');
+    const room = input.value.trim();
+    if (!room) {
+        alert('Por favor, escribe un nombre de sala.');
+        return;
+    }
+    
+    // Limpiar nombre: solo caracteres alfanuméricos, guiones y barras bajas
+    const cleanRoomName = room.toLowerCase().replace(/[^a-z0-9_-]/g, '');
+    if (!cleanRoomName) {
+        alert('El nombre de la sala no es válido. Usa letras, números, guiones y barras bajas.');
+        return;
+    }
+    
+    state.roomName = cleanRoomName;
+    localStorage.setItem('lab_physics_room_name', cleanRoomName);
+    
+    updateRoomUIConnected(cleanRoomName);
+    syncOnlineLeaderboard(true);
+    startRoomPolling();
+}
+
+function disconnectRoom() {
+    stopRoomPolling();
+    state.roomName = '';
+    localStorage.removeItem('lab_physics_room_name');
+    
+    const inputEl = document.getElementById('room-name-input');
+    if (inputEl) inputEl.value = '';
+    updateRoomUIDisconnected();
+    renderLeaderboard();
+}
+
+function syncOnlineLeaderboard(isManual = false) {
+    if (!state.roomName || state.isSyncing) return;
+    
+    state.isSyncing = true;
+    const indicator = document.getElementById('room-status-indicator');
+    const syncBtn = document.getElementById('btn-sync-room');
+    const syncIcon = syncBtn ? syncBtn.querySelector('.sync-icon') : null;
+    
+    // Estado de UI de Sincronizando
+    if (indicator) {
+        indicator.className = 'room-status syncing';
+        indicator.querySelector('.status-text').textContent = 'Sincronizando ranking...';
+    }
+    if (syncIcon) {
+        syncIcon.classList.add('rotating');
+    }
+    
+    const cleanRoomName = state.roomName.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '');
+    
+    fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${ONLINE_APP_KEY}/${cleanRoomName}`)
+        .then(res => res.json())
+        .then(rawVal => {
+            let serverList = [];
+            if (rawVal && rawVal !== '""' && rawVal !== 'null') {
+                try {
+                    // Limpiar comillas extras devueltas por el serializador JSON de immanuel.co
+                    const cleanedRaw = rawVal.trim().replace(/^"|"$/g, '');
+                    if (cleanedRaw) {
+                        // Reconstruir caracteres seguros Base64
+                        let b64Str = cleanedRaw.replace(/-/g, '+').replace(/_/g, '/');
+                        const pad = 4 - (b64Str.length % 4);
+                        if (pad < 4) b64Str += '='.repeat(pad);
+                        
+                        // Decodificar Base64 (compatible con UTF-8)
+                        const jsonStr = decodeURIComponent(escape(atob(b64Str)));
+                        const parsed = JSON.parse(jsonStr);
+                        if (Array.isArray(parsed)) {
+                            // Validar firma de cada registro del servidor para descartar trampas
+                            serverList = parsed.filter(entry => {
+                                if (!entry.name || typeof entry.score !== 'number' || typeof entry.time !== 'number') {
+                                    return false;
+                                }
+                                const expectedCode = generateVerificationCode(entry.name, entry.score, entry.time);
+                                return entry.code === expectedCode;
+                            });
+                        }
+                    }
+                } catch (e) {
+                    console.error("Error al procesar ranking de la sala:", e);
+                }
+            }
+            
+            // Unir con puntuaciones guardadas localmente
+            let localLeaderboard = getLeaderboard();
+            let mergedMap = new Map();
+            
+            // Insertar datos del servidor
+            serverList.forEach(entry => {
+                const key = entry.name.toLowerCase();
+                mergedMap.set(key, entry);
+            });
+            
+            // Insertar datos locales
+            localLeaderboard.forEach(entry => {
+                const key = entry.name.toLowerCase();
+                const expectedCode = generateVerificationCode(entry.name, entry.score, entry.time);
+                if (!entry.code) {
+                    entry.code = expectedCode;
+                }
+                
+                // Solo si la firma local es válida
+                if (entry.code === expectedCode) {
+                    if (mergedMap.has(key)) {
+                        const serverEntry = mergedMap.get(key);
+                        // Conservar el mejor intento (puntuación desc, luego tiempo asc)
+                        if (entry.score > serverEntry.score || (entry.score === serverEntry.score && entry.time < serverEntry.time)) {
+                            mergedMap.set(key, entry);
+                        }
+                    } else {
+                        mergedMap.set(key, entry);
+                    }
+                }
+            });
+            
+            const mergedList = Array.from(mergedMap.values());
+            
+            // Guardar localmente el ranking consolidado
+            localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(mergedList));
+            
+            // Comprobar si hay nuevos datos locales que subir al servidor
+            let hasNewData = false;
+            mergedList.forEach(mergedEntry => {
+                const serverEntry = serverList.find(s => s.name.toLowerCase() === mergedEntry.name.toLowerCase());
+                if (!serverEntry || serverEntry.score !== mergedEntry.score || serverEntry.time !== mergedEntry.time) {
+                    hasNewData = true;
+                }
+            });
+            
+            if (hasNewData && mergedList.length > 0) {
+                // Codificar array a UTF-8 y luego Base64
+                const jsonStr = JSON.stringify(mergedList);
+                let b64Str = btoa(unescape(encodeURIComponent(jsonStr)));
+                // URL-Safe Base64 y remover '=' de padding
+                let safeB64Str = b64Str.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
+                
+                return fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${ONLINE_APP_KEY}/${cleanRoomName}/${safeB64Str}`, {
+                    method: 'POST'
+                })
+                .then(() => {
+                    console.log("Ranking de la sala actualizado en la nube.");
+                    finishSync(true);
+                });
+            } else {
+                console.log("Sincronización finalizada. Sin datos locales que subir.");
+                finishSync(true);
+            }
+        })
+        .catch(err => {
+            console.error("Fallo al sincronizar ranking online:", err);
+            finishSync(false);
+            if (isManual) {
+                alert("No se ha podido sincronizar con la sala. Revisa tu conexión de red.");
+            }
+        });
+        
+    function finishSync(success) {
+        state.isSyncing = false;
+        if (syncIcon) syncIcon.classList.remove('rotating');
+        
+        if (indicator) {
+            if (success) {
+                indicator.className = 'room-status connected';
+                indicator.querySelector('.status-text').textContent = `Conectado a la sala: ${state.roomName}`;
+            } else {
+                indicator.className = 'room-status disconnected';
+                indicator.querySelector('.status-text').textContent = `Error al sincronizar sala: ${state.roomName}`;
+            }
+        }
+        renderLeaderboard();
+    }
+}
+
+function startRoomPolling() {
+    stopRoomPolling();
+    // Consultar cada 20 segundos de forma pasiva si la tabla es visible en pantalla
+    state.roomSyncInterval = setInterval(() => {
+        const lbCard = document.getElementById('leaderboard-card');
+        if (lbCard && !lbCard.classList.contains('hidden')) {
+            syncOnlineLeaderboard(false);
+        }
+    }, 20000);
+}
+
+function stopRoomPolling() {
+    if (state.roomSyncInterval) {
+        clearInterval(state.roomSyncInterval);
+        state.roomSyncInterval = null;
+    }
+}
+
+function updateRoomUIConnected(roomName) {
+    const indicator = document.getElementById('room-status-indicator');
+    if (indicator) {
+        indicator.className = 'room-status connected';
+        indicator.querySelector('.status-text').textContent = `Conectado a la sala: ${roomName}`;
+    }
+    
+    const btnConnect = document.getElementById('btn-connect-room');
+    if (btnConnect) btnConnect.classList.add('hidden');
+    const inputRoom = document.getElementById('room-name-input');
+    if (inputRoom) inputRoom.classList.add('hidden');
+    
+    const btnSync = document.getElementById('btn-sync-room');
+    if (btnSync) btnSync.classList.remove('hidden');
+    const btnDisconnect = document.getElementById('btn-disconnect-room');
+    if (btnDisconnect) btnDisconnect.classList.remove('hidden');
+}
+
+function updateRoomUIDisconnected() {
+    const indicator = document.getElementById('room-status-indicator');
+    if (indicator) {
+        indicator.className = 'room-status disconnected';
+        indicator.querySelector('.status-text').textContent = 'Sin conectar a ninguna sala';
+    }
+    
+    const btnConnect = document.getElementById('btn-connect-room');
+    if (btnConnect) btnConnect.classList.remove('hidden');
+    const inputRoom = document.getElementById('room-name-input');
+    if (inputRoom) inputRoom.classList.remove('hidden');
+    
+    const btnSync = document.getElementById('btn-sync-room');
+    if (btnSync) btnSync.classList.add('hidden');
+    const btnDisconnect = document.getElementById('btn-disconnect-room');
+    if (btnDisconnect) btnDisconnect.classList.add('hidden');
+}
+
