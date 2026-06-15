@@ -930,7 +930,6 @@ function resetQuiz(onlyFailed = false) {
     document.getElementById('exam-results-card').classList.add('hidden');
     document.getElementById('quiz-play-container').classList.remove('hidden');
     document.getElementById('review-board-card').classList.add('hidden');
-    document.getElementById('leaderboard-card').classList.add('hidden');
     // Cerrar la caja de compartir
     document.getElementById('share-box-container').classList.add('hidden');
     document.getElementById('share-name-input').value = '';
