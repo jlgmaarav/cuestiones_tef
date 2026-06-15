@@ -403,7 +403,7 @@ const QUIZ_DATABASE = [
     "correct_index": 0,
     "correct_text": "Invertir el sentido de la corriente en el circuito impreso.",
     "bold_span_matched": "Invertir el sentido de la corriente en una sola de las bobinas del electroimán.",
-    "justification": "La fuerza magnética que experimenta el circuito obedece a la ley de Lorentz: \\(\\vec{F} = \\int I d\\vec{l} \\times \\vec{B}\\). Para que el vector resultante \\(\\vec{F}\\) se invierta (\\(-\\vec{F}\\)), el operador de paridad espacial debe romper la simetría del producto vectorial. Si se invierte la corriente en todos los elementos (opción c), se invierte tanto \\(d\\vec{l}\\) como \\(\\vec{B}\\), resultando en \\((-I d\\vec{l}) \\times (-\\vec{B}) = I d\\vec{l} \\times \\vec{B}\\), dejando la fuerza invariante. Por ello, solo debe invertirse una de las fuentes (el circuito impreso o el electroimán)."
+    "justification": "El fundamento de este experimento se basa en la fuerza magnética sobre un conductor rectilíneo descrita por la ley de Lorentz: \\(\\vec{F} = I (\\vec{l} \\times \\vec{B})\\). Para invertir el sentido de \\(\\vec{F}\\), debemos cambiar el signo de uno de los factores: la corriente del circuito impreso (\\(I\\)) o el campo (\\(\\vec{B}\\)). <br>• <strong>Invertir la corriente en el circuito impreso (Correcta)</strong>: Cambia el signo de \\(I\\), resultando en \\(-\\vec{F} = (-I)(\\vec{l} \\times \\vec{B})\\). <br>• <strong>Invertir en todos los circuitos</strong>: Invierte simultáneamente \\(I\\) y \\(\\vec{B}\\), lo que se cancela en el producto vectorial, dejando la fuerza igual: \\((-I)\\cdot(\\vec{l} \\times -\\vec{B}) = \\vec{F}\\). <br>• <strong>Invertir en una sola bobina</strong>: Las bobinas están en serie sumando sus campos. Invertir una sola hace que se opongan y el campo neto se anule o reduzca drásticamente, anulando la fuerza en vez de invertirla."
   },
   {
     "id": "E30 (IV)",
@@ -796,6 +796,8 @@ const QUIZ_DATABASE = [
     "justification": "A diferencia del experimento clásico de Young de doble rendija, el biprisma de Fresnel es un método de interferencia por división de frente de onda que no bloquea parte del campo electromagnético. El dispositivo, compuesto por dos prismas de ángulo muy agudo unidos por su base, refracta el frente de onda divergente procedente de una única rendija real iluminada. Esta doble refracción genera dos focos virtuales desplazados espacialmente, que actúan geométricamente como dos fuentes secundarias coherentes (\\(S_1\\) y \\(S_2\\)) en fase, permitiendo la superposición de sus ondas y la consecuente interferencia en la zona de solapamiento."
   }
 ];
+
+
 
 
 
