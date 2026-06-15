@@ -400,10 +400,10 @@ const QUIZ_DATABASE = [
       "La fuerza siempre tiene el mismo sentido."
     ],
     "matched_page": 23,
-    "correct_index": 2,
-    "correct_text": "Invertir el sentido de la corriente en una sola de las bobinas del electroimán.",
+    "correct_index": 0,
+    "correct_text": "Invertir el sentido de la corriente en el circuito impreso.",
     "bold_span_matched": "Invertir el sentido de la corriente en una sola de las bobinas del electroimán.",
-    "justification": "Para invertir el sentido de la fuerza magnética \\(\\vec{F} = I_{\\text{impreso}} (\\vec{L} \\times \\vec{B})\\), se debe cambiar el signo de uno de los términos (corriente o campo). Esto se consigue invirtiendo el sentido de la corriente en uno solo de los dos circuitos (ya sea el circuito impreso o el electroimán)."
+    "justification": "La fuerza magnética que experimenta el circuito obedece a la ley de Lorentz: \\(\\vec{F} = \\int I d\\vec{l} \\times \\vec{B}\\). Para que el vector resultante \\(\\vec{F}\\) se invierta (\\(-\\vec{F}\\)), el operador de paridad espacial debe romper la simetría del producto vectorial. Si se invierte la corriente en todos los elementos (opción c), se invierte tanto \\(d\\vec{l}\\) como \\(\\vec{B}\\), resultando en \\((-I d\\vec{l}) \\times (-\\vec{B}) = I d\\vec{l} \\times \\vec{B}\\), dejando la fuerza invariante. Por ello, solo debe invertirse una de las fuentes (el circuito impreso o el electroimán)."
   },
   {
     "id": "E30 (IV)",
@@ -449,8 +449,355 @@ const QUIZ_DATABASE = [
     "correct_text": "Se ha alcanzado la saturación del material.",
     "bold_span_matched": "Se ha alcanzado la saturación del material.",
     "justification": "Cuando la curva de imanación \\(M-H\\) presenta extremos horizontales, la susceptibilidad diferencial \\(\\frac{\\partial M}{\\partial H}\\) se aproxima a cero. Esto indica que todos los momentos magnéticos están alineados con el campo externo, habiéndose alcanzado la saturación magnética del material."
+  },
+  {
+    "id": "E1_A",
+    "text": "Un condensador tarda 7 ms en descargarse a la mitad. R=10kΩ. ¿De qué orden es la capacidad usada?",
+    "options": [
+      "1 \\(\\mu\\)F",
+      "10 \\(\\mu\\)F",
+      "100 \\(\\mu\\)F",
+      "1000 \\(\\mu\\)F"
+    ],
+    "matched_page": 19,
+    "correct_index": 0,
+    "correct_text": "1 \\(\\mu\\)F",
+    "bold_span_matched": "1 uF",
+    "justification": "La evolución temporal del potencial en un proceso de descarga de un circuito RC obedece a la siguiente función exponencial: \\(V(t) = V_0 e^{-\\frac{t}{RC}}\\). La condición del enunciado establece que el potencial decae a la mitad de su valor inicial, es decir, \\(V(t) = V_0/2\\), en el instante \\(t = 7 \\times 10^{-3}\\text{ s}\\). Imponiendo esta condición en la ecuación: \\(\\frac{1}{2} = e^{-\\frac{t}{RC}} \\implies \\ln(2) = \\frac{t}{RC}\\). Aislando la variable de interés \\(C\\) (la capacidad del condensador) y sustituyendo los parámetros del sistema (\\(R = 10^4\\ \\Omega\\) y el tiempo \\(t\\)): \\(C = \\frac{t}{R \\ln(2)} = \\frac{7 \\times 10^{-3}}{10^4 \\times 0.693} \\approx 1.01 \\times 10^{-6}\\text{ F}\\). Dimensionalmente, esto equivale a \\(1\\ \\mu\\text{F}\\), coincidiendo con el orden de magnitud de la primera opción."
+  },
+  {
+    "id": "E2_A",
+    "text": "Queremos eliminar las lentas oscilaciones de un circuito RLC. Debemos:",
+    "options": [
+      "Aumentar R",
+      "Disminuir R",
+      "Aumentar L",
+      "Disminuir C"
+    ],
+    "matched_page": 20,
+    "correct_index": 0,
+    "correct_text": "Aumentar R",
+    "bold_span_matched": "Aumentar R",
+    "justification": "La dinámica de un circuito RLC serie viene determinada por la relación entre su coeficiente de amortiguamiento \\(\\alpha = \\frac{R}{2L}\\) y su frecuencia propia \\(\\omega_0 = \\frac{1}{\\sqrt{LC}}\\). El sistema presenta un régimen subamortiguado (oscilatorio) cuando \\(\\alpha < \\omega_0\\). Para suprimir las oscilaciones y forzar un régimen críticamente amortiguado o sobreamortiguado, es condición necesaria que: \\(R \\ge 2\\sqrt{\\frac{L}{C}}\\). Incrementar la resistencia \\(R\\) aumenta el factor de disipación energética de Joule, rompiendo la condición de oscilación transitoria."
+  },
+  {
+    "id": "E3_A",
+    "text": "En el experimento de la balanza de corrientes al apagar el electroimán se observa que la fuerza no se anula. Esto es debido a:",
+    "options": [
+      "La inductancia del circuito.",
+      "La histéresis del material.",
+      "La remanencia.",
+      "El acoplamiento mutuo."
+    ],
+    "matched_page": 23,
+    "correct_index": 2,
+    "correct_text": "La remanencia.",
+    "bold_span_matched": "la remanencia.",
+    "justification": "Al suprimir la corriente (\\(I \\to 0\\)), el material ferromagnético del núcleo del electroimán no retorna a un estado de magnetización nula debido a la histéresis magnética. Los dominios magnéticos mantienen un alineamiento parcial, conservando una magnetización residual \\(M_r\\) que genera un campo magnético remanente \\(B_r\\) (el observable físico que no se anula es el campo magnético, aunque el enunciado original use incorrectamente el término 'inductancia')."
+  },
+  {
+    "id": "E5_A",
+    "text": "Si en el calibrado del gaussímetro colocamos en el arrollamiento problema las dos conexiones en paralelo:",
+    "options": [
+      "Tienes el mismo campo.",
+      "Tienes el doble del campo que en serie.",
+      "Tienes la mitad del campo que en serie.",
+      "Se anulan los campos."
+    ],
+    "matched_page": 21,
+    "correct_index": 2,
+    "correct_text": "Tienes la mitad del campo que en serie.",
+    "bold_span_matched": "Tienes la mitad del campo que en serie.",
+    "justification": "Asumiendo una fuente de corriente constante \\(I\\): En configuración serie, la intensidad \\(I\\) recorre la totalidad de las \\(2N\\) espiras, generando un campo magnético \\(B_{\\text{serie}} \\propto 2NI\\). En configuración paralelo, la ley de nodos de Kirchhoff impone que la corriente se bifurque por simetría. Cada sub-bobina de \\(N\\) espiras es atravesada por \\(I/2\\). Por el principio de superposición, el campo total es \\(B_{\\text{paralelo}} \\propto N(I/2) + N(I/2) = NI\\). Por tanto, el campo resultante es exactamente la mitad."
+  },
+  {
+    "id": "E6_A",
+    "text": "En la práctica de las bobinas de Helmholtz si la corriente circula en ambas en el mismo sentido y las separamos mucho más que su radio:",
+    "options": [
+      "Tenemos dos máximos en el centro de las bobinas.",
+      "Tenemos dos mínimos en el centro de las bobinas.",
+      "Tenemos un máximo central.",
+      "Tenemos un valor casi constante a lo largo del espacio entre bobinas."
+    ],
+    "matched_page": 22,
+    "correct_index": 0,
+    "correct_text": "Tenemos dos máximos en el centro de las bobinas.",
+    "bold_span_matched": "Tenemos dos máximos en el centro de las bobinas.",
+    "justification": "El campo magnético axial \\(B(z)\\) es la superposición de las contribuciones de Biot-Savart de dos espiras separadas una distancia \\(d\\). La configuración de Helmholtz (\\(d=R\\)) anula la segunda derivada en el punto medio, creando un 'plateau'. Sin embargo, si \\(d \\gg R\\), la interacción superpuesta en el espacio intermedio decae exponencialmente, formando un mínimo local en el centro geométrico del sistema y revelando dos máximos locales aislados, situados en el plano axial intrínseco de cada bobina."
+  },
+  {
+    "id": "E7_A",
+    "text": "Si en la medida de ciclos de histéresis el ciclo llega a presentar lazos en los extremos, es porque:",
+    "options": [
+      "El circuito integrador se ha recalentado y no funciona correctamente.",
+      "Estamos operando a frecuencias por encima de la frecuencia de corte.",
+      "La capacidad del integrador es demasiado baja.",
+      "La capacidad del integrador es demasiado alta."
+    ],
+    "matched_page": 24,
+    "correct_index": 2,
+    "correct_text": "La capacidad del integrador es demasiado baja.",
+    "bold_span_matched": "La capacidad del integrador es demasiado baja.",
+    "justification": "El circuito integrador pasivo RC aproxima la inducción \\(B \\propto \\int \\varepsilon dt\\). La condición matemática estricta para que opere como un integrador ideal es que la frecuencia de la señal sea muy superior a la frecuencia de corte del circuito: \\(\\omega RC \\gg 1\\). Si la capacidad \\(C\\) es excesivamente baja, esta desigualdad se rompe, induciendo un desfase parasitario entre las componentes armónicas de \\(H\\) y \\(B\\). Topológicamente, este error de fase se proyecta en el diagrama de Lissajous como un cruce de las curvas en los puntos de saturación (lazos)."
+  },
+  {
+    "id": "E8_A",
+    "text": "¿Cómo podemos saber en la curva de imanación M-H de un cierto material si se ha alcanzado su saturación?",
+    "options": [
+      "Los extremos del ciclo de histéresis son horizontales.",
+      "Los extremos del ciclo de histéresis son verticales.",
+      "El ciclo de histéresis se cierra por completo.",
+      "El ciclo de histéresis presenta lazos en los extremos."
+    ],
+    "matched_page": 24,
+    "correct_index": 0,
+    "correct_text": "Los extremos del ciclo de histéresis son horizontales.",
+    "bold_span_matched": "los extremos del ciclo de histéresis son horizontales.",
+    "justification": "La saturación técnica del material ferromagnético implica que la totalidad de los momentos magnéticos de los dominios de Weiss se han alineado paralelamente al campo excitador \\(\\vec{H}\\). En este límite asintótico, la magnetización adquiere su valor máximo \\(M_s\\) y no puede seguir incrementando. Matemáticamente, la susceptibilidad magnética diferencial se anula: \\(\\chi = \\frac{dM}{dH} \\to 0\\). Geométricamente, una derivada nula implica una pendiente estrictamente horizontal en las ramas extremas del diagrama \\(M-H\\)."
+  },
+  {
+    "id": "C1_A",
+    "text": "Las líneas espectrales en la práctica de rayos X representan:",
+    "options": [
+      "Energía de los fotones emitidos al impactar los electrones con el ánodo transfiriendo su energía a las capas más internas.",
+      "Energía de los fotones emitidos al impactar los electrones con el ánodo y sufrir una desaceleración (radiación de frenado).",
+      "La radiación de frenado que es un espectro discontinuo.",
+      "Porque hay impurezas."
+    ],
+    "matched_page": 17,
+    "correct_index": 0,
+    "correct_text": "Energía de los fotones emitidos al impactar los electrones con el ánodo transfiriendo su energía a las capas más internas.",
+    "bold_span_matched": "Energía de los fotones emitidos al impactar los electrones con el ánodo transfiriendo su energía a las capas más internas.",
+    "justification": "El espectro característico de rayos X (las líneas discretas, a diferencia del Bremsstrahlung continuo) se origina por la cuantización de los niveles de energía atómicos. Un electrón de alta energía cinética arranca un electrón de las capas fuertemente ligadas (ej. capa K) del átomo del ánodo. La transición de un electrón de una capa superior (ej. L o M) para llenar esta vacante emite un fotón de rayos X con una energía estrictamente igual a la diferencia de energía de dichos estados cuánticos: \\(\\Delta E = h\\nu\\)."
+  },
+  {
+    "id": "C2_A",
+    "text": "En la práctica de rayos X:",
+    "options": [
+      "El ánodo está conectado al polo negativo del generador eléctrico.",
+      "El ánodo está conectado al polo positivo del generador eléctrico.",
+      "El filamento de tungsteno está conectado al polo positivo del generador eléctrico.",
+      "El filamento de tungsteno está desconectado."
+    ],
+    "matched_page": 17,
+    "correct_index": 1,
+    "correct_text": "El ánodo está conectado al polo positivo del generador eléctrico.",
+    "bold_span_matched": "El ánodo está conectado al polo positivo del generador eléctrico.",
+    "justification": "Para que el gradiente de potencial electrostático genere un campo eléctrico capaz de acelerar los electrones (emitidos termiónicamente en el cátodo) hacia el blanco metálico, el ánodo debe poseer un potencial positivo. Dado que el electrón posee carga negativa (\\(q = -e\\)), experimentará una fuerza de Lorentz \\(\\vec{F} = -e\\vec{E}\\) en dirección opuesta a las líneas de campo, dirigiéndose hacia el polo positivo."
+  },
+  {
+    "id": "C3_A",
+    "text": "En la práctica de Efecto Zeeman:",
+    "options": [
+      "La lámpara empleada era de sodio.",
+      "La longitud de onda de la línea central (\\(\\Delta M = 0\\)) es distinta que la longitud de onda de la línea observada sin campo magnético.",
+      "Existen 9 transiciones posibles pero solo 3 de distinta energía.",
+      "La línea central desaparecía en presencia de campo magnético si se observaba perpendicularmente."
+    ],
+    "matched_page": 18,
+    "correct_index": 2,
+    "correct_text": "Existen 9 transiciones posibles pero solo 3 de distinta energía.",
+    "bold_span_matched": "Existen 9 transiciones posibles pero solo 3 de distinta energía.",
+    "justification": "Para un efecto Zeeman normal (como la transición espectroscópica típica del Cd: \\({}^1D_2 \\to {}^1P_1\\), donde \\(S=0\\)), el nivel superior se desdobla en 5 subniveles de Zeeman y el inferior en 3. Las reglas de selección dipolares imponen \\(\\Delta m_l = 0, \\pm 1\\). Combinatoriamente, esto limita las transiciones radiativas permitidas a 9. La perturbación del Hamiltoniano es lineal respecto a \\(m_l\\) (\\(\\Delta E = \\mu_B B \\Delta m_l\\)), por lo que estas 9 transiciones colapsan espectralmente en exactamente 3 frecuencias discretas (el triplete de Lorentz)."
+  },
+  {
+    "id": "C4_A",
+    "text": "En la práctica de Efecto Zeeman:",
+    "options": [
+      "En el átomo de sodio el nivel \\({}^1D_2\\) en ausencia de campo magnético se desdobla en 3 subniveles de energía.",
+      "En el átomo de cadmio el nivel \\({}^1D_2\\) en presencia de campo magnético se desdobla en 5 subniveles de energía.",
+      "En el átomo de cadmio el nivel \\({}^1P_1\\) en presencia de campo magnético se desdobla en 5 subniveles de energía.",
+      "Los niveles de energía equiespaciados son inversamente proporcionales al campo magnético aplicado."
+    ],
+    "matched_page": 18,
+    "correct_index": 1,
+    "correct_text": "En el átomo de cadmio el nivel \\({}^1D_2\\) en presencia de campo magnético se desdobla en 5 subniveles de energía.",
+    "bold_span_matched": "En el átomo de cadmio el nivel 1D2 en presencia de campo magnético se desdobla en 5 subniveles de energía.",
+    "justification": "La multiplicidad Zeeman de un nivel viene determinada por el número cuántico del momento angular total \\(J\\), produciendo \\(2J+1\\) estados degenerados. Para la notación de Russell-Saunders \\({}^1D_2\\): El superíndice indica la multiplicidad de espín \\(2S+1 = 1 \\implies S=0\\). La letra \\(D\\) indica el momento angular orbital \\(L=2\\). Por acoplamiento espín-órbita, \\(J = L+S = 2\\). El número de subniveles magnéticos \\(m_J\\) es \\(2(2) + 1 = 5\\)."
+  },
+  {
+    "id": "C5_A",
+    "text": "Empleando dos montajes idénticos hemos obtenido que en uno de ellos la tensión Hall es positiva, y en el otro que es negativa. Esto se debe a que:",
+    "options": [
+      "En uno los portadores son huecos y en el otro son electrones.",
+      "En uno el campo magnético es más intenso.",
+      "En uno la corriente circula al revés.",
+      "En uno la temperatura de la muestra es más alta."
+    ],
+    "matched_page": 16,
+    "correct_index": 0,
+    "correct_text": "En uno los portadores son huecos y en el otro son electrones.",
+    "bold_span_matched": "En uno los portadores son huecos y en el otro son electrones.",
+    "justification": "La velocidad de deriva \\(\\vec{v}_d\\) de los portadores invierte su sentido en función del signo de la carga para mantener el mismo sentido macroscópico de la corriente \\(\\vec{J}\\). Al evaluar la fuerza de Lorentz transversal \\(\\vec{F}_m = q(\\vec{v}_d \\times \\vec{B})\\), tanto huecos (\\(q>0\\)) como electrones (\\(q<0\\)) son deflectados hacia la misma frontera geométrica del material. En consecuencia, el potencial de la cara en la que se acumulan toma el signo algebraico del portador de carga mayoritario, definiendo el signo del coeficiente de Hall \\(R_H\\)."
+  },
+  {
+    "id": "C6_A",
+    "text": "¿Cómo depende la tensión del campo magnético?",
+    "options": [
+      "Es directamente proporcional.",
+      "Es inversamente proporcional.",
+      "Es cuadrática.",
+      "Es independiente del campo."
+    ],
+    "matched_page": 16,
+    "correct_index": 0,
+    "correct_text": "Es directamente proporcional.",
+    "bold_span_matched": "es directamente proporcional.",
+    "justification": "El campo eléctrico transversal (campo Hall) se establece cuando la fuerza eléctrica compensa exactamente la fuerza magnética de Lorentz en régimen estacionario (\\(qE_H = qv_dB\\)). Expresando la velocidad de deriva en función de la densidad de corriente, se obtiene la tensión Hall: \\(V_H = \\frac{1}{nqe} \\frac{IB}{d}\\). Asumiendo que las propiedades intensivas del material (\\(n, q\\)) y las geométricas (\\(d\\), así como la corriente \\(I\\)) son constantes, \\(V_H\\) es una función lineal \\(V_H(B) \\propto B\\)."
+  },
+  {
+    "id": "C7_A",
+    "text": "En la práctica de resonancia electrónica:",
+    "options": [
+      "Los niveles del electrón se desdoblan en dos debido a su factor giromagnético.",
+      "El momento magnético del electrón se acopla al campo magnético externo.",
+      "El espín del electrón puede valer 1/2 o -1/2.",
+      "El electrón no interactúa con campos electromagnéticos."
+    ],
+    "matched_page": 16,
+    "correct_index": 1,
+    "correct_text": "El momento magnético del electrón se acopla al campo magnético externo.",
+    "bold_span_matched": "El momento magnético del electrón se acopla al campo magnético externo.",
+    "justification": "La resonancia paramagnética se sustenta en la perturbación introducida en el Hamiltoniano del sistema por la presencia de un campo magnético estático \\(\\vec{B}\\). Este término de interacción (efecto Zeeman de espín) es el producto escalar entre el campo externo y el momento magnético dipolar intrínseco del electrón: \\(\\hat{H}_{\\text{Zeeman}} = -\\vec{\\mu}_S \\cdot \\vec{B}\\). Este acoplamiento rompe la degeneración de Kramers de los estados base del sistema."
+  },
+  {
+    "id": "C8_A",
+    "text": "En la práctica de resonancia electrónica, ¿cuál debe ser la energía necesaria para que se produzca el salto de un electrón de un nivel a otro?",
+    "options": [
+      "Debe ser igual a la energía del fotón absorbido.",
+      "Debe ser el doble de la energía del fotón absorbido.",
+      "Debe ser la mitad de la energía del fotón absorbido.",
+      "Debe ser independiente del fotón."
+    ],
+    "matched_page": 16,
+    "correct_index": 0,
+    "correct_text": "Debe ser igual a la energía del fotón absorbido.",
+    "bold_span_matched": "debe ser igual a la energía del fotón absorbido.",
+    "justification": "Tratado bajo la aproximación semiclásica, la radiación electromagnética (microondas) induce transiciones cuánticas entre los autoestados del operador \\(\\hat{S}_z\\) (\\(m_s = -1/2 \\to m_s = +1/2\\)). El postulado de Bohr para la absorción resonante estipula que la energía del cuanto del campo electromagnético incidente (\\(E = h\\nu\\)) debe igualar de forma exacta la diferencia de autovalores de energía del Hamiltoniano perturbado: \\(\\Delta E = g \\mu_B B = h\\nu\\)."
+  },
+  {
+    "id": "O1_A",
+    "text": "En la práctica del interferómetro de Michelson, ¿dónde se forman las interferencias?",
+    "options": [
+      "En el vidrio esmerilado.",
+      "En el espejo que tenemos enfrente de nosotros (E2).",
+      "En nuestro ojo.",
+      "En el espejo que tenemos a nuestra derecha (E1)."
+    ],
+    "matched_page": 15,
+    "correct_index": 2,
+    "correct_text": "En nuestro ojo.",
+    "bold_span_matched": "En nuestro ojo.",
+    "justification": "En la configuración típica del interferómetro de Michelson para la observación visual directa (empleando una fuente extensa para generar anillos de Haidinger o franjas de igual inclinación), los haces interfieren espacialmente en el infinito. El cristalino del ojo actúa como una lente convergente que focaliza estos haces paralelos, integrando la diferencia de fase \\(\\delta = \\frac{4\\pi d}{\\lambda}\\cos\\theta\\) y proyectando el patrón de interferencia localizado directamente sobre la retina del observador."
+  },
+  {
+    "id": "O2_A",
+    "text": "En la práctica del interferómetro de Michelson las interferencias se deben a:",
+    "options": [
+      "La superposición de dos haces de luz que vienen de dos fuentes extensas.",
+      "La superposición de dos haces de luz que vienen de dos fuentes puntuales.",
+      "La superposición de dos haces de luz que vienen de una fuente extensa.",
+      "La superposición de dos haces de luz que vienen de una fuente puntual."
+    ],
+    "matched_page": 15,
+    "correct_index": 2,
+    "correct_text": "La superposición de dos haces de luz que vienen de una fuente extensa.",
+    "bold_span_matched": "La superposición de dos haces de luz que vienen de una fuente extensa.",
+    "justification": "El interferómetro de Michelson es un dispositivo de interferencia por división de amplitud. Un divisor de haz (lente semiespejada) escinde la amplitud electromagnética proveniente de una única fuente extensa primaria. El uso de una fuente extensa garantiza la luminosidad del sistema y permite la observación de franjas de igual inclinación, donde la coherencia espacial se mantiene entre los puntos homólogos de las dos fuentes virtuales generadas por la reflexión en los espejos E1 y E2."
+  },
+  {
+    "id": "O3_A",
+    "text": "¿Por qué se utilizan redes de difracción en espectroscopía?",
+    "options": [
+      "Porque dispersan la luz en todas direcciones por igual.",
+      "Porque se producen interferencias para cada longitud de onda constructivas solo en una zona del espacio.",
+      "Porque absorben las longitudes de onda no deseadas.",
+      "No se pueden utilizar."
+    ],
+    "matched_page": 13,
+    "correct_index": 1,
+    "correct_text": "Porque se producen interferencias para cada longitud de onda constructivas solo en una zona del espacio.",
+    "bold_span_matched": "Porque se producen interferencias para cada longitud de onda constructivas solo en una zona del espacio.",
+    "justification": "Las redes de difracción rigen su comportamiento según la ecuación fundamental \\(d(\\sin\\theta_i + \\sin\\theta_m) = m\\lambda\\). La condición de interferencia constructiva (máximos principales) establece que la desviación angular \\(\\theta_m\\) es una función biunívoca de la longitud de onda \\(\\lambda\\) para un orden \\(m\\) dado. Por lo tanto, el poder dispersivo de la red \\(D = \\frac{d\\theta_m}{d\\lambda}\\) separa espacialmente las distintas componentes monocromáticas del espectro, permitiendo su resolución angular."
+  },
+  {
+    "id": "O4_A",
+    "text": "En la práctica de red de difracción, medimos el ángulo de mínima desviación porque:",
+    "options": [
+      "No medimos el de mínima desviación, medimos el de máxima desviación.",
+      "Porque nuestro montaje experimental no nos permite hacer otra cosa.",
+      "Porque así no tenemos que tener en cuenta el ángulo de incidencia.",
+      "Porque la red de difracción se rompe si se desvía más."
+    ],
+    "matched_page": 13,
+    "correct_index": 2,
+    "correct_text": "Porque así no tenemos que tener en cuenta el ángulo de incidencia.",
+    "bold_span_matched": "Porque así no tenemos que tener en cuenta el ángulo de incidencia.",
+    "justification": "La desviación total experimentada por un haz en una red de difracción es \\(\\delta = \\theta_i + \\theta_m\\). La condición de mínima desviación se alcanza cuando el montaje posee simetría respecto al plano normal a la red, es decir, \\(\\theta_i = \\theta_m\\). Bajo esta geometría, la ecuación de la red se reduce a \\(2d\\sin(\\theta) = m\\lambda\\). Experimentalmente, esto permite determinar \\(\\lambda\\) midiendo únicamente el ángulo de desviación total, eliminando la necesidad de definir y medir con precisión la normal absoluta de la red (lo cual eliminaría la dependencia explícita del ángulo de incidencia \\(\\theta_i\\) frente a un sistema de referencia externo)."
+  },
+  {
+    "id": "O5_A",
+    "text": "Si en la práctica de parámetros de Stokes, una vez preparado todo, antes de medir los parámetros de Stokes, cambiamos la lámpara por otra:",
+    "options": [
+      "No se puede porque la lámina retardadora del analizador circular solo sirve para una línea del doblete del sodio.",
+      "No se puede porque la medida de los parámetros de Stokes solo tiene sentido para la lámpara de sodio.",
+      "Sí se puede. Solo debemos modificar la posición de la lente colimadora.",
+      "No se puede porque tendríamos que girar los polarizadores, cambiar su posición..."
+    ],
+    "matched_page": 14,
+    "correct_index": 0,
+    "correct_text": "No se puede porque la lámina retardadora del analizador circular solo sirve para una línea del doblete del sodio.",
+    "bold_span_matched": "No se puede porque la lámina retardadora del analizador circular solo sirve para una línea del doblete del sodio.",
+    "justification": "El retardo de fase \\(\\Gamma\\) introducido por una lámina birrefringente de espesor \\(e\\) obedece a la relación: \\(\\Gamma = \\frac{2\\pi}{\\lambda} |n_e - n_o| e\\). Como se observa, el retardo es estrictamente dependiente de \\(\\lambda\\) (es inherentemente cromático). Una lámina diseñada o calibrada para funcionar como cuarto de onda (\\(\\Gamma = \\pi/2\\)) para la longitud de onda del sodio (\\(\\approx 589\\text{ nm}\\)) introducirá un retardo arbitrario diferente si se irradia con otra longitud de onda, invalidando la base matemática para la extracción de los parámetros de Stokes."
+  },
+  {
+    "id": "O6_A",
+    "text": "¿Qué parámetros de Stokes obtenemos?",
+    "options": [
+      "Los de la luz de la lámpara de sodio.",
+      "Los de la luz de la lámpara de sodio tras pasar un filtro de muestra.",
+      "Los de la lámpara de sodio reflejada en un espejo plano.",
+      "Los de la luz blanca de fondo de la habitación."
+    ],
+    "matched_page": 14,
+    "correct_index": 1,
+    "correct_text": "Los de la luz de la lámpara de sodio tras pasar un filtro de muestra.",
+    "bold_span_matched": "Los de la luz de la lámpara de sodio tras pasar un filtro de muestra.",
+    "justification": "El formalismo de Stokes se emplea para caracterizar el estado de polarización de una onda electromagnética. En un montaje polarimétrico, la luz incidente de polarización conocida interactúa con un elemento óptico (la muestra), el cual modifica dicho estado (descrito matemáticamente por la acción de una matriz de Mueller sobre el vector de Stokes incidente: \\(\\vec{S}' = \\textbf{M} \\vec{S}\\)). El analizador situado a posteriori mide la intensidad proyectada en diferentes bases (lineal y circular) para determinar el nuevo vector \\(\\vec{S}'\\) emergente tras la interacción con el dieléctrico/filtro."
+  },
+  {
+    "id": "O7_A",
+    "text": "En el experimento de Young, ¿por qué utilizamos una lámpara de sodio?",
+    "options": [
+      "Porque nos da la gana, se podría usar cualquier otra cuasimonocromática.",
+      "Porque el biprisma de Fresnel solo funciona con sodio.",
+      "Porque el color amarillo es más visible en el microscopio.",
+      "Porque emite en un espectro continuo de longitudes de onda."
+    ],
+    "matched_page": 14,
+    "correct_index": 0,
+    "correct_text": "Porque nos da la gana, se podría usar cualquier otra cuasimonocromática.",
+    "bold_span_matched": "porque nos da la gana, se podría usar cualquier otra cuasimonocromática.",
+    "justification": "Para obtener un patrón de interferencia estacionario, la diferencia de marcha \\(\\Delta x\\) entre los haces debe ser menor que la longitud de coherencia de la fuente (\\(L_c = c \\tau_c \\approx \\frac{\\lambda^2}{\\Delta\\lambda}\\)). El requisito físico estricto es poseer un ancho de banda espectral \\(\\Delta\\lambda\\) lo suficientemente estrecho (luz cuasimonocromática) para asegurar coherencia temporal. El sodio se emplea por disponibilidad e intensidad, pero cualquier emisión con una longitud de coherencia adecuada (como un láser o una lámpara espectral filtrada) satisfará la condición de interferencia."
+  },
+  {
+    "id": "O8_A",
+    "text": "En el experimento de Young, ¿para qué sirve el biprisma de Fresnel?",
+    "options": [
+      "Para formar múltiples imágenes de las rendijas que interfieren entre ellas.",
+      "Para obtener 2 imágenes de la rendija.",
+      "Se usa porque no sé qué, pero si tuviésemos una rendija distinta podría usarse una lente en vez del biprisma.",
+      "Para filtrar las longitudes de onda no deseadas."
+    ],
+    "matched_page": 14,
+    "correct_index": 1,
+    "correct_text": "Para obtener 2 imágenes de la rendija.",
+    "bold_span_matched": "Para obtener 2 imágenes de la rendija.",
+    "justification": "A diferencia del experimento clásico de Young de doble rendija, el biprisma de Fresnel es un método de interferencia por división de frente de onda que no bloquea parte del campo electromagnético. El dispositivo, compuesto por dos prismas de ángulo muy agudo unidos por su base, refracta el frente de onda divergente procedente de una única rendija real iluminada. Esta doble refracción genera dos focos virtuales desplazados espacialmente, que actúan geométricamente como dos fuentes secundarias coherentes (\\(S_1\\) y \\(S_2\\)) en fase, permitiendo la superposición de sus ondas y la consecuente interferencia en la zona de solapamiento."
   }
 ];
+
+
 
 
 
