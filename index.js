@@ -1978,7 +1978,7 @@ function syncOnlineLeaderboard(isManual = false) {
     
     const cleanRoomName = state.roomName.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '');
     
-    fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${ONLINE_APP_KEY}/${cleanRoomName}`)
+    fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${ONLINE_APP_KEY}/${cleanRoomName}?cb=${Date.now()}`)
         .then(res => res.json())
         .then(rawVal => {
             let serverList = [];
