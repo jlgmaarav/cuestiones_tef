@@ -1762,10 +1762,10 @@ function saveToLeaderboard(name, score, time) {
         const oldEntry = leaderboard[userIndex];
         // Conservar el mejor intento (más aciertos, o igual aciertos pero menor tiempo)
         if (score > oldEntry.score || (score === oldEntry.score && time < oldEntry.time)) {
-            leaderboard[userIndex] = { name, score, time, code, date: new Date().toLocaleDateString() };
+            leaderboard[userIndex] = { name, score, time, code };
         }
     } else {
-        leaderboard.push({ name, score, time, code, date: new Date().toLocaleDateString() });
+        leaderboard.push({ name, score, time, code });
     }
     
     localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(leaderboard));
@@ -2064,7 +2064,7 @@ function syncOnlineLeaderboard(isManual = false) {
                 // URL-Safe Base64 y remover '=' de padding
                 let safeB64Str = b64Str.replace(/\+/g, '-').replace(/\//g, '_').replace(/=/g, '');
                 
-                return fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue/${ONLINE_APP_KEY}/${cleanRoomName}/${safeB64Str}`, {
+                return fetch(`https://keyvalue.immanuel.co/api/KeyVal/UpdateValue?appKey=${ONLINE_APP_KEY}&key=${cleanRoomName}&value=${safeB64Str}`, {
                     method: 'POST'
                 })
                 .then(() => {
