@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz de Prácticas de Laboratorio | 3º Física</title>
+    <!-- Google Fonts: Outfit and Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+    <!-- MathJax for rendering physics equations -->
+    <script>
+    window.MathJax = {
+      tex: {
+        inlineMath: [['\\(', '\\)']],
+        displayMath: [['\\[', '\\]']]
+      },
+      options: {
+        skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+      }
+    };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" id="MathJax-script" async></script>
+</head>
+<body class="practice-mode-active">
+    
+    <!-- Canvas de Confeti Animado -->
+    <canvas id="confetti-canvas"></canvas>
+
+    <div class="app-container">
+        
+        <!-- HEADER PRINCIPAL -->
+        <header class="main-header">
+            <div class="logo-area">
+                <span class="academy-tag">LABORATORIO III</span>
+                <h1>Preparador de Examen</h1>
+                <p class="subtitle">Autoevaluación de Cuestiones de Test de Laboratorio (Óptica, Cuántica y Electromagnetismo)</p>
+            </div>
+            
+            <!-- Selector de Modo -->
+            <div class="mode-selector-wrapper">
+                <div class="mode-tabs">
+                    <button class="mode-tab active" id="tab-mode-practice">
+                        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                        <span>Modo Práctica</span>
+                    </button>
+                    <button class="mode-tab" id="tab-mode-exam">
+                        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                        <span>Modo Examen</span>
+                    </button>
+                </div>
+            </div>
+        </header>
+
+        <!-- DASHBOARD DE ESTADÍSTICAS Y PROGRESO -->
+        <section class="dashboard-section">
+            <div class="progress-container">
+                <div class="progress-bar-wrapper">
+                    <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
+                </div>
+                <div class="progress-text-row">
+                    <span id="progress-text">0% Completado (0/30)</span>
+                </div>
+            </div>
+
+            <div class="stats-grid">
+                <!-- Tarjeta 1: Aciertos / Respondidas -->
+                <div class="stat-card" id="card-stat-correct">
+                    <div class="stat-icon-wrapper correct">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label" id="label-stat-correct">Aciertos</span>
+                        <span class="stat-value" id="stat-correct">0</span>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 2: Fallos / Restantes -->
+                <div class="stat-card" id="card-stat-wrong">
+                    <div class="stat-icon-wrapper wrong">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label" id="label-stat-wrong">Fallos</span>
+                        <span class="stat-value" id="stat-wrong">0</span>
+                    </div>
+                </div>
+
+                <!-- Tarjeta 3: Temporizador (Oculto en práctica) -->
+                <div class="stat-card hidden" id="timer-container">
+                    <div class="stat-icon-wrapper timer">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                    </div>
+                    <div class="stat-info">
+                        <span class="stat-label">Tiempo Restante</span>
+                        <span class="stat-value" id="timer-val">30:00</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CONTENEDOR PRINCIPAL DEL JUEGO -->
+        <main class="quiz-main-area">
+            
+            <!-- CONTENEDOR DE JUEGO ACTIVO -->
+            <div class="quiz-play-container" id="quiz-play-container">
+                <div class="quiz-layout-grid">
+                    
+                    <!-- Lado Izquierdo: Pregunta y Opciones -->
+                    <div class="quiz-card">
+                        <div class="quiz-card-header">
+                            <span class="category-badge" id="question-category">Electromagnetismo</span>
+                            <span class="question-number" id="question-number">Pregunta 1 de 30</span>
+                        </div>
+                        
+                        <div class="question-body">
+                            <p id="question-text">Cargando pregunta...</p>
+                        </div>
+                        
+                        <!-- Lista de Opciones -->
+                        <ul class="options-list" id="options-list">
+                            <!-- Opciones inyectadas dinámicamente -->
+                        </ul>
+                        
+                        <!-- Botones de Acción de la Tarjeta -->
+                        <div class="quiz-actions">
+                            <button class="btn secondary-btn" id="btn-prev" disabled>
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"></polyline></svg>
+                                Anterior
+                            </button>
+                            
+                            <button class="btn primary-btn" id="btn-verify">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 14 14"></polyline></svg>
+                                Verificar respuesta
+                            </button>
+                            
+                            <button class="btn success-btn hidden" id="btn-submit-exam">
+                                Enviar Examen
+                            </button>
+                            
+                            <button class="btn primary-btn" id="btn-next">
+                                Siguiente
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Lado Derecho: Justificación / Explicación (Práctica) -->
+                    <div class="justification-card hidden" id="justification-card">
+                        <div class="just-header">
+                            <div class="just-icon-badge">
+                                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"></path><path d="M19 10v2a7 7 0 0 1-14 0v-2"></path><line x1="12" y1="19" x2="12" y2="22"></line></svg>
+                            </div>
+                            <h3>Análisis Teórico</h3>
+                        </div>
+                        <div class="just-content" id="justification-content">
+                            <!-- Justificación inyectada dinámicamente -->
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- CONTENEDOR DE RESULTADOS DEL EXAMEN (Oculto al inicio) -->
+            <div class="exam-results-card hidden" id="exam-results-card">
+                <div class="results-layout">
+                    
+                    <div class="results-summary">
+                        <h2>Resultado del Examen</h2>
+                        <p class="results-tagline">Has completado el examen de autoevaluación.</p>
+                        
+                        <div class="results-visuals">
+                            <div class="results-percent-circle" id="results-percent-container">
+                                <span class="percent-val" id="results-percent-text">0%</span>
+                                <span class="percent-lbl">Nota</span>
+                            </div>
+                        </div>
+
+                        <div class="results-stats-board">
+                            <div class="board-stat">
+                                <span class="lbl">Aciertos</span>
+                                <span class="val text-green" id="results-score-text">0 / 30</span>
+                            </div>
+                            <div class="board-stat">
+                                <span class="lbl">Tiempo empleado</span>
+                                <span class="val" id="results-time-text">00:00</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="results-details">
+                        <h3>Desglose por Bloque Temático</h3>
+                        <div class="details-list">
+                            <div class="detail-row">
+                                <div class="cat-info">
+                                    <span class="color-dot opt"></span>
+                                    <span>Óptica Física</span>
+                                </div>
+                                <span class="count-val" id="results-detail-opt">0 de 8</span>
+                            </div>
+                            <div class="detail-row">
+                                <div class="cat-info">
+                                    <span class="color-dot qua"></span>
+                                    <span>Física Cuántica</span>
+                                </div>
+                                <span class="count-val" id="results-detail-qua">0 de 5</span>
+                            </div>
+                            <div class="detail-row">
+                                <div class="cat-info">
+                                    <span class="color-dot ele"></span>
+                                    <span>Electromagnetismo</span>
+                                </div>
+                                <span class="count-val" id="results-detail-ele">0 de 17</span>
+                            </div>
+                        </div>
+                        
+                        <div class="results-actions">
+                            <button class="btn primary-btn" id="btn-restart-exam">
+                                <svg class="btn-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21.5 2v6h-6M21.34 15.57a10 10 0 1 1-.57-8.38l5.67-5.67"></path></svg>
+                                Repetir Examen Completo
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- TABLÓN DE REPASO Y PREGUNTAS (Visible al terminar) -->
+            <section class="review-board-card hidden" id="review-board-card">
+                <div class="review-header-row">
+                    <h3>Tablón de Revisión Detallada</h3>
+                    
+                    <!-- Pestañas de Filtrado -->
+                    <div class="review-tabs">
+                        <button class="rev-tab active" id="tab-rev-all">Todas</button>
+                        <button class="rev-tab text-green" id="tab-rev-correct">Acertadas</button>
+                        <button class="rev-tab text-red" id="tab-rev-failed">Falladas</button>
+                    </div>
+                </div>
+
+                <div class="review-actions-bar">
+                    <button class="btn secondary-btn" id="btn-restart">
+                        Reiniciar Quiz Completo
+                    </button>
+                    <button class="btn accent-btn" id="btn-restart-failed">
+                        Practicar solo Preguntas Falladas
+                    </button>
+                </div>
+
+                <!-- Lista de preguntas colapsable -->
+                <div class="review-list-container" id="review-list-container">
+                    <!-- Items de revisión inyectados -->
+                </div>
+            </section>
+
+        </main>
+        
+        <footer class="app-footer">
+            <p>Preparador del Laboratorio de Física III (Segundo Cuatrimestre). Cuestiones verificadas y corregidas.</p>
+        </footer>
+        
+    </div>
+
+    <script src="index.js"></script>
+</body>
+</html>
