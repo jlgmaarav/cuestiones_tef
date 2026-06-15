@@ -250,8 +250,8 @@ const QUIZ_DATABASE = [
       "Capacidades tan grandes no se pueden medir por este procedimiento."
     ],
     "matched_page": 19,
-    "correct_index": 0,
-    "correct_text": "Del orden de 10 Ω.",
+    "correct_index": 1,
+    "correct_text": "Del orden de 10⁴ Ω.",
     "bold_span_matched": "Del orden de 10⁴ Ω.",
     "justification": "Para medir cómodamente la descarga con un cronómetro manual, se requiere una constante de tiempo del orden de \\(\\tau \\approx 10\\text{ segundos}\\). De la ecuación \\(\\tau = RC\\), despejamos \\(R = \\tau / C = 10\\text{ s} / (1000 \\times 10^{-6}\\text{ F}) = 10^4\\ \\Omega\\)."
   },
@@ -796,6 +796,8 @@ const QUIZ_DATABASE = [
     "justification": "A diferencia del experimento clásico de Young de doble rendija, el biprisma de Fresnel es un método de interferencia por división de frente de onda que no bloquea parte del campo electromagnético. El dispositivo, compuesto por dos prismas de ángulo muy agudo unidos por su base, refracta el frente de onda divergente procedente de una única rendija real iluminada. Esta doble refracción genera dos focos virtuales desplazados espacialmente, que actúan geométricamente como dos fuentes secundarias coherentes (\\(S_1\\) y \\(S_2\\)) en fase, permitiendo la superposición de sus ondas y la consecuente interferencia en la zona de solapamiento."
   }
 ];
+
+
 
 
 
