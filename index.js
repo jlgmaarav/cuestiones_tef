@@ -993,7 +993,7 @@ const QUIZ_DATABASE = [
   },
   {
     "id": "C_Ex15",
-    "text": "En un experimento de RSE con DPPH, sintonizamos el oscilador a una frecuencia de trabajo fija de \\(\\nu_0 = 50.0\\text{ MHz}\\). Se observa que la resonancia se produce para un campo magnético estático de \\(B_0 = 1.78\\text{ mT}\\). Utilizando los valores \\(h = 6.63 \\times 10^{-34}\\text{ J}\\cdot\\text{s}\\) y \\(\\mu_{\\text{B}} = 9.27 \\times 10^{-24}\\text{ A}\\cdot\\text{m}^2\\), ¿cuál es el factor de Landé \\(g\\) experimental obtenido?",
+    "text": "En la práctica de <strong>Resonancia de Espín Electrónico (RSE)</strong> se utiliza una muestra patrón de <strong>DPPH</strong> (un radical libre orgánico estable con un electrón desapareado). Sintonizamos el oscilador a una frecuencia de trabajo fija de \\(\\nu_0 = 50.0\\text{ MHz}\\). Se observa que la absorción de energía (resonancia) se produce para un campo magnético estático de \\(B_0 = 1.78\\text{ mT}\\). Utilizando los valores \\(h = 6.63 \\times 10^{-34}\\text{ J}\\cdot\\text{s}\\) y \\(\\mu_{\\text{B}} = 9.27 \\times 10^{-24}\\text{ J/T}\\), ¿cuál es el factor de Landé \\(g\\) experimental obtenido?",
     "options": [
       "\\(g \\approx 1.00\\)",
       "\\(g \\approx 2.01\\)",
@@ -1002,7 +1002,7 @@ const QUIZ_DATABASE = [
     ],
     "correct_index": 1,
     "correct_text": "\\(g \\approx 2.01\\)",
-    "justification": "La condición de resonancia cuántica es \\(h\\nu = g\\mu_{\\text{B}}B\\). Despejando el factor de Landé \\(g\\):\n\\[g = \\frac{h \\nu_0}{\\mu_{\\text{B}} B_0} = \\frac{6.63 \\times 10^{-34}\\text{ J}\\cdot\\text{s} \\times 50.0 \\times 10^6\\text{ s}^{-1}}{9.27 \\times 10^{-24}\\text{ J/T} \\times 1.78 \\times 10^{-3}\\text{ T}} = \\frac{3.315 \\times 10^{-26}}{1.650 \\times 10^{-26}} \\approx 2.01\\]",
+    "justification": "<strong>Fundamento físico y cálculo paso a paso:</strong><br>1) <strong>Significado de RSE y DPPH:</strong> RSE significa <em>Resonancia de Espín Electrónico</em>. El DPPH es un <em>radical libre orgánico estable</em> con un electrón desapareado que sirve como muestra de referencia en el laboratorio.<br>2) <strong>Condición de resonancia cuántica:</strong> Ocurre cuando la energía del fotón de radiofrecuencia (\\(E = h\\nu_0\\)) coincide con la diferencia de energía de espín inducida por el campo magnético (\\(\\Delta E = g\\mu_{\\text{B}}B_0\\)): <br>\\[h\\nu_0 = g\\mu_{\\text{B}}B_0\\]<br>3) <strong>Valores del experimento:</strong><br>• Frecuencia: \\(\\nu_0 = 50.0\\text{ MHz} = 5.0 \\times 10^{7}\\text{ s}^{-1}\\)<br>• Campo magnético: \\(B_0 = 1.78\\text{ mT} = 1.78 \\times 10^{-3}\\text{ T}\\)<br>• Cte. de Planck: \\(h = 6.63 \\times 10^{-34}\\text{ J}\\cdot\\text{s}\\)<br>• Magnetón de Bohr: \\(\\mu_{\\text{B}} = 9.27 \\times 10^{-24}\\text{ J/T}\\)<br>4) <strong>Cálculo numérico:</strong><br>• Energía del fotón: \\(h\\nu_0 = 6.63 \\times 10^{-34} \\times 5.0 \\times 10^{7} = 3.315 \\times 10^{-26}\\text{ J}\\)<br>• Magnetón por Campo: \\(\\mu_{\\text{B}}B_0 = 9.27 \\times 10^{-24} \\times 1.78 \\times 10^{-3} = 1.650 \\times 10^{-26}\\text{ J}\\)<br>• Despejando \\(g\\):<br>\\[g = \\frac{h \\nu_0}{\\mu_{\\text{B}} B_0} = \\frac{3.315 \\times 10^{-26}\\text{ J}}{1.650 \\times 10^{-26}\\text{ J}} \\approx 2.01\\]",
     "matched_page": "28-34"
   },
   {
