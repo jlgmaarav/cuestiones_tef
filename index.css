@@ -34,6 +34,7 @@
     
     --color-orange: #f59e0b;
     --color-orange-trans: rgba(245, 158, 11, 0.15);
+    --color-extra: #ec4899;
     
     --font-heading: 'Outfit', sans-serif;
     --font-body: 'Inter', sans-serif;
@@ -830,6 +831,7 @@ body {
 .color-dot.opt { background: var(--accent-cyan); }
 .color-dot.qua { background: var(--accent-purple); }
 .color-dot.ele { background: var(--color-orange); }
+.color-dot.ext { background: var(--color-extra); }
 
 .count-val {
     font-family: var(--font-heading);

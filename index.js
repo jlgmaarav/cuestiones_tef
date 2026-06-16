@@ -794,6 +794,678 @@ const QUIZ_DATABASE = [
     "correct_text": "Para obtener 2 imágenes de la rendija.",
     "bold_span_matched": "Para obtener 2 imágenes de la rendija.",
     "justification": "A diferencia del experimento clásico de Young de doble rendija, el biprisma de Fresnel es un método de interferencia por división de frente de onda que no bloquea parte del campo electromagnético. El dispositivo, compuesto por dos prismas de ángulo muy agudo unidos por su base, refracta el frente de onda divergente procedente de una única rendija real iluminada. Esta doble refracción genera dos focos virtuales desplazados espacialmente, que actúan geométricamente como dos fuentes secundarias coherentes (\\(S_1\\) y \\(S_2\\)) en fase, permitiendo la superposición de sus ondas y la consecuente interferencia en la zona de solapamiento."
+  },
+  {
+    "id": "C_Ex1",
+    "text": "En la práctica del efecto Hall, los puntos de conexión transversal \\(x\\) e \\(y\\) no están perfectamente alineados en la lámina conductora. Esto introduce una diferencia de potencial parásita (\"offset\") \\(V_{zy} = R_{xy}I\\) incluso en ausencia de campo magnético. ¿Cómo se compensa experimentalmente este efecto en el montaje?",
+    "options": [
+      "Se conecta una resistencia de gran valor en serie con el microvoltímetro para atenuar la tensión.",
+      "La placa de medida dispone de dos contactos en un lado de la lámina y un potenciómetro que permite ajustar y equilibrar sus potenciales en ausencia de campo magnético.",
+      "Se invierte el sentido de la corriente de trabajo y se promedian las lecturas de tensión de forma matemática en cada punto.",
+      "No se puede compensar experimentalmente, por lo que es obligatorio medir siempre con el electroimán encendido desde el inicio."
+    ],
+    "correct_index": 1,
+    "correct_text": "La placa de medida dispone de dos contactos en un lado de la lámina y un potenciómetro que permite ajustar y equilibrar sus potenciales en ausencia de campo magnético.",
+    "justification": "La placa de soporte de las muestras de plata y wolframio incorpora un contacto en un lado (punto \\(x\\)) y dos contactos ligeramente separados a la izquierda y derecha de la proyección de \\(x\\) en el otro lado. Estos dos contactos se acoplan a un potenciómetro analógico. Al variar este potenciómetro en ausencia de campo magnético (\\(B = 0\\)), se busca el punto equivalente donde la tensión \\(V_{xy}\\) sea cero para la corriente de trabajo elegida, anulando la tensión de offset.",
+    "matched_page": "1-8"
+  },
+  {
+    "id": "C_Ex2",
+    "text": "Consideremos una lámina Hall en el plano \\(XZ\\) por la que circula una corriente eléctrica \\(I\\) en la dirección \\(+X\\). Se aplica un campo magnético \\(\\vec{B}\\) en la dirección \\(+Y\\). ¿Cuál es la dirección y sentido de la fuerza magnética de Lorentz que experimentan los portadores de carga, y cómo depende esto de su signo?",
+    "options": [
+      "La fuerza va en la dirección \\(+Z\\) si los portadores son positivos (huecos) y en \\(-Z\\) si son negativos (electrones).",
+      "La fuerza va en la dirección \\(+Z\\) independientemente de si los portadores son positivos o negativos.",
+      "La fuerza va en la dirección \\(-Z\\) independientemente de si los portadores son positivos o negativos.",
+      "Los portadores positivos experimentan una fuerza en la dirección \\(+Y\\) y los negativos en \\(-Y\\)."
+    ],
+    "correct_index": 1,
+    "correct_text": "La fuerza va en la dirección \\(+Z\\) independientemente de si los portadores son positivos o negativos.",
+    "justification": "La fuerza de Lorentz es \\(\\vec{F}_m = q (\\vec{v}_d \\times \\vec{B})\\). Si los portadores son positivos (\\(q > 0\\)), su velocidad de deriva \\(\\vec{v}_d\\) va en el sentido de la corriente (\\(+X\\)), de modo que \\(\\vec{F}_m \\propto (+q) (\\vec{u}_x \\times \\vec{u}_y) = +q \\vec{u}_z\\). Si son negativos (\\(q < 0\\)), su velocidad de deriva va en sentido opuesto (\\(-X\\)), por lo que \\(\\vec{F}_m \\propto (-|q|) (-\\vec{u}_x \\times \\vec{u}_y) = +|q| \\vec{u}_z\\). Por tanto, la fuerza magnética desvía a ambos tipos de portadores hacia la misma cara (\\(+Z\\)). Lo que cambia es el signo de la carga acumulada en dicha cara.",
+    "matched_page": "1-8"
+  },
+  {
+    "id": "C_Ex3",
+    "text": "Durante la práctica, se observa que las fluctuaciones de tensión termoeléctrica en los contactos son mucho más severas y difíciles de estabilizar en la lámina de wolframio (\\(W\\)) que en la de plata (\\(Ag\\)). ¿A qué se debe este comportamiento?",
+    "options": [
+      "El wolframio tiene una temperatura de fusión más baja, por lo que sufre deformaciones plásticas debido al calor.",
+      "La resistividad del wolframio es mucho mayor que la de la plata, lo que genera un calentamiento por efecto Joule muy superior que induce corrientes de aire y gradientes térmicos en los contactos.",
+      "La plata no experimenta efecto Joule por comportarse como un superconductor a temperatura de laboratorio.",
+      "El wolframio es ferromagnético y absorbe el calor del electroimán circundante."
+    ],
+    "correct_index": 1,
+    "correct_text": "La resistividad del wolframio es mucho mayor que la de la plata, lo que genera un calentamiento por efecto Joule muy superior que induce corrientes de aire y gradientes térmicos en los contactos.",
+    "justification": "El wolframio tiene una resistividad eléctrica sustancialmente mayor que la plata. Al circular intensidades elevadas (hasta 10-12 A) por la lámina, la potencia disipada por efecto Joule (\\(P = I^2 R\\)) es mucho mayor en el wolframio. Este calentamiento calienta el aire circundante, creando corrientes de aire por convección que causan fluctuaciones térmicas rápidas en los contactos de soldadura de la lámina, generando tensiones termoeléctricas parásitas por efecto Seebeck.",
+    "matched_page": "1-8"
+  },
+  {
+    "id": "C_Ex4",
+    "text": "En un experimento con una lámina de plata de espesor \\(d = 50 \\times 10^{-6}\\text{ m}\\), se obtiene un ajuste lineal de la tensión Hall \\(V_{\\text{H}}\\) frente al campo magnético \\(B\\) con una pendiente de \\(m = 1.4 \\times 10^{-7}\\text{ V/T}\\), manteniendo la intensidad constante en \\(I = 7.0\\text{ A}\\). ¿Cuál es el valor experimental de la constante de Hall \\(R_{\\text{H}}\\) de la plata?",
+    "options": [
+      "\\(R_{\\text{H}} \\approx 1.0 \\times 10^{-15}\\text{ m}^3/\\text{C}\\)",
+      "\\(R_{\\text{H}} \\approx 1.0 \\times 10^{-12}\\text{ m}^3/\\text{C}\\)",
+      "\\(R_{\\text{H}} \\approx 1.0 \\times 10^{-10}\\text{ m}^3/\\text{C}\\)",
+      "\\(R_{\\text{H}} \\approx 1.4 \\times 10^{-7}\\text{ m}^3/\\text{C}\\)"
+    ],
+    "correct_index": 2,
+    "correct_text": "\\(R_{\\text{H}} \\approx 1.0 \\times 10^{-10}\\text{ m}^3/\\text{C}\\)",
+    "justification": "La tensión de Hall viene dada por \\(V_{\\text{H}} = \\frac{R_{\\text{H}} I B}{d}\\). La pendiente de la recta \\(V_{\\text{H}}\\) frente a \\(B\\) es \\(m = \\frac{R_{\\text{H}} I}{d}\\). Despejando la constante de Hall \\(R_{\\text{H}}\\):\n\\[R_{\\text{H}} = \\frac{m \\cdot d}{I} = \\frac{1.4 \\times 10^{-7}\\text{ V/T} \\times 50 \\times 10^{-6}\\text{ m}}{7.0\\text{ A}} = 1.0 \\times 10^{-10}\\text{ m}^3/\\text{C}\\]",
+    "matched_page": "1-8"
+  },
+  {
+    "id": "C_Ex5",
+    "text": "En la observación del efecto Zeeman en configuración longitudinal (paralela al campo magnético \\(\\vec{B}\\)), la línea central del triplete (componente \\(\\pi\\), \\(\\Delta m = 0\\)) no es visible en el espectro. ¿Cuál es la explicación física de esta ausencia?",
+    "options": [
+      "Los fotones asociados a \\(\\Delta m = 0\\) se absorben por las paredes de la lámpara de cadmio.",
+      "Los dipolos atómicos oscilan en la dirección del campo magnético y, al ser las ondas electromagnéticas transversales, no se propaga radiación en la dirección de dicha oscilación.",
+      "La transición \\(\\Delta m = 0\\) está estrictamente prohibida por las reglas de selección cuánticas en presencia de campo magnético.",
+      "La componente \\(\\pi\\) solo se emite si el campo magnético supera los 2 Teslas de intensidad."
+    ],
+    "correct_index": 1,
+    "correct_text": "Los dipolos atómicos oscilan en la dirección del campo magnético y, al ser las ondas electromagnéticas transversales, no se propaga radiación en la dirección de dicha oscilación.",
+    "justification": "La componente \\(\\pi\\) corresponde a transiciones donde el momento angular no cambia de proyección (\\(\\Delta m = 0\\)), lo que clásicamente equivale a un dipolo eléctrico que oscila linealmente a lo largo del eje del campo magnético \\(\\vec{B}\\). La teoría electromagnética clásica y cuántica establece que un dipolo eléctrico no irradia energía en la dirección de su propio eje de oscilación. Como la observación longitudinal se realiza precisamente a lo largo de este eje, la componente \\(\\pi\\) no es observable.",
+    "matched_page": "9-18"
+  },
+  {
+    "id": "C_Ex6",
+    "text": "¿Por qué el procedimiento experimental de calibración del campo magnético en el entrehierro mediante la sonda Hall debe realizarse con la lámpara de cadmio APAGADA?",
+    "options": [
+      "Para evitar perturbaciones electromagnéticas que distorsionen la señal de radiofrecuencia de la sonda.",
+      "Porque la sonda Hall es muy sensible a la temperatura y el intenso calor que genera la lámpara encendida la dañaría irreversiblemente.",
+      "Porque el campo magnético del electroimán cambia de sentido si la lámpara se encuentra encendida.",
+      "Para asegurar que la tensión del voltímetro de la sonda sea puramente alterna."
+    ],
+    "correct_index": 1,
+    "correct_text": "Porque la sonda Hall es muy sensible a la temperatura y el intenso calor que genera la lámpara encendida la dañaría irreversiblemente.",
+    "justification": "La ampolla de la lámpara de cadmio alcanza temperaturas sumamente elevadas para mantener el cadmio en fase de vapor durante la descarga. Las sondas de efecto Hall utilizadas para la calibración del campo magnético son dispositivos semiconductores delicados cuyo rango de temperatura de operación es limitado. Introducir la sonda en el estrecho canal entre los polos con la lámpara encendida causaría un calentamiento excesivo que alteraría su calibración o destruiría el sensor.",
+    "matched_page": "9-18"
+  },
+  {
+    "id": "C_Ex7",
+    "text": "En la observación longitudinal del efecto Zeeman, ¿qué función realiza la lámina de cuarto de onda (\\(\\lambda/4\\)) colocada antes del analizador polarizador lineal?",
+    "options": [
+      "Filtra las componentes de alta frecuencia de la luz de cadmio.",
+      "Convierte las componentes polarizadas circularmente (\\(\\sigma^+\\) y \\(\\sigma^-\\)) en luz polarizada linealmente en direcciones perpendiculares entre sí para poder separarlas ópticamente.",
+      "Corrige los errores de camino óptico introducidos por el interferómetro de Fabry-Perot.",
+      "Bloquea la radiación infrarroja de la lámpara de descarga."
+    ],
+    "correct_index": 1,
+    "correct_text": "Convierte las componentes polarizadas circularmente (\\(\\sigma^+\\) y \\(\\sigma^-\\)) en luz polarizada linealmente en direcciones perpendiculares entre sí para poder separarlas ópticamente.",
+    "justification": "Las componentes del doblete longitudinal (\\(\\sigma^+\\) y \\(\\sigma^-\\)) presentan polarización circular derecha e izquierda. Al atravesar una lámina de cuarto de onda (\\(\\lambda/4\\)), se introduce un desfase de \\(\\pi/2\\) entre las componentes ortogonales del campo eléctrico, transformando las ondas circulares en ondas linealmente polarizadas a \\(\\pm 45^\\circ\\) respecto a los ejes rápidos y lentos de la lámina. Esto permite extinguir o aislar una de las dos líneas simplemente girando un polarizador lineal posterior (analizador).",
+    "matched_page": "9-18"
+  },
+  {
+    "id": "C_Ex8",
+    "text": "¿Por qué se utiliza la línea roja de emisión del cadmio (\\(\\lambda = 643.8\\text{ nm}\\)) en esta práctica para medir la relación carga/masa (\\(e/m\\)) del electrón?",
+    "options": [
+      "Porque es una transición entre estados singletes (\\({}^1\\text{D}_2 \\to {}^1\\text{P}_1\\)), lo que da lugar al efecto Zeeman normal (un triplete simple de Lorentz) sin la complicación añadida del espín.",
+      "Porque la luz roja no es absorbida por el aire a temperatura ambiente.",
+      "Porque es la única transición del cadmio que se produce en el rango visible.",
+      "Porque las líneas de Zeeman anómalas no sufren desviación en presencia de campo magnético."
+    ],
+    "correct_index": 0,
+    "correct_text": "Porque es una transición entre estados singletes (\\({}^1\\text{D}_2 \\to {}^1\\text{P}_1\\)), lo que da lugar al efecto Zeeman normal (un triplete simple de Lorentz) sin la complicación añadida del espín.",
+    "justification": "La transición roja del cadmio ocurre entre los niveles singletes \\({}^1\\text{D}_2\\) (\\(S=0, L=2, J=2\\)) y \\({}^1\\text{P}_1\\) (\\(S=0, L=1, J=1\\)). Dado que el espín total de ambos niveles es cero (\\(S=0\\)), no hay acoplamiento con el espín y el factor de Landé de ambos niveles es exactamente la unidad (\\(g=1\\)). Esto genera un desdoblamiento de Zeeman clásico o normal de 3 líneas (triplete de Lorentz) equiespaciadas energéticamente en \\(\\Delta E = \\mu_{\\text{B}} B\\), permitiendo calcular \\(e/m\\) mediante fórmulas analíticas sencillas.",
+    "matched_page": "9-18"
+  },
+  {
+    "id": "C_Ex9",
+    "text": "Si el potencial de aceleración \\(U\\) aplicado a un tubo de rayos X con ánodo de molibdeno disminuye de 35 kV a 20 kV, ¿cómo se ve afectado el espectro de emisión obtenido?",
+    "options": [
+      "Desaparece todo el espectro característico de líneas, pero el continuo de frenado permanece idéntico.",
+      "La longitud de onda mínima de corte del espectro continuo (límite de Duane-Hunt \\(\\lambda_c\\)) se desplaza hacia valores mayores (menores energías).",
+      "La longitud de onda mínima de corte \\(\\lambda_c\\) disminuye proporcionalmente a la raíz cuadrada del voltaje.",
+      "El espectro se desplaza íntegramente hacia el rango de luz visible por efecto fotoeléctrico."
+    ],
+    "correct_index": 1,
+    "correct_text": "La longitud de onda mínima de corte del espectro continuo (límite de Duane-Hunt \\(\\lambda_c\\)) se desplaza hacia valores mayores (menores energías).",
+    "justification": "El límite de Duane-Hunt establece que la energía del fotón más energético emitido por frenado (Bremsstrahlung) es igual a la energía de los electrones acelerados en el tubo: \\(eU = h\\nu_{\\text{máx}} = hc/\\lambda_c\\). Despejando la longitud de onda de corte, \\(\\lambda_c = hc/(eU)\\), se deduce que \\(\\lambda_c\\) es inversamente proporcional al potencial \\(U\\). Por tanto, al disminuir el voltaje \\(U\\), la longitud de onda de corte aumenta (menor energía límite).",
+    "matched_page": "21-27"
+  },
+  {
+    "id": "C_Ex10",
+    "text": "En el equipo de difracción de rayos X, el goniómetro automático mantiene siempre una relación angular de 2 a 1 entre el detector Geiger y el cristal analizado. ¿Cuál es el fundamento de esta relación?",
+    "options": [
+      "Que el detector debe moverse a doble velocidad lineal para no perder el haz de electrones difractado.",
+      "Que cuando el haz incide con un ángulo \\(\\alpha\\) sobre los planos cristalinos, el haz reflejado por Bragg se desvía un ángulo total de \\(2\\alpha\\) respecto a la dirección del haz incidente original.",
+      "Que la difracción de Bragg solo ocurre para múltiplos enteros pares del ángulo de incidencia.",
+      "Que compensa el factor de escala geométrico del colimador de wolframio."
+    ],
+    "correct_index": 1,
+    "correct_text": "Que cuando el haz incide con un ángulo \\(\\alpha\\) sobre los planos cristalinos, el haz reflejado por Bragg se desvía un ángulo total de \\(2\\alpha\\) respecto a la dirección del haz incidente original.",
+    "justification": "De acuerdo con la ley de reflexión, si un haz incide con un ángulo \\(\\alpha\\) sobre los planos atómicos de un monocristal, el haz reflejado emerge con el mismo ángulo \\(\\alpha\\) respecto al plano del cristal. Por geometría de ángulos, el haz reflejado tiene una dirección desviada un ángulo \\(\\theta_{\\text{dev}} = \\alpha + \\alpha = 2\\alpha\\) respecto a la línea del haz incidente. Por tanto, para registrar la intensidad reflejada a un ángulo de Bragg \\(\\alpha\\), el detector debe colocarse a un ángulo de \\(2\\alpha\\) respecto a la horizontal del haz primario.",
+    "matched_page": "21-27"
+  },
+  {
+    "id": "C_Ex11",
+    "text": "En el estudio de la atenuación de rayos X en distintos materiales, se comprueba la ley de Moseley para los bordes de absorción K. ¿Qué representa la constante \\(\\sigma\\) en dicha relación?",
+    "options": [
+      "El coeficiente de atenuación lineal del medio material.",
+      "La constante de Rydberg del blanco metálico del ánodo.",
+      "La constante de apantallamiento, que modela la reducción de la carga nuclear efectiva percibida por un electrón debido al resto de electrones del átomo.",
+      "La distancia interplanar de la red cristalina del LiF o NaCl."
+    ],
+    "correct_index": 2,
+    "correct_text": "La constante de apantallamiento, que modela la reducción de la carga nuclear efectiva percibida por un electrón debido al resto de electrones del átomo.",
+    "justification": "La ley de Moseley establece que la raíz cuadrada de la frecuencia de transición es proporcional a la carga nuclear efectiva, que se escribe como \\(Z_{\\text{eff}} = Z - \\sigma\\), donde \\(Z\\) es el número atómico y \\(\\sigma\\) la constante de apantallamiento. Esta constante cuantifica cómo el campo electrostático del núcleo es apantallado por la presencia de otros electrones internos en el átomo, siendo un parámetro empírico que depende del nivel energético (\\(\\sigma \\approx 3.74\\) o \\(5.74\\) para los bordes de absorción K).",
+    "matched_page": "21-27"
+  },
+  {
+    "id": "C_Ex12",
+    "text": "Un haz de rayos X de intensidad \\(I_0\\) atraviesa una chapa de cobre de espesor \\(L = 0.5\\text{ mm}\\). Si el coeficiente de atenuación lineal del cobre para dicha longitud de onda es \\(\\mu = 40\\text{ cm}^{-1}\\), ¿qué porcentaje de la intensidad del haz incidente consigue atravesar el metal?",
+    "options": [
+      "Aproximadamente un \\(82\\%\\)",
+      "Aproximadamente un \\(50\\%\\)",
+      "Aproximadamente un \\(14\\%\\)",
+      "Aproximadamente un \\(2\\%\\)"
+    ],
+    "correct_index": 2,
+    "correct_text": "Aproximadamente un \\(14\\%\\)",
+    "justification": "La ley de atenuación de rayos X es \\(I_{\\text{out}} = I_0 \\text{e}^{-\\mu L}\\). Expresando todas las magnitudes en las mismas unidades de longitud: \\(\\mu = 40\\text{ cm}^{-1} = 4.0\\text{ mm}^{-1}\\), y \\(L = 0.5\\text{ mm}\\). El exponente resulta ser:\n\\[- \\mu L = -(4.0\\text{ mm}^{-1}) \\times (0.5\\text{ mm}) = -2.0\\]\nLa fracción transmitida es:\n\\[\\frac{I_{\\text{out}}}{I_0} = \\text{e}^{-2.0} \\approx 0.1353 \\implies 13.5\\% \\approx 14\\%\\]",
+    "matched_page": "21-27"
+  },
+  {
+    "id": "C_Ex13",
+    "text": "La muestra activa que se introduce en la bobina del oscilador de radiofrecuencia durante la práctica de RSE es difenil-picril-hidracilo (DPPH). ¿Qué propiedad física clave la hace idónea para este experimento?",
+    "options": [
+      "Es un semiconductor intrínseco con una alta densidad de portadores de tipo hueco.",
+      "Es un radical libre orgánico estable que posee un electrón desapareado con momento angular orbital \\(l=0\\), lo que resulta en un factor Landé experimental \\(g \\approx 2\\).",
+      "Es una sustancia luminiscente que emite fotones en el rango visible por efecto Zeeman.",
+      "Su gran anisotropía cristalina permite la separación por doble refracción del espín."
+    ],
+    "correct_index": 1,
+    "correct_text": "Es un radical libre orgánico estable que posee un electrón desapareado con momento angular orbital \\(l=0\\), lo que resulta en un factor Landé experimental \\(g \\approx 2\\).",
+    "justification": "El DPPH es un compuesto orgánico estable con un electrón libre no apareado. La deslocalización del orbital de este electrón hace que su momento angular orbital sea nulo (\\(l=0\\)), de modo que el momento magnético proviene casi exclusivamente del espín electrónico. Como consecuencia, su factor de Landé es extremadamente cercano al del electrón libre, \\(g \\approx 2.0036\\), proporcionando una señal de resonancia muy estrecha y fácil de medir experimentalmente.",
+    "matched_page": "28-34"
+  },
+  {
+    "id": "C_Ex14",
+    "text": "En la práctica de RSE, en lugar de variar con gran precisión la frecuencia de la radiofrecuencia \\(\\nu\\) del circuito oscilador, se prefiere superponer un campo magnético sinusoidal \\(B_1 \\sin\\omega t\\) sobre el campo estático \\(B_0\\). ¿Qué ventaja experimental aporta esto?",
+    "options": [
+      "Permite que la resonancia se mantenga estacionaria en un valor constante sin fluctuaciones térmicas.",
+      "Facilita la observación de la señal en el osciloscopio barriendo el campo magnético de forma periódica a través del valor de resonancia exacto de la muestra.",
+      "Anula la autoinducción de las bobinas Helmholtz eliminando los desfases de corriente.",
+      "Permite duplicar el factor de Landé experimental en cada periodo."
+    ],
+    "correct_index": 1,
+    "correct_text": "Facilita la observación de la señal en el osciloscopio barriendo el campo magnético de forma periódica a través del valor de resonancia exacto de la muestra.",
+    "justification": "Sintonizar y barrer frecuencias de radiofrecuencia ultra-altas (megahertzios) con una precisión de hercios manteniendo la estabilidad es tecnológicamente muy complejo. Es mucho más sencillo fijar la frecuencia del resonador y barrer el campo magnético de manera sinusoidal usando una bobina de modulación AC. Esto hace que el campo total cruce el valor exacto de resonancia de forma cíclica, permitiendo representar en el osciloscopio el pico de absorción como una señal en función del tiempo.",
+    "matched_page": "28-34"
+  },
+  {
+    "id": "C_Ex15",
+    "text": "En un experimento de RSE con DPPH, sintonizamos el oscilador a una frecuencia de trabajo fija de \\(\\nu_0 = 50.0\\text{ MHz}\\). Se observa que la resonancia se produce para un campo magnético estático de \\(B_0 = 1.78\\text{ mT}\\). Utilizando los valores \\(h = 6.63 \\times 10^{-34}\\text{ J}\\cdot\\text{s}\\) y \\(\\mu_{\\text{B}} = 9.27 \\times 10^{-24}\\text{ A}\\cdot\\text{m}^2\\), ¿cuál es el factor de Landé \\(g\\) experimental obtenido?",
+    "options": [
+      "\\(g \\approx 1.00\\)",
+      "\\(g \\approx 2.01\\)",
+      "\\(g \\approx 3.82\\)",
+      "\\(g \\approx 5.56\\)"
+    ],
+    "correct_index": 1,
+    "correct_text": "\\(g \\approx 2.01\\)",
+    "justification": "La condición de resonancia cuántica es \\(h\\nu = g\\mu_{\\text{B}}B\\). Despejando el factor de Landé \\(g\\):\n\\[g = \\frac{h \\nu_0}{\\mu_{\\text{B}} B_0} = \\frac{6.63 \\times 10^{-34}\\text{ J}\\cdot\\text{s} \\times 50.0 \\times 10^6\\text{ s}^{-1}}{9.27 \\times 10^{-24}\\text{ J/T} \\times 1.78 \\times 10^{-3}\\text{ T}} = \\frac{3.315 \\times 10^{-26}}{1.650 \\times 10^{-26}} \\approx 2.01\\]",
+    "matched_page": "28-34"
+  },
+  {
+    "id": "C_Ex16",
+    "text": "Al observar en el osciloscopio las señales en modo dual, se visualiza la curva sinusoidal de corriente del campo magnético y, superpuestos a ella, aparecen dos picos de resonancia por cada periodo de modulación. Si variamos la corriente continua \\(U_0\\) y el variador de fase hasta que los dos picos se vuelvan perfectamente simétricos respecto al máximo/mínimo de la sinusoide, ¿qué valor de campo magnético corresponde a ese instante de resonancia simétrica?",
+    "options": [
+      "El campo magnético máximo \\(B_0 + B_1\\).",
+      "El campo magnético en el cual el término variable sinusoidal es nulo, es decir, el campo estático \\(B(t) = B_0\\).",
+      "El campo magnético remanente del núcleo de las bobinas Helmholtz.",
+      "Un valor de campo que depende únicamente de la amplitud de radiofrecuencia."
+    ],
+    "correct_index": 1,
+    "correct_text": "El campo magnético en el cual el término variable sinusoidal es nulo, es decir, el campo estático \\(B(t) = B_0\\).",
+    "justification": "Los dos picos de resonancia ocurren cuando el campo magnético variable \\(B(t) = B_0 + B_1 \\sin\\omega t\\) iguala al campo de resonancia \\(B_{\\text{res}}\\). Si ajustamos la componente de corriente continua \\(U_0\\) (que define \\(B_0\\)) para que \\(B_{\\text{res}} = B_0\\), la condición de resonancia se satisface exactamente cuando \\(\\sin\\omega t = 0\\). En esta situación, los picos de resonancia ocurren en los pasos por cero de la componente AC, situándose de forma perfectamente simétrica a distancias iguales del máximo y el mínimo de la sinusoide.",
+    "matched_page": "28-34"
+  },
+  {
+    "id": "E_Ex1",
+    "text": "Si un condensador de poliéster de capacidad \\(C\\) se descarga a través de una caja de resistencias \\(R\\) en un montaje experimental, ¿cuál es la relación exacta entre el tiempo medio de descarga \\(t_{1/2}\\) (tiempo necesario para reducir la tensión a la mitad de su valor inicial) y la constante de tiempo del circuito \\(\\tau = RC\\)?",
+    "options": [
+      "\\(t_{1/2} = \\tau / \\ln 2 \\approx 1.44 \\tau\\)",
+      "\\(t_{1/2} = \\tau \\ln 2 \\approx 0.693 \\tau\\)",
+      "\\(t_{1/2} = \\tau\\)",
+      "\\(t_{1/2} = 2 \\pi \\tau\\)"
+    ],
+    "correct_index": 1,
+    "correct_text": "\\(t_{1/2} = \\tau \\ln 2 \\approx 0.693 \\tau\\)",
+    "justification": "La tensión en bornes de un condensador en descarga libre responde a la ecuación \\(V(t) = V_0 \\text{e}^{-t/\\tau}\\), donde \\(\\tau = RC\\). La condición para la descarga media establece que \\(V(t_{1/2}) = V_0 / 2\\). Sustituyendo en la ecuación:\n\\[\\frac{V_0}{2} = V_0 \\text{e}^{-t_{1/2}/\\tau} \\implies \\text{e}^{-t_{1/2}/\\tau} = \\frac{1}{2} \\implies -\\frac{t_{1/2}}{\\tau} = -\\ln 2 \\implies t_{1/2} = \\tau \\ln 2\\]",
+    "matched_page": "35-42"
+  },
+  {
+    "id": "E_Ex2",
+    "text": "En un circuito RLC serie en régimen subamortiguado (\\(R < 2\\sqrt{L/C}\\)), ¿cómo es la frecuencia angular \\(\\omega\\) de la respuesta oscilatoria amortiguada en comparación con la frecuencia de resonancia natural del circuito ideal no amortiguado \\(\\omega_0 = 1/\\sqrt{LC}\\)?",
+    "options": [
+      "\\(\\omega\\) es mayor que \\(\\omega_0\\) porque la resistencia acelera la descarga de energía.",
+      "\\(\\omega\\) es menor que \\(\\omega_0\\) debido a la disipación resistiva, cumpliendo la relación \\(\\omega = \\sqrt{\\omega_0^2 - \\alpha^2}\\) con \\(\\alpha = R/(2L)\\).",
+      "\\(\\omega\\) es idéntica a \\(\\omega_0\\), ya que la resistencia solo altera la envolvente exponencial y no la frecuencia fundamental.",
+      "\\(\\omega\\) oscila alternativamente entre valores mayores y menores que \\(\\omega_0\\)."
+    ],
+    "correct_index": 1,
+    "correct_text": "\\(\\omega\\) es menor que \\(\\omega_0\\) debido a la disipación resistiva, cumpliendo la relación \\(\\omega = \\sqrt{\\omega_0^2 - \\alpha^2}\\) con \\(\\alpha = R/(2L)\\).",
+    "justification": "La resolución de la ecuación diferencial para la corriente en un circuito RLC serie subamortiguado proporciona una solución de la forma \\(i(t) \\propto \\text{e}^{-\\alpha t} \\sin(\\omega t)\\), donde el coeficiente de amortiguamiento es \\(\\alpha = \\frac{R}{2L}\\) y la frecuencia angular es \\(\\omega = \\sqrt{\\frac{1}{LC} - \\frac{R^2}{4L^2}}\\). Reescrito en términos de la frecuencia propia del sistema sin pérdidas, \\(\\omega_0 = \\frac{1}{\\sqrt{LC}}\\), se tiene que \\(\\omega = \\sqrt{\\omega_0^2 - \\alpha^2}\\). Por tanto, la resistencia reduce la frecuencia de oscilación transitoria libre del circuito.",
+    "matched_page": "35-42"
+  },
+  {
+    "id": "E_Ex3",
+    "text": "Visualizamos en la pantalla del osciloscopio la tensión transitoria en un circuito RLC subamortiguado. La amplitud del primer pico de tensión medido es \\(A_1 = 8.0\\text{ V}\\), y la amplitud del segundo pico consecutivo (transcurrido exactamente un periodo de oscilación \\(T\\)) es \\(A_2 = 3.2\\text{ V}\\). ¿Cuál es el valor del factor de amortiguamiento \\(\\alpha = R/(2L)\\) de este circuito?",
+    "options": [
+      "\\(\\alpha \\approx \\ln(2.5)/T\\)",
+      "\\(\\alpha \\approx 2.5/T\\)",
+      "\\(\\alpha \\approx \\ln(11.2)/T\\)",
+      "\\(\\alpha \\approx 0.4/T\\)"
+    ],
+    "correct_index": 0,
+    "correct_text": "\\(\\alpha \\approx \\ln(2.5)/T\\)",
+    "justification": "La envolvente de decaimiento de las oscilaciones transitorias responde a una ley de tipo exponencial \\(A(t) = A_0 \\text{e}^{-\\alpha t}\\). Al comparar dos máximos sucesivos separados por un intervalo de tiempo igual al periodo de oscilación \\(T\\), su cociente es:\n\\[\\frac{A_1}{A_2} = \\frac{A_0 \\text{e}^{-\\alpha t}}{A_0 \\text{e}^{-\\alpha(t+T)}} = \\text{e}^{\\alpha T}\\]\nTomando el logaritmo natural a ambos lados y despejando el factor de amortiguamiento \\(\\alpha\\):\n\\[\\ln\\left(\\frac{A_1}{A_2}\\right) = \\alpha T \\implies \\alpha = \\frac{\\ln(8.0 / 3.2)}{T} = \\frac{\\ln(2.5)}{T}\\]",
+    "matched_page": "35-42"
+  },
+  {
+    "id": "E_Ex4",
+    "text": "Para guardar e incorporar de forma automatizada las gráficas de tensión y los datos de los canales en el informe de prácticas, ¿qué herramienta de software se encuentra disponible en el escritorio del ordenador del laboratorio?",
+    "options": [
+      "Una base de datos SQL conectada al osciloscopio.",
+      "Un libro de Excel programado con macros llamado *Osciloscopio-23.xlsm* que captura datos y pantallas por interfaz directa.",
+      "Un script de Python que exporta en formato de texto plano a través de un puerto serie virtual.",
+      "No hay software disponible y se deben tomar fotos de la pantalla con el teléfono móvil."
+    ],
+    "correct_index": 1,
+    "correct_text": "Un libro de Excel programado con macros llamado *Osciloscopio-23.xlsm* que captura datos y pantallas por interfaz directa.",
+    "justification": "Según se indica en la sección de Realización Práctica del guión, en el escritorio de cada puesto se dispone de la hoja de cálculo de Excel *Osciloscopio-23.xlsm*. Este fichero tiene macros automatizadas que permiten transferir los arrays de datos y capturar imágenes del visor de los osciloscopios del laboratorio mediante la pulsación de botones dedicados en su interfaz.",
+    "matched_page": "35-42"
+  },
+  {
+    "id": "E_Ex5",
+    "text": "¿Cuál es la razón física de la regla de seguridad que prohíbe terminantemente apagar o desconectar los cables de la fuente de corriente del electroimán mientras está circulando intensidad por él?",
+    "options": [
+      "Se induce un cortocircuito que quema de forma instantánea el núcleo de hierro-silicio.",
+      "Las bobinas del electroimán poseen una gran inductancia y acumulan energía magnética; interrumpir el circuito bruscamente provoca una f.e.m. de autoinducción muy elevada que genera un arco eléctrico peligroso.",
+      "Se descalibra permanentemente el sensor de la balanza debido a un cambio brusco del peso tara.",
+      "La inversión de la corriente calienta el devanado por efecto Joule hasta fundir el cobre."
+    ],
+    "correct_index": 1,
+    "correct_text": "Las bobinas del electroimán poseen una gran inductancia y acumulan energía magnética; interrumpir el circuito bruscamente provoca una f.e.m. de autoinducción muy elevada que genera un arco eléctrico peligroso.",
+    "justification": "Un electroimán con cientos de espiras enrolladas sobre un núcleo ferromagnético posee una autoinducción \\(L\\) muy alta. La energía almacenada en el campo magnético es \\(E = \\frac{1}{2} L I^2\\). Si se interrumpe la corriente de golpe (\\(dt \\to 0\\)), la derivada temporal de la corriente es extremadamente grande y negativa, induciendo según la ley de Faraday una fuerza electromotriz autorregulada \\(\\varepsilon = -L \\frac{dI}{dt}\\) que puede llegar a miles de voltios. Esto provoca un arco eléctrico en el interruptor o enchufe, pudiendo dar una descarga eléctrica al experimentador y destruir el aislamiento térmico de los equipos.",
+    "matched_page": "43-46"
+  },
+  {
+    "id": "E_Ex6",
+    "text": "En el diseño del electroimán de la balanza de corrientes, ¿por qué la reluctancia del entrehierro \\(R_g = g/(\\mu_0 S)\\) suele representar el término dominante en la oposición al flujo magnético a pesar de que su longitud \\(g\\) es de apenas unos milímetros?",
+    "options": [
+      "Porque la sección transversal \\(S\\) del entrehierro es despreciable comparada con la del núcleo de hierro en U.",
+      "Porque la permeabilidad magnética del aire (\\(\\mu_0\\)) es miles de veces menor que la permeabilidad magnética del núcleo ferromagnético de hierro (\\(\\mu \\gg \\mu_0\\)).",
+      "Porque el flujo magnético se dispersa y el campo en el aire no es perpendicular al circuito móvil.",
+      "Porque la reluctancia del hierro es proporcional a la resistencia eléctrica del circuito impreso."
+    ],
+    "correct_index": 1,
+    "correct_text": "Porque la permeabilidad magnética del aire (\\(\\mu_0\\)) es miles de veces menor que la permeabilidad magnética del núcleo ferromagnético de hierro (\\(\\mu \\gg \\mu_0\\)).",
+    "justification": "La reluctancia magnética se define como \\(R_m = \\frac{L}{\\mu S}\\). Para el hierro dulce del núcleo, la permeabilidad magnética \\(\\mu\\) es muy elevada (permeabilidad relativa \\(\\mu_r \\sim 1000 - 5000\\)), por lo que su reluctancia \\(R_c\\) es muy baja. Por el contrario, para el entrehierro, el medio es el aire con permeabilidad \\(\\mu_0\\). Al ser \\(\\mu_{\\text{hierro}} \\approx 1000 \\mu_0\\), un milímetro de aire ofrece la misma reluctancia (resistencia al paso del flujo) que varios metros de hierro, haciendo del entrehierro el factor limitante del circuito magnético.",
+    "matched_page": "43-46"
+  },
+  {
+    "id": "E_Ex7",
+    "text": "En el experimento de la balanza de corrientes, un segmento recto conductor de longitud activa \\(L = 5.0\\text{ cm}\\) suspendido del circuito móvil es recorrido por una intensidad de \\(I_c = 4.0\\text{ A}\\). Si al encender el electroimán con una intensidad fija \\(I_e = 2.0\\text{ A}\\) la balanza registra una fuerza de \\(F = 8.0\\text{ mN}\\), ¿cuál es el campo de inducción magnética \\(B\\) en el entrehierro?",
+    "options": [
+      "\\(B = 0.01\\text{ T}\\)",
+      "\\(B = 0.04\\text{ T}\\)",
+      "\\(B = 0.10\\text{ T}\\)",
+      "\\(B = 0.40\\text{ T}\\)"
+    ],
+    "correct_index": 1,
+    "correct_text": "\\(B = 0.04\\text{ T}\\)",
+    "justification": "La fuerza de Lorentz sobre un conductor rectilíneo perpendicular al campo es \\(F = I_c L B\\). Despejando la inducción magnética \\(B\\):\n\\[B = \\frac{F}{I_c L} = \\frac{8.0 \\times 10^{-3}\\text{ N}}{4.0\\text{ A} \\times 0.05\\text{ m}} = \\frac{8.0 \\times 10^{-3}}{0.20} = 0.04\\text{ T}\\]",
+    "matched_page": "43-46"
+  },
+  {
+    "id": "E_Ex8",
+    "text": "Al colocar las diferentes placas de circuito impreso en el brazo de la balanza electrodinámica para realizar las medidas de fuerza, ¿por qué es crítico que queden correctamente centradas horizontal y verticalmente sin llegar a rozar las piezas polares?",
+    "options": [
+      "Porque si rozan el electroimán, las fuerzas de fricción mecánica adulteran la lectura del peso en la balanza y distorsionan la medida de la fuerza Lorentz.",
+      "Porque el rozamiento con el hierro provoca descargas eléctricas que cortocircuitan la fuente de corriente continua.",
+      "Porque el rozamiento calienta las bobinas por efecto Joule.",
+      "Porque el campo magnético del electroimán es estrictamente nulo fuera del centro geométrico exacto de las piezas polares."
+    ],
+    "correct_index": 0,
+    "correct_text": "Porque si rozan el electroimán, las fuerzas de fricción mecánica adulteran la lectura del peso en la balanza y distorsionan la medida de la fuerza Lorentz.",
+    "justification": "La balanza mide variaciones de fuerza del orden de milinewtons (mN) traduciendo pequeñas deflexiones de su plato de carga. Cualquier mínimo rozamiento físico entre la placa de circuito impreso (móvil) y las pesadas piezas del electroimán (estáticas) introduce fuerzas de fricción estática o dinámica que impiden que la balanza registre con exactitud la fuerza magnética neta, falseando los resultados.",
+    "matched_page": "43-46"
+  },
+  {
+    "id": "E_Ex9",
+    "text": "De acuerdo con el fundamento teórico, la inducción magnética en el interior de un solenoide muy largo (\\(L \\gg a\\)) es uniforme y viene dada por \\(B = \\mu_0 n I\\). ¿Qué ocurre con el valor del campo magnético axial a medida que nos desplazamos desde la zona central del solenoide hacia sus extremos físicos (\\(z = \\pm L/2\\))?",
+    "options": [
+      "El campo magnético permanece perfectamente constante y cae bruscamente a cero en cuanto cruzamos el límite exterior.",
+      "El campo aumenta hasta el doble en los bordes debido al efecto de dispersión de las líneas de campo.",
+      "El campo magnético en el eje decrece progresivamente hasta reducirse aproximadamente a la mitad de su valor central en los extremos de la bobina.",
+      "El campo magnético oscila sinusoidalmente cambiando su polaridad norte-sur en cada extremo."
+    ],
+    "correct_index": 2,
+    "correct_text": "El campo magnético en el eje decrece progresivamente hasta reducirse aproximadamente a la mitad de su valor central en los extremos de la bobina.",
+    "justification": "Evaluando la expresión analítica del campo magnético axial de un solenoide finito de longitud \\(L\\) y radio \\(a\\) en los extremos (\\(z = \\pm L/2\\)), se obtiene mediante integración que el campo es exactamente la mitad del valor en el centro geométrico para un solenoide largo:\n\\[B\\left(\\pm \\frac{L}{2}\\right) = \\frac{1}{2} \\mu_0 \\frac{N}{L} I \\left( \\frac{L}{\\sqrt{L^2 + a^2}} \\right) \\approx \\frac{1}{2} B(0)\\]\nEsto se debe a que las líneas de campo divergen hacia el exterior del solenoide al aproximarse a las aberturas terminales.",
+    "matched_page": "47-54"
+  },
+  {
+    "id": "E_Ex10",
+    "text": "¿Cuál es la razón por la que en la práctica de campos magnéticos se alimenta al solenoide y las bobinas Helmholtz con corriente alterna en lugar de corriente continua?",
+    "options": [
+      "Porque la corriente continua saturaría el núcleo ferromagnético de la bobina pequeña del gausímetro.",
+      "Porque el sensor del gausímetro está basado en la inducción electromagnética (ley de Faraday), la cual requiere que el flujo magnético a través de la bobina detectora varíe en el tiempo para generar una f.e.m. medible.",
+      "Porque la corriente alterna consume menos energía y evita sobrecalentamientos por efecto Joule en el banco de medida.",
+      "Porque el voltímetro digital del laboratorio solo puede realizar lecturas de potencial alterno de muy alta frecuencia."
+    ],
+    "correct_index": 1,
+    "correct_text": "Porque el sensor del gausímetro está basado en la inducción electromagnética (ley de Faraday), la cual requiere que el flujo magnético a través de la bobina detectora varíe en el tiempo para generar una f.e.m. medible.",
+    "justification": "El gausímetro de inducción utiliza una pequeña bobina exploradora como sonda. La tensión inducida en bornes de una bobina de superficie \\(S\\) y \\(N\\) espiras en presencia de un campo \\(B(t)\\) es \\(\\varepsilon = -N S \\frac{dB}{dt}\\). Si el campo magnético fuera estático (producido por corriente continua), la derivada temporal sería cero y no habría f.e.m. inducida. Alimentando las bobinas inductoras con corriente alterna sinusoidal \\(I(t) = I_0 \\sin\\omega t\\), el campo oscila armónicamente, generando una tensión proporcional a la amplitud de la inducción magnética.",
+    "matched_page": "47-54"
+  },
+  {
+    "id": "E_Ex11",
+    "text": "Para el calibrado del gausímetro, montamos un solenoide de longitud \\(L = 30\\text{ cm}\\) que consta de dos arrollamientos en serie de \\(N_1 = N_2 = 146\\text{ espiras}\\) cada uno (\\(N = 292\\text{ espiras}\\) en total). Si el amperímetro registra una corriente de \\(I = 1.5\\text{ A}\\) por las bobinas, ¿cuál es el campo magnético teórico \\(B\\) en la zona central interior (asumiendo solenoide largo)?",
+    "options": [
+      "\\(B \\approx 1.84 \\times 10^{-3}\\text{ T}\\)",
+      "\\(B \\approx 1.84 \\times 10^{-6}\\text{ T}\\)",
+      "\\(B \\approx 3.68 \\times 10^{-3}\\text{ T}\\)",
+      "\\(B \\approx 9.20 \\times 10^{-4}\\text{ T}\\)"
+    ],
+    "correct_index": 0,
+    "correct_text": "\\(B \\approx 1.84 \\times 10^{-3}\\text{ T}\\)",
+    "justification": "El campo en el interior central de un solenoide largo viene dado por \\(B = \\mu_0 \\frac{N}{L} I\\). Tomando \\(\\mu_0 = 4\\pi \\times 10^{-7}\\text{ T}\\cdot\\text{m/A}\\), la longitud en metros \\(L = 0.30\\text{ m}\\) y \\(N = 292\\):\n\\[B = (4\\pi \\times 10^{-7}\\text{ T}\\cdot\\text{m/A}) \\times \\frac{292}{0.30\\text{ m}} \\times 1.5\\text{ A} = (4\\pi \\times 10^{-7}) \\times 973.33 \\times 1.5 \\approx 1.835 \\times 10^{-3}\\text{ T} \\approx 1.84\\text{ mT}\\]",
+    "matched_page": "47-54"
+  },
+  {
+    "id": "E_Ex12",
+    "text": "En el estudio de la bobina pequeña para la comprobación de la aproximación dipolar magnética en puntos alejados de su eje (\\(z \\gg a\\)), ¿cómo decae la inducción magnética \\(B\\) en función de la distancia \\(r\\) al centro de la bobina?",
+    "options": [
+      "Decae linealmente como \\(r^{-1}\\).",
+      "Decae cuadráticamente como \\(r^{-2}\\).",
+      "Decae inversamente con el cubo de la distancia como \\(r^{-3}\\).",
+      "Decae exponencialmente según la ley \\(\\text{e}^{-r}\\)."
+    ],
+    "correct_index": 2,
+    "correct_text": "Decae inversamente con el cubo de la distancia como \\(r^{-3}\\).",
+    "justification": "Para distancias mucho mayores que el radio de la espira o bobina (\\(r \\gg a\\)), los términos monopolares del potencial magnético son nulos y la primera aproximación válida es el término dipolar. Evaluando las componentes del campo magnético del dipolo, se tiene que tanto la componente radial como la angular son proporcionales a \\(\\frac{\\mu_0 m}{4\\pi r^3}\\). Por tanto, la intensidad del campo magnético decae de manera cúbica con la distancia (\\(B \\propto r^{-3}\\)), lo que constituye la firma experimental del comportamiento dipolar.",
+    "matched_page": "47-54"
+  },
+  {
+    "id": "E_Ex13",
+    "text": "La visualización del ciclo de histéresis en el osciloscopio se fundamenta en que la tensión en el condensador \\(V_y\\) del filtro RC sea proporcional a la integral temporal de la f.e.m. inducida en las bobinas secundarias. ¿Bajo qué condición de frecuencia de trabajo \\(f\\) con respecto a la frecuencia de corte del filtro \\(f_c = 1/(2\\pi R'C')\\) se cumple esto con precisión?",
+    "options": [
+      "A frecuencias muy inferiores a la frecuencia de corte (\\(f \\ll f_c\\)).",
+      "A frecuencias muy superiores a la frecuencia de corte (\\(f \\gg f_c\\)).",
+      "A frecuencias exactamente coincidentes con la de corte (\\(f = f_c\\)).",
+      "La frecuencia no afecta al integrador pasivo, solo a la corriente del primario."
+    ],
+    "correct_index": 1,
+    "correct_text": "A frecuencias muy superiores a la frecuencia de corte (\\(f \\gg f_c\\)).",
+    "justification": "La tensión en bornes del condensador en un filtro pasa-bajo RC responde a \\(V_c(t) \\approx \\frac{1}{R'C'} \\int V_{\\text{in}}(t) dt\\) únicamente si la caída de tensión en el condensador es despreciable frente a la de la resistencia (\\(V_c \\ll V_R\\)). En el dominio de Fourier, esta aproximación exige que la impedancia del condensador sea muy pequeña frente a la resistencia (\\(1/(\\omega C') \\ll R'\\)), lo que se traduce en \\(\\omega \\gg 1/(R'C')\\), que es equivalente a trabajar a frecuencias mucho mayores que la frecuencia de corte (\\(f \\gg f_c\\)). Si se baja demasiado la frecuencia de excitación, la integración falla, distorsionando la señal y generando lazos artificiales cruzados en los extremos del ciclo.",
+    "matched_page": "55-60"
+  },
+  {
+    "id": "E_Ex14",
+    "text": "Dos núcleos ferromagnéticos idénticos en dimensiones se someten a un campo magnético sinusoidal de frecuencia \\(f = 100\\text{ Hz}\\). El núcleo \\(A\\) es de hierro-silicio laminado (campo coercitivo \\(H_c\\) bajo) y el núcleo \\(B\\) es de hierro macizo (campo coercitivo \\(H_c\\) alto). ¿Qué núcleo experimentará una mayor disipación de calor por histéresis?",
+    "options": [
+      "El núcleo \\(A\\) porque sus dominios magnéticos oscilan de forma más rápida.",
+      "El núcleo \\(B\\) porque la energía perdida en forma de calor por unidad de volumen en cada ciclo es proporcional al área encerrada por el ciclo de histéresis.",
+      "Ambos por igual, puesto que las pérdidas por histéresis dependen únicamente de la amplitud del generador de funciones.",
+      "Ninguno disipa calor por histéresis; la energía eléctrica se conserva íntegramente en forma de energía electrostática."
+    ],
+    "correct_index": 1,
+    "correct_text": "El núcleo \\(B\\) porque la energía perdida en forma de calor por unidad de volumen en cada ciclo es proporcional al área encerrada por el ciclo de histéresis.",
+    "justification": "La energía disipada en forma de calor por unidad de volumen en cada ciclo completo del campo magnético es igual a la integral de línea del ciclo de histéresis: \\(\\Delta E_{\\text{ciclo}} = \\mu_0 \\oint H dM\\), la cual equivale geométricamente al área encerrada por la curva de histéresis. La potencia media disipada es \\(P = \\mu_0 A f\\). Puesto que el núcleo \\(B\\) de hierro macizo es magnéticamente \"duro\" y posee un ciclo de histéresis mucho más ancho (mayor área \\(A\\)) que el núcleo blando \\(A\\), su disipación térmica y pérdidas energéticas por histéresis serán notablemente mayores.",
+    "matched_page": "55-60"
+  },
+  {
+    "id": "E_Ex15",
+    "text": "El núcleo de prueba nº4 empleado en la práctica está constituido por una ferrita de manganeso-zinc, mientras que los otros tres núcleos son metálicos. ¿Qué propiedad eléctrica fundamental distingue a las ferritas de los metales ferromagnéticos en aplicaciones de alta frecuencia?",
+    "options": [
+      "Las ferritas son excelentes conductores de la corriente eléctrica por carecer de electrones de valencia.",
+      "Las ferritas poseen una resistividad eléctrica sumamente alta (comportamiento semiconductor/aislante), lo que suprime la inducción de corrientes de Foucault parásitas y minimiza las pérdidas Joule.",
+      "Las ferritas no presentan histéresis magnética de ningún tipo, comportándose como paramagnéticos perfectos.",
+      "Las ferritas se enfrían espontáneamente al estar inmersas en campos variables."
+    ],
+    "correct_index": 1,
+    "correct_text": "Las ferritas poseen una resistividad eléctrica sumamente alta (comportamiento semiconductor/aislante), lo que suprime la inducción de corrientes de Foucault parásitas y minimiza las pérdidas Joule.",
+    "justification": "En los materiales ferromagnéticos metálicos (como el acero o hierro macizo), los campos magnéticos variables en el tiempo inducen bucles de corrientes eléctricas en su interior (corrientes de Foucault) que disipan energía por efecto Joule. Las ferritas son cerámicos de óxidos de hierro combinados con zinc y manganeso. Debido a su estructura atómica, poseen propiedades magnéticas intensas combinadas con una conductividad eléctrica casi nula. Esta resistividad muy elevada impide físicamente la circulación de corrientes inducidas parásitas, por lo que las ferritas no presentan pérdidas por corrientes de Foucault y se usan en bobinados y transformadores de alta frecuencia.",
+    "matched_page": "55-60"
+  },
+  {
+    "id": "E_Ex16",
+    "text": "Un núcleo ferromagnético de volumen \\(V = 200\\text{ cm}^3\\) tiene un ciclo de histéresis cuya área integrada (representando el ciclo \\(B-H\\)) equivale a una densidad de pérdida por ciclo de \\(A = 500\\text{ J/m}^3\\). Si el circuito primario se alimenta a una frecuencia estándar de \\(f = 50\\text{ Hz}\\), ¿cuál es la potencia total que se disipa en forma de calor en el núcleo debido a la histéresis?",
+    "options": [
+      "\\(P_{\\text{pérdidas}} = 0.5\\text{ W}\\)",
+      "\\(P_{\\text{pérdidas}} = 5.0\\text{ W}\\)",
+      "\\(P_{\\text{pérdidas}} = 50.0\\text{ W}\\)",
+      "\\(P_{\\text{pérdidas}} = 5000\\text{ W}\\)"
+    ],
+    "correct_index": 1,
+    "correct_text": "\\(P_{\\text{pérdidas}} = 5.0\\text{ W}\\)",
+    "justification": "La potencia de pérdida disipada por unidad de volumen es el producto del área del ciclo \\(B-H\\) (que representa la densidad de energía perdida por ciclo en \\(\\text{J/m}^3\\)) por la frecuencia \\(f\\):\n\\[p = A \\cdot f = 500\\text{ J/m}^3 \\times 50\\text{ s}^{-1} = 25000\\text{ W/m}^3\\]\nLa potencia total disipada en el volumen del núcleo \\(V = 200\\text{ cm}^3 = 200 \\times 10^{-6}\\text{ m}^3\\) es:\n\\[P_{\\text{pérdidas}} = p \\cdot V = 25000\\text{ W/m}^3 \\times 200 \\times 10^{-6}\\text{ m}^3 = 5.0\\text{ W}\\]",
+    "matched_page": "55-60"
+  },
+  {
+    "id": "O_Ex1",
+    "text": "En la práctica del interferómetro de Michelson, antes de poder observar el patrón de interferencia de anillos circulares, se debe realizar una alineación inicial del sistema óptico para hacer coincidir los frentes de onda. ¿Qué procedimiento práctico se sigue en el laboratorio?",
+    "options": [
+      "Se hace pasar un haz láser a través de la lámina compensadora y se mide la distancia geométrica exacta con un calibrador digital.",
+      "Se sitúa un objeto puntual (como la punta de un alfiler o bolígrafo) entre la lámpara de sodio y la lámina divisora de haz, y se ajustan los tornillos de inclinación del espejo fijo hasta lograr la superposición perfecta de las dos imágenes virtuales vistas en el telescopio.",
+      "Se rota la lente colimadora 90 grados hasta lograr la extinción total del haz reflejado.",
+      "Se gira rápidamente el tornillo micrométrico del espejo móvil en busca del punto medio de su recorrido mecánico."
+    ],
+    "correct_index": 1,
+    "correct_text": "Se sitúa un objeto puntual (como la punta de un alfiler o bolígrafo) entre la lámpara de sodio y la lámina divisora de haz, y se ajustan los tornillos de inclinación del espejo fijo hasta lograr la superposición perfecta de las dos imágenes virtuales vistas en el telescopio.",
+    "justification": "El uso de un puntero físico o alfiler enfrente de la fuente extensa de sodio genera dos haces que se reflejan de forma independiente en los espejos E1 y E2, formando dos imágenes distintas visibles a través del telescopio/ojo del observador. Moviendo los tornillos de inclinación micrométricos del espejo fijo E2, se giran los frentes de onda reflejados hasta que las dos imágenes virtuales del alfiler se superponen espacialmente en una sola. Esta coincidencia garantiza la colinealidad de los ejes ópticos virtuales de ambos brazos, condición necesaria para que se forme el patrón de anillos en el infinito.",
+    "matched_page": "1-8 y 17-20"
+  },
+  {
+    "id": "O_Ex2",
+    "text": "En el interferómetro de Michelson iluminado con una lámpara de sodio (\\(\\lambda = 589\\text{ nm}\\)), desplazamos el espejo móvil una distancia física \\(d\\). Si este desplazamiento produce el paso de \\(N = 100\\) franjas (o anillos) brillantes por el centro del patrón de interferencia, ¿qué distancia \\(d\\) se ha desplazado el espejo móvil?",
+    "options": [
+      "\\(d = 58.9\\text{ \\(\\mu\\)m}\\)",
+      "\\(d = 29.45\\text{ \\(\\mu\\)m}\\)",
+      "\\(d = 14.73\\text{ \\(\\mu\\)m}\\)",
+      "\\(d = 117.8\\text{ \\(\\mu\\)m}\\)"
+    ],
+    "correct_index": 1,
+    "correct_text": "\\(d = 29.45\\text{ \\(\\mu\\)m}\\)",
+    "justification": "La diferencia de caminos ópticos en el Michelson es \\(\\Delta s = 2d\\) debido al recorrido de ida y vuelta en el brazo móvil. La condición para el paso de \\(N\\) máximos de interferencia (franjas brillantes) por el centro del ocular es \\(\\Delta s = N \\lambda\\). Sustituyendo e igualando:\n\\[2d = N \\lambda \\implies d = \\frac{N \\lambda}{2} = \\frac{100 \\times 589 \\times 10^{-9}\\text{ m}}{2} = 29.45 \\times 10^{-6}\\text{ m} = 29.45\\text{ \\(\\mu\\)m}\\]",
+    "matched_page": "1-8 y 17-20"
+  },
+  {
+    "id": "O_Ex3",
+    "text": "Uno de los objetivos del experimento de Michelson es medir la diferencia de longitudes de onda del doblete del sodio (\\(\\Delta\\lambda = \\lambda_1 - \\lambda_2\\)). Para ello, desplazamos el espejo móvil una distancia \\(\\Delta d\\) entre dos posiciones consecutivas de mínima visibilidad de las franjas. ¿Cuál es la relación matemática utilizada en el guion para calcular \\(\\Delta\\lambda\\) a partir de la longitud de onda media conocida \\(\\lambda \\approx 589.3\\text{ nm}\\)?",
+    "options": [
+      "\\(\\Delta\\lambda = \\frac{\\lambda^2}{2 \\Delta d}\\)",
+      "\\(\\Delta\\lambda = \\frac{2 \\Delta d}{\\lambda^2}\\)",
+      "\\(\\Delta\\lambda = \\frac{\\lambda^2}{\\Delta d}\\)",
+      "\\(\\Delta\\lambda = \\sqrt{\\lambda \\Delta d}\\)"
+    ],
+    "correct_index": 0,
+    "correct_text": "\\(\\Delta\\lambda = \\frac{\\lambda^2}{2 \\Delta d}\\)",
+    "justification": "El sodio emite principalmente en dos líneas espectrales muy cercanas (\\(\\lambda_1\\) y \\(\\lambda_2\\)). Sus respectivos patrones de interferencia entran en coincidencia (fase) y oposición (contrafase) de forma periódica al mover el espejo móvil. La visibilidad de los anillos concéntricos es mínima cuando los máximos de una longitud de onda coinciden con los mínimos de la otra. La distancia física recorrida por el espejo entre dos mínimos de visibilidad consecutivos, \\(\\Delta d\\), corresponde a un desfase relativo acumulado de un ciclo en el camino óptico de ida y vuelta, es decir, \\(2\\Delta d (1/\\lambda_2 - 1/\\lambda_1) = 1\\). Sabiendo que \\(\\lambda_1 - \\lambda_2 = \\Delta\\lambda\\) y \\(\\lambda_1 \\lambda_2 \\approx \\lambda^2\\), resulta:\n\\[2\\Delta d \\frac{\\Delta\\lambda}{\\lambda^2} = 1 \\implies \\Delta\\lambda = \\frac{\\lambda^2}{2\\Delta d}\\]",
+    "matched_page": "1-8 y 17-20"
+  },
+  {
+    "id": "O_Ex4",
+    "text": "Al realizar las medidas experimentales con el interferómetro de Michelson, el avance real del espejo móvil \\(d\\) no coincide con el valor nominal registrado en la escala del tambor del micrómetro. ¿Cómo se calibra en el laboratorio esta relación de reducción (desmultiplicación mecánica)?",
+    "options": [
+      "Multiplicando la distancia nominal por el índice de refracción del aire del laboratorio.",
+      "Contando el paso de un número conocido de franjas \\(N\\) para calcular el desplazamiento real \\(d = N\\lambda / 2\\), y dividiendo este valor real entre el incremento medido en la escala del micrómetro.",
+      "Midiendo el espesor de la lámina divisora de haz mediante un micrómetro de tornillo externo.",
+      "Utilizando un filtro de color para medir la ganancia en frecuencia en bornes del detector."
+    ],
+    "correct_index": 1,
+    "correct_text": "Contando el paso de un número conocido de franjas \\(N\\) para calcular el desplazamiento real \\(d = N\\lambda / 2\\), y dividiendo este valor real entre el incremento medido en la escala del micrómetro.",
+    "justification": "El tornillo del micrómetro tiene un engranaje desmultiplicador mecánico para permitir un avance extremadamente fino del espejo móvil. Para calcular este factor de reducción, el experimentador realiza una calibración de control: desplaza el tornillo una distancia nominal visible en el tambor y cuenta simultáneamente el paso de \\(N\\) franjas. A partir de la longitud de onda de sodio se calcula el avance real \\(d = N\\lambda / 2\\). La relación de reducción es la constante de proporcionalidad \\(k = d_{\\text{real}} / d_{\\text{tambor}}\\), la cual multiplica a las lecturas nominales del micrómetro en las medidas posteriores.",
+    "matched_page": "1-8 y 17-20"
+  },
+  {
+    "id": "O_Ex5",
+    "text": "Para determinar con precisión el ángulo de desviación mínima \\(\\delta_m\\) de una línea espectral con el goniómetro, ¿qué procedimiento operativo se debe realizar en el espectrómetro?",
+    "options": [
+      "Situar el telescopio exactamente a 90 grados respecto a la normal y rotar la red hasta extinguir el haz.",
+      "Apuntar a la línea elegida con el telescopio y, mientras giramos lentamente la plataforma porta-red, seguir la línea con el telescopio hasta que esta se detenga en un punto límite y comience a moverse en sentido inverso; esta posición de retorno marca el ángulo límite de desviación mínima.",
+      "Separar la red del colimador y registrar la lectura del nonio para el orden de difracción cero.",
+      "Ajustar la rendija de entrada al máximo de su escala milimétrica para solapar los órdenes de difracción."
+    ],
+    "correct_index": 1,
+    "correct_text": "Apuntar a la línea elegida con el telescopio y, mientras giramos lentamente la plataforma porta-red, seguir la línea con el telescopio hasta que esta se detenga en un punto límite y comience a moverse en sentido inverso; esta posición de retorno marca el ángulo límite de desviación mínima.",
+    "justification": "El ángulo de desviación total \\(\\delta\\) de la luz difractada por la red varía al rotar el ángulo de incidencia \\(\\theta_i\\). Operativamente, al girar la red en una dirección, la línea espectral observada a través del telescopio se desplazará hacia un extremo lateral (reducción del ángulo de desviación). Al llegar a la condición de desviación mínima, la línea se detiene momentáneamente y, si se continúa la rotación en el mismo sentido, la línea invierte su dirección de desplazamiento. Anotando la posición angular del telescopio en este punto de inflexión se determina la desviación mínima \\(\\delta_m\\).",
+    "matched_page": "13-16"
+  },
+  {
+    "id": "O_Ex6",
+    "text": "En la configuración de mínima desviación para una línea espectral de longitud de onda \\(\\lambda\\) en el orden \\(m\\), los ángulos de incidencia y difracción son iguales respecto a la normal del plano de la red (\\(\\theta_i = \\theta_m\\)). ¿Cómo se escribe la ecuación de la red en esta posición simétrica en función de la desviación total medida \\(\\delta_m\\)?",
+    "options": [
+      "\\(m\\lambda = d \\sin(\\delta_m)\\)",
+      "\\(m\\lambda = 2d \\sin(\\delta_m / 2)\\)",
+      "\\(m\\lambda = d \\tan(\\delta_m / 2)\\)",
+      "\\(m\\lambda = 2d \\cos(\\delta_m)\\)"
+    ],
+    "correct_index": 1,
+    "correct_text": "\\(m\\lambda = 2d \\sin(\\delta_m / 2)\\)",
+    "justification": "La relación general de difracción es \\(d(\\sin\\theta_i + \\sin\\theta_m) = m\\lambda\\). En la condición de desviación mínima, la trayectoria del haz es simétrica respecto a la red, lo que implica que el ángulo de incidencia y el de difracción son idénticos (\\(\\theta_i = \\theta_m\\)). Dado que la desviación angular total medida con el telescopio respecto al haz directo es la suma de ambos ángulos (\\(\\delta_m = \\theta_i + \\theta_m\\)), resulta que \\(\\theta_i = \\theta_m = \\delta_m / 2\\). Sustituyendo en la ecuación general:\n\\[d \\left(\\sin\\frac{\\delta_m}{2} + \\sin\\frac{\\delta_m}{2}\\right) = m\\lambda \\implies 2d \\sin\\left(\\frac{\\delta_m}{2}\\right) = m\\lambda\\]",
+    "matched_page": "13-16"
+  },
+  {
+    "id": "O_Ex7",
+    "text": "Antes de poder medir la longitud de onda \\(\\lambda\\) de líneas espectrales desconocidas con una red de difracción, se debe caracterizar la constante interplanar \\(d\\) de dicha red. ¿Qué procedimiento de calibración se realiza en la práctica?",
+    "options": [
+      "Medir la constante \\(d\\) directamente con un calibrador micrómetro de contacto sobre la superficie óptica de la red.",
+      "Registrar la posición angular de la desviación mínima \\(\\delta_m\\) del primer orden para una longitud de onda de referencia bien conocida, como la línea amarilla de una lámpara de sodio (\\(\\lambda = 589.3\\text{ nm}\\)), y despejar \\(d\\).",
+      "Alinear la red de modo que no desvíe la luz y medir el desfase circular en el condensador.",
+      "Medir el calor disipado en la red por unidad de volumen mediante una sonda termoeléctrica."
+    ],
+    "correct_index": 1,
+    "correct_text": "Registrar la posición angular de la desviación mínima \\(\\delta_m\\) del primer orden para una longitud de onda de referencia bien conocida, como la línea amarilla de una lámpara de sodio (\\(\\lambda = 589.3\\text{ nm}\\)), y despejar \\(d\\).",
+    "justification": "La constante de red \\(d\\) (distancia entre rendijas adyacentes) puede diferir ligeramente de los valores de fábrica. Para calibrarla de forma precisa, el experimentador introduce una lámpara de sodio cuya longitud de onda central (\\(589.3\\text{ nm}\\)) es estándar. Midiendo el ángulo de desviación mínima \\(\\delta_m\\) en el primer orden, la constante de red se deduce directamente como \\(d = \\lambda / [2\\sin(\\delta_m/2)]\\). Este valor calibrado se utiliza para calcular cualquier otra longitud de onda desconocida.",
+    "matched_page": "13-16"
+  },
+  {
+    "id": "O_Ex8",
+    "text": "El disco graduado del espectrómetro dispone de dos escalas de nonio (vernier) independientes separadas exactamente 180 grados en el disco. ¿Cuál es el propósito operativo de tomar lecturas en ambos verniers para cada línea medida?",
+    "options": [
+      "Determinar si la luz difractada por la red presenta polarización elíptica a 180 grados.",
+      "Cancelar y corregir por promedio el error sistemático debido a la excentricidad del disco, es decir, la falta de coincidencia entre el eje mecánico de rotación del telescopio y el centro geométrico de la escala graduada.",
+      "Medir simultáneamente las longitudes de onda del primer orden positivo y negativo.",
+      "Proveer una lectura redundante por si una de las escalas presenta suciedad o daños en sus líneas de división."
+    ],
+    "correct_index": 1,
+    "correct_text": "Cancelar y corregir por promedio el error sistemático debido a la excentricidad del disco, es decir, la falta de coincidencia entre el eje mecánico de rotación del telescopio y el centro geométrico de la escala graduada.",
+    "justification": "En los instrumentos mecánicos de medida angular, el eje de rotación del brazo portamicroscopio no coincide perfectamente con el centro geométrico de la escala circular graduada. Esta excentricidad genera una discrepancia armónica sistemática en la lectura del ángulo. Tomando las lecturas angulares en dos verniers opuestos por el diámetro (\\(180^\\circ\\)) y calculando el promedio de la diferencia angular, la contribución de la excentricidad se cancela matemáticamente de forma exacta, mejorando la precisión de la desviación mínima medida.",
+    "matched_page": "13-16"
+  },
+  {
+    "id": "O_Ex9",
+    "text": "En la caracterización del estado de polarización de una onda de luz mediante los parámetros de Stokes \\((s_0, s_1, s_2, s_3)\\), ¿cuál es el significado físico de la cantidad \\(s_3\\)?",
+    "options": [
+      "Representa la intensidad total de la luz que no está polarizada.",
+      "Describe el balance entre las componentes con polarización circular derecha e izquierda de la onda.",
+      "Determina el ángulo de inclinación del elipsoide de polarización lineal.",
+      "Cuantifica la pérdida de luz por absorción de Joule en los polarizadores de muestra."
+    ],
+    "correct_index": 1,
+    "correct_text": "Describe el balance entre las componentes con polarización circular derecha e izquierda de la onda.",
+    "justification": "Los parámetros de Stokes se definen en términos de intensidades proyectadas en diferentes bases. Mientras que \\(s_1\\) describe el balance lineal horizontal-vertical y \\(s_2\\) el balance oblicuo a \\(\\pm 45^\\circ\\), el parámetro \\(s_3\\) se define como \\(s_3 = \\langle 2 a_1 a_2 \\sin\\delta \\rangle\\), que físicamente equivale a la diferencia entre la intensidad de luz polarizada circular derecha pura e izquierda pura. Si \\(s_3 > 0\\), predomina la helicidad derecha, y si \\(s_3 < 0\\), la izquierda.",
+    "matched_page": "9-16"
+  },
+  {
+    "id": "O_Ex10",
+    "text": "En la calibración experimental del montaje de polarimetría con luz natural de una lámpara de sodio de intensidad directa \\(I_0\\), se colocan en el banco dos polarizadores idénticos cruzados perpendicularmente y se mide la intensidad residual transmitida \\(I_\\perp\\). ¿Qué parámetro se deduce de esta medición?",
+    "options": [
+      "La constante de retardo de la lámina de cuarto de onda.",
+      "El producto de los coeficientes de transmisión de los ejes principales del polarizador real, cumpliendo \\(k_1 k_2 = \\sqrt{I_\\perp / I_0}\\).",
+      "La reflectividad de la fotocélula de medida.",
+      "El ángulo de desviación mínima de los ejes ópticos."
+    ],
+    "correct_index": 1,
+    "correct_text": "El producto de los coeficientes de transmisión de los ejes principales del polarizador real, cumpliendo \\(k_1 k_2 = \\sqrt{I_\\perp / I_0}\\).",
+    "justification": "La luz natural (no polarizada) tiene componentes ortogonales descorrelacionadas de igual intensidad promedio \\(\\langle a_1^2 \\rangle = \\langle a_2^2 \\rangle = a^2\\), de modo que \\(I_0 = 2a^2\\). Un polarizador real con coeficientes de transmisión \\(k_1\\) y \\(k_2\\) transmite estas componentes de forma imperfecta. Al cruzar dos de estos polarizadores en ángulo recto, la luz que logra pasar es \\(I_\\perp = 2 k_1^2 k_2^2 a^2 = k_1^2 k_2^2 I_0\\). Despejando el producto de coeficientes:\n\\[k_1^2 k_2^2 = \\frac{I_\\perp}{I_0} \\implies k_1 k_2 = \\sqrt{\\frac{I_\\perp}{I_0}}\\]",
+    "matched_page": "9-16"
+  },
+  {
+    "id": "O_Ex11",
+    "text": "Para la sintonización del analizador circular que mide el parámetro \\(s_3\\), se emplea una lámina de cuarto de onda (\\(\\lambda/4\\)) calibrada para la longitud de onda del sodio (\\(\\lambda \\approx 589\\text{ nm}\\)). Si sustituyéramos la lámpara de sodio por otra fuente de longitud de onda significativamente diferente sin cambiar la lámina retardadora, ¿qué ocurriría?",
+    "options": [
+      "Las medidas de Stokes seguirían siendo correctas porque el desfase de la lámina es geométrico e independiente del color.",
+      "La lámina dejaría de introducir un desfase de exactamente 90 grados (\\(\\pi/2\\)), lo que distorsionaría el estado de polarización medido e invalidaría las ecuaciones del borrador de Stokes.",
+      "El compensador se volvería opaco por resonancia de absorción.",
+      "Las intensidades \\(I_5\\) e \\(I_6\\) se volverían idénticas independientemente del estado de la luz."
+    ],
+    "correct_index": 1,
+    "correct_text": "La lámina dejaría de introducir un desfase de exactamente 90 grados (\\(\\pi/2\\)), lo que distorsionaría el estado de polarización medido e invalidaría las ecuaciones del borrador de Stokes.",
+    "justification": "El retardo de fase \\(\\Gamma\\) introducido por una lámina birrefringente depende de la longitud de onda: \\(\\Gamma = \\frac{2\\pi \\Delta n e}{\\lambda}\\). Como \\(\\Gamma\\) es inversamente proporcional a \\(\\lambda\\), una lámina tallada para dar un desfase de cuarto de onda (\\(\\pi/2\\) radianes o 90°) para la luz amarilla de sodio dará un desfase distinto para cualquier otra longitud de onda, por lo que el analizador circular ya no proyectará las componentes correctas en el osciloscopio y fallará la deducción de \\(s_3\\).",
+    "matched_page": "9-16"
+  },
+  {
+    "id": "O_Ex12",
+    "text": "De acuerdo con las expresiones obtenidas en la calibración con polarizadores reales, ¿cómo calculamos el parámetro de Stokes \\(s_2\\) a partir de las intensidades medidas con el polarizador orientado a \\(45^\\circ\\) (\\(I_3\\)) y a \\(135^\\circ\\) (\\(I_4\\))?",
+    "options": [
+      "\\(s_2 = I_3 - I_4\\)",
+      "\\(s_2 = \\frac{I_3 - I_4}{k_1^2 - k_2^2}\\), donde los coeficientes de transmisión corrigen las imperfecciones de los polarizadores no ideales.",
+      "\\(s_2 = (I_3 + I_4) / (k_1^2 + k_2^2)\\)",
+      "\\(s_2 = \\sqrt{(I_3^2 - I_4^2) / I_0}\\)"
+    ],
+    "correct_index": 1,
+    "correct_text": "\\(s_2 = \\frac{I_3 - I_4}{k_1^2 - k_2^2}\\), donde los coeficientes de transmisión corrigen las imperfecciones de los polarizadores no ideales.",
+    "justification": "Con polarizadores reales con factores de transmisión \\(k_1\\) y \\(k_2\\), las intensidades medidas son \\(I_3 = \\frac{1}{2}(k_1^2 + k_2^2) s_0 + \\frac{1}{2}(k_1^2 - k_2^2) s_2\\) e \\(I_4 = \\frac{1}{2}(k_1^2 + k_2^2) s_0 - \\frac{1}{2}(k_1^2 - k_2^2) s_2\\). Al restar ambas expresiones obtenemos \\(I_3 - I_4 = (k_1^2 - k_2^2) s_2\\), de donde se despeja \\(s_2 = (I_3 - I_4) / (k_1^2 - k_2^2)\\). El denominador corrige el hecho de que un polarizador real disminuye el contraste debido a fugas (\\(k_2 > 0\\)) y absorción (\\(k_1 < 1\\)).",
+    "matched_page": "9-16"
+  },
+  {
+    "id": "O_Ex13",
+    "text": "En el experimento de Young con el biprisma de Fresnel, al realizar el ajuste de la rendija simple de entrada del colimador, ¿qué compromiso experimental debe alcanzar el alumno respecto a la anchura de su abertura?",
+    "options": [
+      "Se debe abrir al máximo posible para evitar la difracción en los bordes de la rendija.",
+      "Debe ser lo bastante estrecha para garantizar la coherencia espacial y nitidez de las franjas, pero lo suficientemente ancha para asegurar que llegue luz con suficiente intensidad al microscopio para permitir su medida.",
+      "Debe tener un ancho equivalente exacto al diámetro de la lente colimadora para colimar por difracción de borde.",
+      "Debe cerrarse por completo y realizar la lectura utilizando únicamente la iluminación ambiental de fondo de la habitación."
+    ],
+    "correct_index": 1,
+    "correct_text": "Debe ser lo bastante estrecha para garantizar la coherencia espacial y nitidez de las franjas, pero lo suficientemente ancha para asegurar que llegue luz con suficiente intensidad al microscopio para permitir su medida.",
+    "justification": "La lámpara de vapor de sodio es una fuente espacialmente extensa e incoherente. Estrechar la rendija de entrada limita transversalmente la procedencia espacial de los frentes de onda, lo que aumenta la coherencia espacial en los focos virtuales creados por el biprisma e incrementa el contraste y nitidez de las franjas. Sin embargo, una abertura muy pequeña disminuye drásticamente el flujo de luz total. Por tanto, operativamente se debe buscar un término medio para ver franjas nítidas y brillantes a la vez.",
+    "matched_page": "14-16"
+  },
+  {
+    "id": "O_Ex14",
+    "text": "Debido a que la distancia \\(d\\) (separación entre los dos focos virtuales coherentes generados por el biprisma) es sumamente pequeña, el guion exige determinarla mediante el método de la lente auxiliar (lente delgada colocada entre el biprisma y el microscopio). Si las separaciones de las imágenes proyectadas para las dos posiciones de enfoque válidas son \\(d_1\\) y \\(d_2\\), ¿cómo se calcula la separación real \\(d\\)?",
+    "options": [
+      "\\(d = \\frac{d_1 + d_2}{2}\\)",
+      "\\(d = \\sqrt{d_1 \\cdot d_2}\\)",
+      "\\(d = d_1 \\cdot d_2\\)",
+      "\\(d = |d_1 - d_2|\\)"
+    ],
+    "correct_index": 1,
+    "correct_text": "\\(d = \\sqrt{d_1 \\cdot d_2}\\)",
+    "justification": "El método de la lente auxiliar utiliza el principio de puntos conjugados de Bessel. Para una distancia fija rendija-microscopio, existen dos posiciones de la lente convergente que forman una imagen nítida de las fuentes virtuales. Las magnificaciones de la lente en estas posiciones son recíprocas (\\(m_1 \\cdot m_2 = 1\\)). Las distancias entre las imágenes de las dos fuentes medidas en el microscopio para cada posición de enfoque son \\(d_1 = m_1 d\\) y \\(d_2 = m_2 d\\). Al multiplicar ambas:\n\\[d_1 \\cdot d_2 = m_1 m_2 d^2 = (1) d^2 \\implies d = \\sqrt{d_1 \\cdot d_2}\\]\nEsta relación permite obtener la separación \\(d\\) con gran precisión utilizando la escala micrómetro del ocular.",
+    "matched_page": "14-16"
+  },
+  {
+    "id": "O_Ex15",
+    "text": "En el microscopio ocular de la práctica medimos la distancia transversal del patrón de franjas consecutivas (interfranja). Si alejamos el microscopio del plano del biprisma (aumentando la distancia \\(D\\) al plano de las rendijas virtuales), ¿cómo varía el espaciado del patrón de interferencia?",
+    "options": [
+      "Las franjas se estrechan debido a la dispersión en el aire.",
+      "La distancia interfranja aumenta proporcionalmente a la distancia \\(D\\), haciendo las franjas más anchas y legibles.",
+      "La interfranja se reduce a la mitad por la ley del inverso del cuadrado de la distancia.",
+      "La interfranja permanece constante porque solo depende de la longitud de onda de la lámpara de sodio."
+    ],
+    "correct_index": 1,
+    "correct_text": "La distancia interfranja aumenta proporcionalmente a la distancia \\(D\\), haciendo las franjas más anchas y legibles.",
+    "justification": "La distancia entre máximos adyacentes en el patrón de Young (interfranja) viene dada por la ecuación \\(i = \\frac{\\lambda D}{d}\\). Al ser la longitud de onda del sodio \\(\\lambda\\) y la separación entre focos virtuales \\(d\\) constantes, la interfranja \\(i\\) es directamente proporcional a la distancia \\(D\\) al plano de observación. Por tanto, al retirar el microscopio hacia atrás, las franjas de interferencia se ensanchan de forma estrictamente lineal con \\(D\\).",
+    "matched_page": "14-16"
+  },
+  {
+    "id": "O_Ex16",
+    "text": "Para lograr observar con nitidez el patrón de franjas de interferencia en el microscopio micrómetro de la práctica del biprisma de Fresnel, ¿qué alineación mecánica y geométrica es imprescindible realizar en el banco de trabajo?",
+    "options": [
+      "Alinear la rendija de entrada rotándola hasta que sea perfectamente paralela a la arista central del biprisma de Fresnel y al hilo del retículo del microscopio.",
+      "Colocar la rendija perpendicular a la arista del biprisma y girar el detector 45 grados.",
+      "Desconectar la rendija del colimador y colocar la red de difracción en incidencia oblicua.",
+      "Inclinar la base del microscopio un ángulo igual al ángulo de refracción límite de la mica."
+    ],
+    "correct_index": 0,
+    "correct_text": "Alinear la rendija de entrada rotándola hasta que sea perfectamente paralela a la arista central del biprisma de Fresnel y al hilo del retículo del microscopio.",
+    "justification": "En el biprisma de Fresnel, el frente de onda se escinde por la arista central paralela a la base de los dos prismas adyacentes. Si la rendija de entrada (que actúa como fuente coherente) está rotada o inclinada respecto a la arista del biprisma, los frentes de onda difractados a lo largo de la altura de la rendija llegarán al microscopio con diferentes desfases relativos transversales. La superposición incoherente de estos desfases difumina e impide observar el patrón. Es operativo y necesario girar el colimador de entrada hasta que su rendija sea exactamente paralela a la arista del biprisma.",
+    "matched_page": "14-16"
   }
 ];
 
@@ -809,6 +1481,7 @@ const QUIZ_DATABASE = [
 
 // Estado del Quiz
 let state = {
+    pool: 'official', // 'official' o 'extra'
     questions: [...QUIZ_DATABASE],
     currentIndex: 0,
     userAnswers: new Array(QUIZ_DATABASE.length).fill(null), // guarda índices 0-3 o null
@@ -828,6 +1501,7 @@ let state = {
 
 // Categorías
 function getCategoryName(id) {
+    if (id.includes('_Ex')) return 'Preguntas Extra';
     if (id.startsWith('O')) return 'Óptica';
     if (id.startsWith('C')) return 'Física Cuántica';
     if (id.startsWith('E')) return 'Electromagnetismo';
@@ -836,6 +1510,7 @@ function getCategoryName(id) {
 
 // Inicialización de DOM y Eventos
 document.addEventListener('DOMContentLoaded', () => {
+    initPoolSelectors();
     initModeSelectors();
     initQuiz();
     initReviewBoard();
@@ -890,6 +1565,89 @@ function switchMode(mode) {
     resetQuiz(false);
 }
 
+function initPoolSelectors() {
+    const officialTab = document.getElementById('tab-pool-official');
+    const extraTab = document.getElementById('tab-pool-extra');
+    
+    if (officialTab && extraTab) {
+        officialTab.addEventListener('click', () => switchPool('official'));
+        extraTab.addEventListener('click', () => switchPool('extra'));
+    }
+}
+
+function switchPool(pool) {
+    if (state.pool === pool) return;
+    
+    // Guardar progreso actual del pool que dejamos
+    saveStateToLocalStorage();
+    
+    state.pool = pool;
+    document.getElementById('tab-pool-official').classList.toggle('active', pool === 'official');
+    document.getElementById('tab-pool-extra').classList.toggle('active', pool === 'extra');
+    
+    const loaded = loadStateFromLocalStorage();
+    if (!loaded) {
+        resetQuiz(false);
+    } else {
+        // Aplicar clases y modos visuales
+        document.body.className = state.mode + '-mode-active';
+        document.getElementById('tab-mode-practice').classList.toggle('active', state.mode === 'practice');
+        document.getElementById('tab-mode-exam').classList.toggle('active', state.mode === 'exam');
+        
+        if (state.mode === 'exam') {
+            document.getElementById('btn-verify').classList.add('hidden');
+            document.getElementById('btn-submit-exam').classList.remove('hidden');
+            document.getElementById('timer-container').classList.remove('hidden');
+            if (!state.examSubmitted) {
+                resetQuiz(false);
+            } else {
+                document.getElementById('quiz-play-container').classList.add('hidden');
+                document.getElementById('exam-results-card').classList.remove('hidden');
+                document.getElementById('review-board-card').classList.remove('hidden');
+                document.getElementById('leaderboard-card').classList.remove('hidden');
+                renderReviewBoard();
+                renderLeaderboard();
+            }
+        } else {
+            document.getElementById('btn-verify').classList.remove('hidden');
+            document.getElementById('btn-submit-exam').classList.add('hidden');
+            document.getElementById('timer-container').classList.add('hidden');
+            
+            const answeredCount = state.userAnswers.filter(ans => ans !== null).length;
+            if (answeredCount === state.questions.length) {
+                document.getElementById('review-board-card').classList.remove('hidden');
+                renderReviewBoard();
+            } else {
+                document.getElementById('review-board-card').classList.add('hidden');
+            }
+        }
+        
+        if (state.roomName) {
+            updateRoomUIConnected(state.roomName, state.userName);
+            syncOnlineLeaderboard(false);
+        } else {
+            updateRoomUIDisconnected();
+        }
+        
+        updateProgress();
+        renderQuestion(state.currentIndex);
+        updateStats();
+    }
+    
+    localStorage.setItem('lab_physics_active_pool', pool);
+}
+
+function toggleDetailRow(el, stats) {
+    if (!el) return;
+    const row = el.closest('.detail-row');
+    if (stats.total === 0) {
+        if (row) row.classList.add('hidden');
+    } else {
+        if (row) row.classList.remove('hidden');
+        el.textContent = `${stats.correct} de ${stats.total}`;
+    }
+}
+
 // --- FUNCIONES DE ALEATORIZACIÓN (SHUFFLE) ---
 function shuffleArray(array) {
     for (let i = array.length - 1; i > 0; i--) {
@@ -937,6 +1695,11 @@ function resetQuiz(onlyFailed = false) {
     
     state.onlyFailedMode = onlyFailed;
     
+    // Filter database based on the selected pool
+    const activeDatabase = state.pool === 'official' 
+        ? QUIZ_DATABASE.filter(q => !q.id.includes('_Ex'))
+        : QUIZ_DATABASE.filter(q => q.id.includes('_Ex'));
+    
     if (onlyFailed) {
         // Filtrar preguntas que se fallaron la última vez
         const failedIds = [];
@@ -951,19 +1714,19 @@ function resetQuiz(onlyFailed = false) {
             alert('¡No tienes preguntas falladas para repasar!');
             state.onlyFailedMode = false;
             // Práctica: sin barajar
-            state.questions = prepareQuestions(QUIZ_DATABASE, false, false);
+            state.questions = prepareQuestions(activeDatabase, false, false);
         } else {
-            const originalFailed = failedIds.map(id => QUIZ_DATABASE.find(q => q.id === id)).filter(Boolean);
+            const originalFailed = failedIds.map(id => activeDatabase.find(q => q.id === id)).filter(Boolean);
             // Práctica de fallos: sin barajar
             state.questions = prepareQuestions(originalFailed, false, false);
         }
     } else {
         if (state.mode === 'exam') {
             // Modo Examen: Barajar preguntas y opciones
-            state.questions = prepareQuestions(QUIZ_DATABASE, true, true);
+            state.questions = prepareQuestions(activeDatabase, true, true);
         } else {
             // Modo Práctica: Secuencial, sin barajar
-            state.questions = prepareQuestions(QUIZ_DATABASE, false, false);
+            state.questions = prepareQuestions(activeDatabase, false, false);
         }
     }
     
@@ -1001,6 +1764,18 @@ function resetQuiz(onlyFailed = false) {
 }
 
 function initQuiz() {
+    // Restaurar selección de banco de preguntas anterior
+    const savedPool = localStorage.getItem('lab_physics_active_pool');
+    if (savedPool === 'extra') {
+        state.pool = 'extra';
+        document.getElementById('tab-pool-official').classList.remove('active');
+        document.getElementById('tab-pool-extra').classList.add('active');
+    } else {
+        state.pool = 'official';
+        document.getElementById('tab-pool-official').classList.add('active');
+        document.getElementById('tab-pool-extra').classList.remove('active');
+    }
+
     const loaded = loadStateFromLocalStorage();
     if (loaded) {
         // Aplicar clases y modos visuales cargados
@@ -1286,12 +2061,14 @@ function submitExam() {
     const categoryStats = {
         'Ópt': { correct: 0, total: 0 },
         'Cuá': { correct: 0, total: 0 },
-        'Ele': { correct: 0, total: 0 }
+        'Ele': { correct: 0, total: 0 },
+        'Ext': { correct: 0, total: 0 }
     };
     
     state.questions.forEach((q, idx) => {
         let cat = 'Ele';
-        if (q.id.startsWith('O')) cat = 'Ópt';
+        if (q.id.includes('_Ex')) cat = 'Ext';
+        else if (q.id.startsWith('O')) cat = 'Ópt';
         else if (q.id.startsWith('C')) cat = 'Cuá';
         
         categoryStats[cat].total++;
@@ -1328,9 +2105,15 @@ function submitExam() {
         pctCircle.classList.add('fail');
     }
     
-    document.getElementById('results-detail-opt').textContent = `${categoryStats['Ópt'].correct} de ${categoryStats['Ópt'].total}`;
-    document.getElementById('results-detail-qua').textContent = `${categoryStats['Cuá'].correct} de ${categoryStats['Cuá'].total}`;
-    document.getElementById('results-detail-ele').textContent = `${categoryStats['Ele'].correct} de ${categoryStats['Ele'].total}`;
+    const detailOpt = document.getElementById('results-detail-opt');
+    const detailQua = document.getElementById('results-detail-qua');
+    const detailEle = document.getElementById('results-detail-ele');
+    const detailExtra = document.getElementById('results-detail-extra');
+    
+    toggleDetailRow(detailOpt, categoryStats['Ópt']);
+    toggleDetailRow(detailQua, categoryStats['Cuá']);
+    toggleDetailRow(detailEle, categoryStats['Ele']);
+    toggleDetailRow(detailExtra, categoryStats['Ext']);
     
     renderReviewBoard();
     document.getElementById('review-board-card').classList.remove('hidden');
@@ -1643,7 +2426,9 @@ setTimeout(() => {
 
 
 // --- PERSISTENCIA CON LOCALSTORAGE ---
-const LOCAL_STORAGE_KEY = 'lab_physics_quiz_state_v1';
+function getLocalStorageKey() {
+    return state.pool === 'official' ? 'lab_physics_quiz_state_v1' : 'lab_physics_quiz_state_extra_v1';
+}
 
 function saveStateToLocalStorage() {
     try {
@@ -1658,14 +2443,14 @@ function saveStateToLocalStorage() {
             // Guardamos la lista de preguntas completa (con su orden y opciones barajadas)
             questions: state.questions
         };
-        localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave));
+        localStorage.setItem(getLocalStorageKey(), JSON.stringify(dataToSave));
     } catch (e) {
         console.error('Error al guardar el estado en localStorage:', e);
     }
 }
 
 function loadStateFromLocalStorage() {
-    const raw = localStorage.getItem(LOCAL_STORAGE_KEY);
+    const raw = localStorage.getItem(getLocalStorageKey());
     if (!raw) return false;
     
     try {
@@ -1700,7 +2485,9 @@ function loadStateFromLocalStorage() {
 
 
 // --- CLASIFICACIÓN Y COMPARTIR RESULTADOS ---
-const LEADERBOARD_KEY = 'lab_physics_leaderboard_v1';
+function getLeaderboardKey() {
+    return state.pool === 'official' ? 'lab_physics_leaderboard_v1' : 'lab_physics_leaderboard_extra_v1';
+}
 
 // Generar código de verificación (Hash anti-trampa)
 function generateVerificationCode(name, score, time) {
@@ -1818,7 +2605,7 @@ function saveToLeaderboard(name, score, time) {
         leaderboard.push({ name, score, time, code });
     }
     
-    localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(leaderboard));
+    localStorage.setItem(getLeaderboardKey(), JSON.stringify(leaderboard));
     renderLeaderboard();
     
     // Si está conectado a una sala, sincronizar y subir a la nube
@@ -1828,7 +2615,7 @@ function saveToLeaderboard(name, score, time) {
 }
 
 function getLeaderboard() {
-    const raw = localStorage.getItem(LEADERBOARD_KEY);
+    const raw = localStorage.getItem(getLeaderboardKey());
     if (!raw) return [];
     try {
         return JSON.parse(raw);
@@ -1868,7 +2655,7 @@ function deleteLeaderboardEntry(index) {
         });
         
         leaderboard.splice(index, 1);
-        localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(leaderboard));
+        localStorage.setItem(getLeaderboardKey(), JSON.stringify(leaderboard));
         renderLeaderboard();
     }
 }
@@ -1910,7 +2697,7 @@ function renderLeaderboard() {
         
         const scoreTd = document.createElement('td');
         scoreTd.style.padding = '0.75rem 0.5rem; text-align: center; font-weight: bold;';
-        scoreTd.textContent = `${entry.score} / 53`;
+        scoreTd.textContent = `${entry.score} / ${QUIZ_DATABASE.length}`;
         
         const timeTd = document.createElement('td');
         timeTd.style.padding = '0.75rem 0.5rem; text-align: center;';
@@ -2026,7 +2813,10 @@ function syncOnlineLeaderboard(isManual = false) {
         syncIcon.classList.add('rotating');
     }
     
-    const cleanRoomName = state.roomName.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '');
+    let cleanRoomName = state.roomName.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '');
+    if (state.pool === 'extra') {
+        cleanRoomName += '-extra';
+    }
     
     fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${ONLINE_APP_KEY}/${cleanRoomName}?cb=${Date.now()}`)
         .then(res => res.json())
@@ -2096,7 +2886,7 @@ function syncOnlineLeaderboard(isManual = false) {
             const mergedList = Array.from(mergedMap.values());
             
             // Guardar localmente el ranking consolidado
-            localStorage.setItem(LEADERBOARD_KEY, JSON.stringify(mergedList));
+            localStorage.setItem(getLeaderboardKey(), JSON.stringify(mergedList));
             
             // Comprobar si hay nuevos datos locales que subir al servidor
             let hasNewData = false;

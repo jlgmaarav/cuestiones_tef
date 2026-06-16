@@ -43,17 +43,32 @@
                 <p class="subtitle">Autoevaluación de Cuestiones de Test de Laboratorio (Óptica, Cuántica y Electromagnetismo)</p>
             </div>
             
-            <!-- Selector de Modo -->
-            <div class="mode-selector-wrapper">
-                <div class="mode-tabs">
-                    <button class="mode-tab active" id="tab-mode-practice">
-                        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
-                        <span>Modo Práctica</span>
-                    </button>
-                    <button class="mode-tab" id="tab-mode-exam">
-                        <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
-                        <span>Modo Examen</span>
-                    </button>
+            <!-- Contenedor de Selectores -->
+            <div class="selectors-container" style="display: flex; gap: 1rem; align-items: center; flex-wrap: wrap;">
+                <!-- Selector de Banco -->
+                <div class="mode-selector-wrapper">
+                    <div class="mode-tabs">
+                        <button class="mode-tab active" id="tab-pool-official">
+                            <span>Preguntas Oficiales</span>
+                        </button>
+                        <button class="mode-tab" id="tab-pool-extra">
+                            <span>Preguntas Extra</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Selector de Modo -->
+                <div class="mode-selector-wrapper">
+                    <div class="mode-tabs">
+                        <button class="mode-tab active" id="tab-mode-practice">
+                            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
+                            <span>Modo Práctica</span>
+                        </button>
+                        <button class="mode-tab" id="tab-mode-exam">
+                            <svg class="tab-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+                            <span>Modo Examen</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>
@@ -65,7 +80,7 @@
                     <div class="progress-fill" id="progress-fill" style="width: 0%;"></div>
                 </div>
                 <div class="progress-text-row">
-                    <span id="progress-text">0% Completado (0/53)</span>
+                    <span id="progress-text">0% Completado (0/101)</span>
                 </div>
             </div>
 
@@ -116,7 +131,7 @@
                     <div class="quiz-card">
                         <div class="quiz-card-header">
                             <span class="category-badge" id="question-category">Electromagnetismo</span>
-                            <span class="question-number" id="question-number">Pregunta 1 de 53</span>
+                            <span class="question-number" id="question-number">Pregunta 1 de 101</span>
                         </div>
                         
                         <div class="question-body">
@@ -218,6 +233,13 @@
                                 </div>
                                 <span class="count-val" id="results-detail-ele">0 de 24</span>
                             </div>
+                            <div class="detail-row">
+                                <div class="cat-info">
+                                    <span class="color-dot ext"></span>
+                                    <span>Preguntas Extra</span>
+                                </div>
+                                <span class="count-val" id="results-detail-extra">0 de 48</span>
+                            </div>
                         </div>
                         
                         <div class="results-actions" style="margin-top: 1rem; display: flex; flex-direction: column; gap: 0.75rem;">
@@ -280,7 +302,7 @@
                 <div class="review-header-row">
                     <div>
                         <h3>🏆 Clasificación entre Amigos</h3>
-                        <p class="subtitle" style="margin-top: 0.25rem;">Ranking basado en aciertos (máximo 53) y tiempo de resolución.</p>
+                        <p class="subtitle" style="margin-top: 0.25rem;">Ranking basado en aciertos (máximo 101) y tiempo de resolución.</p>
                     </div>
                 </div>
 
