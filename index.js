@@ -890,6 +890,43 @@ function switchMode(mode) {
     resetQuiz(false);
 }
 
+// --- FUNCIONES DE ALEATORIZACIÓN (SHUFFLE) ---
+function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
+}
+
+function prepareQuestions(originalQuestions, shuffleQuestions = true, shuffleOptions = true) {
+    let prepped = originalQuestions.map(q => {
+        // Clonar la pregunta para no modificar la base de datos estática
+        let cloned = {
+            id: q.id,
+            text: q.text,
+            options: [...q.options],
+            correct_index: q.correct_index,
+            justification: q.justification,
+            matched_page: q.matched_page
+        };
+        
+        if (shuffleOptions) {
+            const correctText = cloned.options[cloned.correct_index];
+            shuffleArray(cloned.options);
+            cloned.correct_index = cloned.options.indexOf(correctText);
+        }
+        
+        return cloned;
+    });
+    
+    if (shuffleQuestions) {
+        shuffleArray(prepped);
+    }
+    
+    return prepped;
+}
+
 // Llenado / Reinicio del Quiz
 function resetQuiz(onlyFailed = false) {
     // Detener temporizador si existe
@@ -902,23 +939,32 @@ function resetQuiz(onlyFailed = false) {
     
     if (onlyFailed) {
         // Filtrar preguntas que se fallaron la última vez
-        const failedIndices = [];
+        const failedIds = [];
         state.userAnswers.forEach((ans, idx) => {
             const q = state.questions[idx];
-            if (ans !== q.correct_index) {
-                failedIndices.push(idx);
+            if (q && ans !== q.correct_index) {
+                failedIds.push(q.id);
             }
         });
         
-        if (failedIndices.length === 0) {
+        if (failedIds.length === 0) {
             alert('¡No tienes preguntas falladas para repasar!');
             state.onlyFailedMode = false;
-            state.questions = [...QUIZ_DATABASE];
+            // Práctica: sin barajar
+            state.questions = prepareQuestions(QUIZ_DATABASE, false, false);
         } else {
-            state.questions = failedIndices.map(idx => QUIZ_DATABASE[idx]);
+            const originalFailed = failedIds.map(id => QUIZ_DATABASE.find(q => q.id === id)).filter(Boolean);
+            // Práctica de fallos: sin barajar
+            state.questions = prepareQuestions(originalFailed, false, false);
         }
     } else {
-        state.questions = [...QUIZ_DATABASE];
+        if (state.mode === 'exam') {
+            // Modo Examen: Barajar preguntas y opciones
+            state.questions = prepareQuestions(QUIZ_DATABASE, true, true);
+        } else {
+            // Modo Práctica: Secuencial, sin barajar
+            state.questions = prepareQuestions(QUIZ_DATABASE, false, false);
+        }
     }
     
     state.currentIndex = 0;
@@ -967,7 +1013,8 @@ function initQuiz() {
             document.getElementById('btn-submit-exam').classList.remove('hidden');
             document.getElementById('timer-container').classList.remove('hidden');
             if (!state.examSubmitted) {
-                startExamTimer();
+                // Si recargan a mitad de examen, vuelve a empezar de cero con barajado fresco
+                resetQuiz(false);
             } else {
                 // Si ya fue enviado, mostrar directamente los resultados y el tablón
                 document.getElementById('quiz-play-container').classList.add('hidden');
@@ -1608,8 +1655,8 @@ function saveStateToLocalStorage() {
             examSubmitted: state.examSubmitted,
             examTimeElapsed: state.examTimeElapsed,
             currentIndex: state.currentIndex,
-            // Guardamos los IDs de las preguntas activas para reconstruir state.questions
-            activeQuestionIds: state.questions.map(q => q.id)
+            // Guardamos la lista de preguntas completa (con su orden y opciones barajadas)
+            questions: state.questions
         };
         localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(dataToSave));
     } catch (e) {
@@ -1630,7 +1677,10 @@ function loadStateFromLocalStorage() {
         state.currentIndex = saved.currentIndex || 0;
         
         // Reconstruir lista de preguntas activas
-        if (saved.activeQuestionIds && saved.activeQuestionIds.length > 0) {
+        if (saved.questions && saved.questions.length > 0) {
+            state.questions = saved.questions;
+        } else if (saved.activeQuestionIds && saved.activeQuestionIds.length > 0) {
+            // Fallback de retrocompatibilidad
             state.questions = saved.activeQuestionIds.map(id => {
                 return QUIZ_DATABASE.find(q => q.id === id);
             }).filter(Boolean);
