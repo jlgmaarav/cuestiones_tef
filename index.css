@@ -133,6 +133,39 @@ body {
     max-width: 600px;
 }
 
+.course-tabs {
+    display: inline-flex;
+    align-self: flex-start;
+    gap: 0.35rem;
+    margin-top: 0.8rem;
+    padding: 4px;
+    border: 1px solid var(--card-border);
+    border-radius: 30px;
+    background: rgba(255, 255, 255, 0.03);
+}
+
+.course-tab {
+    padding: 0.55rem 1.15rem;
+    border-radius: 24px;
+    color: var(--text-secondary);
+    font-family: var(--font-heading);
+    font-size: 0.9rem;
+    font-weight: 700;
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.course-tab:hover {
+    color: var(--text-primary);
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.course-tab.active {
+    color: var(--text-primary);
+    background: var(--accent-cyan);
+    box-shadow: 0 4px 15px rgba(6, 182, 212, 0.25);
+}
+
 /* Selector de Modo (Tabs estilo Glass) */
 .mode-selector-wrapper {
     background: rgba(255, 255, 255, 0.03);
