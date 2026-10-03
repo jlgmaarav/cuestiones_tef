@@ -1,5 +1,5 @@
 // Banco de preguntas del Quiz de Prácticas de Laboratorio
-const QUIZ_DATABASE = [
+const TEF_III_QUIZ_DATABASE = [
   {
     "id": "O1",
     "text": "Consideremos una red de difracción que se emplea con luz colimada en incidencia normal. ¿Cuántos órdenes de difracción pueden utilizarse para analizar un espectro?",
@@ -1479,6 +1479,35 @@ const QUIZ_DATABASE = [
 
 
 
+const COURSE_ID = new URLSearchParams(window.location.search).get('course') === 'iv' ? 'iv' : 'iii';
+const QUIZ_DATABASE = COURSE_ID === 'iv'
+    ? [...window.TEF_IV_QUIZ_DATABASE, ...window.TEF_IV_EXTRA_QUIZ_DATABASE]
+    : TEF_III_QUIZ_DATABASE;
+const EXCLUDED_TEF_IV_QUESTION_IDS = new Set([
+    'N2', 'N22',
+    'N_Ex_23_02', 'N_Ex_22_08', 'N_Ex_18_02', 'N_Ex_17_02'
+]);
+
+function getActivePoolStorageKey() {
+    return COURSE_ID === 'iv' ? 'lab_physics_tef_iv_active_pool' : 'lab_physics_active_pool';
+}
+
+function getRoomStorageKey(type) {
+    const prefix = COURSE_ID === 'iv' ? 'lab_physics_tef_iv' : 'lab_physics';
+    return `${prefix}_room_${type}`;
+}
+
+function getActiveDatabase() {
+    return QUIZ_DATABASE.filter(q =>
+        !(COURSE_ID === 'iv' && EXCLUDED_TEF_IV_QUESTION_IDS.has(q.id)) &&
+        (state.pool === 'extra' ? q.id.includes('_Ex') : !q.id.includes('_Ex'))
+    );
+}
+
+function updateCoursePoolUI() {
+    document.getElementById('leaderboard-description').textContent = `Ranking basado en aciertos (máximo ${getActiveDatabase().length}) y tiempo de resolución.`;
+}
+
 // Estado del Quiz
 let state = {
     pool: 'official', // 'official' o 'extra'
@@ -1501,6 +1530,7 @@ let state = {
 
 // Categorías
 function getCategoryName(id) {
+    if (COURSE_ID === 'iv') return 'Física Nuclear';
     if (id.includes('_Ex')) return 'Preguntas Extra';
     if (id.startsWith('O')) return 'Óptica';
     if (id.startsWith('C')) return 'Física Cuántica';
@@ -1510,6 +1540,7 @@ function getCategoryName(id) {
 
 // Inicialización de DOM y Eventos
 document.addEventListener('DOMContentLoaded', () => {
+    initializeCourseUI();
     initPoolSelectors();
     initModeSelectors();
     initQuiz();
@@ -1537,6 +1568,30 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('btn-disconnect-room').addEventListener('click', disconnectRoom);
     document.getElementById('btn-sync-room').addEventListener('click', () => syncOnlineLeaderboard(true));
 });
+
+function initializeCourseUI() {
+    const isTEFIV = COURSE_ID === 'iv';
+    const courseTabIII = document.getElementById('course-tab-iii');
+    const courseTabIV = document.getElementById('course-tab-iv');
+    courseTabIII.classList.toggle('active', !isTEFIV);
+    courseTabIV.classList.toggle('active', isTEFIV);
+    if (isTEFIV) {
+        courseTabIII.removeAttribute('aria-current');
+        courseTabIV.setAttribute('aria-current', 'page');
+        document.querySelector('.academy-tag').textContent = 'TÉCNICAS EXPERIMENTALES DE FÍSICA IV';
+        document.querySelector('.logo-area .subtitle').textContent = 'Banco tipo test de Nuclear: examen 2021–2022, convocatorias 2017–2023 y nuevas preguntas basadas en los guiones.';
+        document.getElementById('pool-official-label').textContent = 'Test 2021–2022';
+        document.getElementById('pool-extra-label').textContent = 'Convocatorias + nuevas';
+        document.getElementById('app-footer-text').textContent = 'Preparador de Técnicas Experimentales de Física IV. Preguntas contrastadas con los exámenes y guiones de prácticas.';
+        document.title = 'Preparador de Examen | TEF IV';
+        state.pool = 'official';
+        const nuclearLabel = document.querySelector('#results-detail-opt').closest('.detail-row').querySelector('.cat-info span:last-child');
+        nuclearLabel.textContent = 'Física Nuclear';
+    } else {
+        document.title = 'Preparador de Examen | TEF III';
+    }
+    updateCoursePoolUI();
+}
 
 // Selección de Modo
 function initModeSelectors() {
@@ -1584,6 +1639,7 @@ function switchPool(pool) {
     state.pool = pool;
     document.getElementById('tab-pool-official').classList.toggle('active', pool === 'official');
     document.getElementById('tab-pool-extra').classList.toggle('active', pool === 'extra');
+    updateCoursePoolUI();
     
     const loaded = loadStateFromLocalStorage();
     if (!loaded) {
@@ -1634,7 +1690,7 @@ function switchPool(pool) {
         updateStats();
     }
     
-    localStorage.setItem('lab_physics_active_pool', pool);
+    localStorage.setItem(getActivePoolStorageKey(), pool);
 }
 
 function toggleDetailRow(el, stats) {
@@ -1666,7 +1722,9 @@ function prepareQuestions(originalQuestions, shuffleQuestions = true, shuffleOpt
             options: [...q.options],
             correct_index: q.correct_index,
             justification: q.justification,
-            matched_page: q.matched_page
+            matched_page: q.matched_page,
+            source_file: q.source_file || '',
+            source_reference: q.source_reference || ''
         };
         
         if (shuffleOptions) {
@@ -1696,9 +1754,7 @@ function resetQuiz(onlyFailed = false) {
     state.onlyFailedMode = onlyFailed;
     
     // Filter database based on the selected pool
-    const activeDatabase = state.pool === 'official' 
-        ? QUIZ_DATABASE.filter(q => !q.id.includes('_Ex'))
-        : QUIZ_DATABASE.filter(q => q.id.includes('_Ex'));
+    const activeDatabase = getActiveDatabase();
     
     if (onlyFailed) {
         // Filtrar preguntas que se fallaron la última vez
@@ -1765,7 +1821,7 @@ function resetQuiz(onlyFailed = false) {
 
 function initQuiz() {
     // Restaurar selección de banco de preguntas anterior
-    const savedPool = localStorage.getItem('lab_physics_active_pool');
+    const savedPool = localStorage.getItem(getActivePoolStorageKey());
     if (savedPool === 'extra') {
         state.pool = 'extra';
         document.getElementById('tab-pool-official').classList.remove('active');
@@ -1775,6 +1831,7 @@ function initQuiz() {
         document.getElementById('tab-pool-official').classList.add('active');
         document.getElementById('tab-pool-extra').classList.remove('active');
     }
+    updateCoursePoolUI();
 
     const loaded = loadStateFromLocalStorage();
     if (loaded) {
@@ -1925,7 +1982,7 @@ function renderQuestion(index) {
         document.getElementById('justification-content').innerHTML = `
             <p class="justification-correct"><strong>Respuesta correcta:</strong> ${q.options[q.correct_index]}</p>
             <p class="justification-text">${q.justification || 'No hay justificación disponible para esta pregunta.'}</p>
-            <p class="justification-source"><small>Pág. PDF original: ${q.matched_page}</small></p>
+            <p class="justification-source"><small>${q.source_file ? `Fuente: ${q.source_file} | ` : ''}${q.source_reference ? `Referencia: ${q.source_reference}` : `Pág. PDF original: ${q.matched_page}`}</small></p>
         `;
         document.getElementById('btn-verify').classList.add('hidden');
     } else {
@@ -2062,14 +2119,15 @@ function submitExam() {
         'Ópt': { correct: 0, total: 0 },
         'Cuá': { correct: 0, total: 0 },
         'Ele': { correct: 0, total: 0 },
-        'Ext': { correct: 0, total: 0 }
+        'Ext': { correct: 0, total: 0 },
+        'Nuc': { correct: 0, total: 0 }
     };
     
     state.questions.forEach((q, idx) => {
-        let cat = 'Ele';
-        if (q.id.includes('_Ex')) cat = 'Ext';
-        else if (q.id.startsWith('O')) cat = 'Ópt';
-        else if (q.id.startsWith('C')) cat = 'Cuá';
+        let cat = COURSE_ID === 'iv' ? 'Nuc' : 'Ele';
+        if (COURSE_ID !== 'iv' && q.id.includes('_Ex')) cat = 'Ext';
+        else if (COURSE_ID !== 'iv' && q.id.startsWith('O')) cat = 'Ópt';
+        else if (COURSE_ID !== 'iv' && q.id.startsWith('C')) cat = 'Cuá';
         
         categoryStats[cat].total++;
         
@@ -2110,7 +2168,7 @@ function submitExam() {
     const detailEle = document.getElementById('results-detail-ele');
     const detailExtra = document.getElementById('results-detail-extra');
     
-    toggleDetailRow(detailOpt, categoryStats['Ópt']);
+    toggleDetailRow(detailOpt, COURSE_ID === 'iv' ? categoryStats['Nuc'] : categoryStats['Ópt']);
     toggleDetailRow(detailQua, categoryStats['Cuá']);
     toggleDetailRow(detailEle, categoryStats['Ele']);
     toggleDetailRow(detailExtra, categoryStats['Ext']);
@@ -2248,7 +2306,7 @@ function renderReviewBoard() {
         justDiv.innerHTML = `
             <h5>Explicación y Justificación Física:</h5>
             <p>${q.justification || 'No hay justificación disponible para esta pregunta.'}</p>
-            <p class="review-meta"><small>Categoría: ${getCategoryName(q.id)} | Práctica de origen | Pág. PDF: ${q.matched_page}</small></p>
+            <p class="review-meta"><small>Categoría: ${getCategoryName(q.id)} | ${q.source_file ? `Fuente: ${q.source_file} | ` : ''}${q.source_reference ? `Referencia: ${q.source_reference}` : `Pág. PDF: ${q.matched_page}`}</small></p>
         `;
         
         details.appendChild(optionsList);
@@ -2427,6 +2485,7 @@ setTimeout(() => {
 
 // --- PERSISTENCIA CON LOCALSTORAGE ---
 function getLocalStorageKey() {
+    if (COURSE_ID === 'iv') return `lab_physics_tef_iv_quiz_state_${state.pool}_v1`;
     return state.pool === 'official' ? 'lab_physics_quiz_state_v1' : 'lab_physics_quiz_state_extra_v1';
 }
 
@@ -2461,21 +2520,43 @@ function loadStateFromLocalStorage() {
         state.examTimeElapsed = saved.examTimeElapsed || 0;
         state.currentIndex = saved.currentIndex || 0;
         
-        // Reconstruir lista de preguntas activas
+        // Reconstruir la lista guardada sin recuperar preguntas retiradas del temario.
+        const activeQuestionsById = new Map(getActiveDatabase().map(q => [q.id, q]));
+        let removedUnavailableQuestions = false;
         if (saved.questions && saved.questions.length > 0) {
-            state.questions = saved.questions;
+            const retained = saved.questions
+                .map((question, savedIndex) => ({ question, savedIndex }))
+                .filter(({ question }) => question && activeQuestionsById.has(question.id));
+            removedUnavailableQuestions = retained.length !== saved.questions.length;
+            state.questions = retained.map(({ question }) => question);
+            state.userAnswers = retained.map(({ savedIndex }) => saved.userAnswers?.[savedIndex] ?? null);
+            state.verified = retained.map(({ savedIndex }) => saved.verified?.[savedIndex] ?? false);
+            const savedCurrentQuestionId = saved.questions[saved.currentIndex]?.id;
+            const retainedCurrentIndex = state.questions.findIndex(q => q.id === savedCurrentQuestionId);
+            state.currentIndex = retainedCurrentIndex >= 0
+                ? retainedCurrentIndex
+                : Math.min(state.currentIndex, Math.max(0, state.questions.length - 1));
         } else if (saved.activeQuestionIds && saved.activeQuestionIds.length > 0) {
             // Fallback de retrocompatibilidad
-            state.questions = saved.activeQuestionIds.map(id => {
-                return QUIZ_DATABASE.find(q => q.id === id);
-            }).filter(Boolean);
+            const retained = saved.activeQuestionIds
+                .map((id, savedIndex) => ({ question: activeQuestionsById.get(id), savedIndex }))
+                .filter(({ question }) => Boolean(question));
+            removedUnavailableQuestions = retained.length !== saved.activeQuestionIds.length;
+            state.questions = retained.map(({ question }) => question);
+            state.userAnswers = retained.map(({ savedIndex }) => saved.userAnswers?.[savedIndex] ?? null);
+            state.verified = retained.map(({ savedIndex }) => saved.verified?.[savedIndex] ?? false);
         } else {
-            state.questions = [...QUIZ_DATABASE];
+            state.questions = [...getActiveDatabase()];
+            state.userAnswers = saved.userAnswers || new Array(state.questions.length).fill(null);
+            state.verified = saved.verified || new Array(state.questions.length).fill(false);
         }
-        
-        state.userAnswers = saved.userAnswers || new Array(state.questions.length).fill(null);
-        state.verified = saved.verified || new Array(state.questions.length).fill(false);
-        
+
+        if (state.questions.length === 0) return false;
+        if (removedUnavailableQuestions) {
+            state.examSubmitted = false;
+            state.examTimeElapsed = 0;
+            state.onlyFailedMode = false;
+        }
         return true;
     } catch (e) {
         console.error('Error al cargar el estado desde localStorage:', e);
@@ -2486,6 +2567,7 @@ function loadStateFromLocalStorage() {
 
 // --- CLASIFICACIÓN Y COMPARTIR RESULTADOS ---
 function getLeaderboardKey() {
+    if (COURSE_ID === 'iv') return `lab_physics_tef_iv_leaderboard_${state.pool}_v1`;
     return state.pool === 'official' ? 'lab_physics_leaderboard_v1' : 'lab_physics_leaderboard_extra_v1';
 }
 
@@ -2531,7 +2613,8 @@ function generateShareCard() {
     
     const code = generateVerificationCode(name, correct, time);
     
-    const text = `🏆 QUIZ EXAMEN LAB III - RESULTADO 🏆\n👤 Estudiante: ${name}\n✅ Respuestas correctas: ${correct} de ${state.questions.length}\n⏱️ Tiempo empleado: ${mins}m ${secs}s (${time} segundos)\n🔑 Código de verificación: ${code}`;
+    const courseLabel = COURSE_ID === 'iv' ? 'TEF IV - FÍSICA NUCLEAR' : 'LAB III';
+    const text = `🏆 QUIZ EXAMEN ${courseLabel} - RESULTADO 🏆\n👤 Estudiante: ${name}\n✅ Respuestas correctas: ${correct} de ${state.questions.length}\n⏱️ Tiempo empleado: ${mins}m ${secs}s (${time} segundos)\n🔑 Código de verificación: ${code}`;
     
     document.getElementById('share-card-text').value = text;
     
@@ -2697,7 +2780,7 @@ function renderLeaderboard() {
         
         const scoreTd = document.createElement('td');
         scoreTd.style.padding = '0.75rem 0.5rem; text-align: center; font-weight: bold;';
-        scoreTd.textContent = `${entry.score} / ${QUIZ_DATABASE.length}`;
+        scoreTd.textContent = `${entry.score} / ${getActiveDatabase().length}`;
         
         const timeTd = document.createElement('td');
         timeTd.style.padding = '0.75rem 0.5rem; text-align: center;';
@@ -2731,8 +2814,8 @@ function renderLeaderboard() {
 const ONLINE_APP_KEY = "gfhy4gqr";
 
 function initRoomConnection() {
-    const savedRoom = localStorage.getItem('lab_physics_room_name');
-    const savedUser = localStorage.getItem('lab_physics_user_name');
+    const savedRoom = localStorage.getItem(getRoomStorageKey('name'));
+    const savedUser = localStorage.getItem(getRoomStorageKey('user'));
     if (savedRoom && savedUser) {
         state.roomName = savedRoom;
         state.userName = savedUser;
@@ -2772,8 +2855,8 @@ function connectRoom() {
     
     state.roomName = cleanRoomName;
     state.userName = user;
-    localStorage.setItem('lab_physics_room_name', cleanRoomName);
-    localStorage.setItem('lab_physics_user_name', user);
+    localStorage.setItem(getRoomStorageKey('name'), cleanRoomName);
+    localStorage.setItem(getRoomStorageKey('user'), user);
     
     updateRoomUIConnected(cleanRoomName, user);
     syncOnlineLeaderboard(true);
@@ -2784,8 +2867,8 @@ function disconnectRoom() {
     stopRoomPolling();
     state.roomName = '';
     state.userName = '';
-    localStorage.removeItem('lab_physics_room_name');
-    localStorage.removeItem('lab_physics_user_name');
+    localStorage.removeItem(getRoomStorageKey('name'));
+    localStorage.removeItem(getRoomStorageKey('user'));
     
     const inputEl = document.getElementById('room-name-input');
     if (inputEl) inputEl.value = '';
@@ -2816,6 +2899,9 @@ function syncOnlineLeaderboard(isManual = false) {
     let cleanRoomName = state.roomName.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '');
     if (state.pool === 'extra') {
         cleanRoomName += '-extra';
+    }
+    if (COURSE_ID === 'iv') {
+        cleanRoomName = `tef-iv-${cleanRoomName}`;
     }
     
     fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${ONLINE_APP_KEY}/${cleanRoomName}?cb=${Date.now()}`)

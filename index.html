@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Quiz de Prácticas de Laboratorio | 3º Física</title>
+    <title>Preparador de Examen | TEF III</title>
     <!-- Google Fonts: Outfit and Inter -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -41,6 +41,10 @@
                 <span class="academy-tag">LABORATORIO III</span>
                 <h1>Preparador de Examen</h1>
                 <p class="subtitle">Autoevaluación de Cuestiones de Test de Laboratorio (Óptica, Cuántica y Electromagnetismo)</p>
+                <nav class="course-tabs" aria-label="Curso">
+                    <a class="course-tab active" id="course-tab-iii" href="./index.html" aria-current="page">TEF III</a>
+                    <a class="course-tab" id="course-tab-iv" href="./index.html?course=iv">TEF IV</a>
+                </nav>
             </div>
             
             <!-- Contenedor de Selectores -->
@@ -49,10 +53,10 @@
                 <div class="mode-selector-wrapper">
                     <div class="mode-tabs">
                         <button class="mode-tab active" id="tab-pool-official">
-                            <span>Preguntas Oficiales</span>
+                            <span id="pool-official-label">Preguntas Oficiales</span>
                         </button>
                         <button class="mode-tab" id="tab-pool-extra">
-                            <span>Preguntas Extra</span>
+                            <span id="pool-extra-label">Preguntas Extra</span>
                         </button>
                     </div>
                 </div>
@@ -302,7 +306,7 @@
                 <div class="review-header-row">
                     <div>
                         <h3>🏆 Clasificación entre Amigos</h3>
-                        <p class="subtitle" style="margin-top: 0.25rem;">Ranking basado en aciertos (máximo 101) y tiempo de resolución.</p>
+                        <p class="subtitle" id="leaderboard-description" style="margin-top: 0.25rem;">Ranking basado en aciertos (máximo 101) y tiempo de resolución.</p>
                     </div>
                 </div>
 
@@ -379,11 +383,13 @@
         </main>
         
         <footer class="app-footer">
-            <p>Preparador del Laboratorio de Física III (Segundo Cuatrimestre). Cuestiones verificadas y corregidas.</p>
+            <p id="app-footer-text">Preparador del Laboratorio de Física III (Segundo Cuatrimestre). Cuestiones verificadas y corregidas.</p>
         </footer>
         
     </div>
 
+    <script src="tef_iv_questions.js"></script>
+    <script src="tef_iv_extra_questions.js"></script>
     <script src="index.js"></script>
 </body>
 </html>
