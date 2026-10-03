@@ -1480,6 +1480,7 @@ const TEF_III_QUIZ_DATABASE = [
 
 
 const COURSE_ID = new URLSearchParams(window.location.search).get('course') === 'iv' ? 'iv' : 'iii';
+const TEF_IV_BANK_VERSION = 2;
 const QUIZ_DATABASE = COURSE_ID === 'iv'
     ? [...window.TEF_IV_QUIZ_DATABASE, ...window.TEF_IV_EXTRA_QUIZ_DATABASE]
     : TEF_III_QUIZ_DATABASE;
@@ -1498,9 +1499,13 @@ function getRoomStorageKey(type) {
 }
 
 function getActiveDatabase() {
+    const isExtraQuestion = q => COURSE_ID === 'iv'
+        ? q.id.startsWith('N_Ex_N_')
+        : q.id.includes('_Ex');
+
     return QUIZ_DATABASE.filter(q =>
         !(COURSE_ID === 'iv' && EXCLUDED_TEF_IV_QUESTION_IDS.has(q.id)) &&
-        (state.pool === 'extra' ? q.id.includes('_Ex') : !q.id.includes('_Ex'))
+        (state.pool === 'extra' ? isExtraQuestion(q) : !isExtraQuestion(q))
     );
 }
 
@@ -1579,9 +1584,9 @@ function initializeCourseUI() {
         courseTabIII.removeAttribute('aria-current');
         courseTabIV.setAttribute('aria-current', 'page');
         document.querySelector('.academy-tag').textContent = 'TÉCNICAS EXPERIMENTALES DE FÍSICA IV';
-        document.querySelector('.logo-area .subtitle').textContent = 'Banco tipo test de Nuclear: examen 2021–2022, convocatorias 2017–2023 y nuevas preguntas basadas en los guiones.';
-        document.getElementById('pool-official-label').textContent = 'Test 2021–2022';
-        document.getElementById('pool-extra-label').textContent = 'Convocatorias + nuevas';
+        document.querySelector('.logo-area .subtitle').textContent = 'Exámenes de TEF IV juntos (2021–2022 y convocatorias); preguntas nuevas de guiones aparte.';
+        document.getElementById('pool-official-label').textContent = 'Exámenes y convocatorias';
+        document.getElementById('pool-extra-label').textContent = 'Nuevas (guiones)';
         document.getElementById('app-footer-text').textContent = 'Preparador de Técnicas Experimentales de Física IV. Preguntas contrastadas con los exámenes y guiones de prácticas.';
         document.title = 'Preparador de Examen | TEF IV';
         state.pool = 'official';
@@ -2485,7 +2490,7 @@ setTimeout(() => {
 
 // --- PERSISTENCIA CON LOCALSTORAGE ---
 function getLocalStorageKey() {
-    if (COURSE_ID === 'iv') return `lab_physics_tef_iv_quiz_state_${state.pool}_v1`;
+    if (COURSE_ID === 'iv') return `lab_physics_tef_iv_quiz_state_${state.pool}_v${TEF_IV_BANK_VERSION}`;
     return state.pool === 'official' ? 'lab_physics_quiz_state_v1' : 'lab_physics_quiz_state_extra_v1';
 }
 
@@ -2567,7 +2572,7 @@ function loadStateFromLocalStorage() {
 
 // --- CLASIFICACIÓN Y COMPARTIR RESULTADOS ---
 function getLeaderboardKey() {
-    if (COURSE_ID === 'iv') return `lab_physics_tef_iv_leaderboard_${state.pool}_v1`;
+    if (COURSE_ID === 'iv') return `lab_physics_tef_iv_leaderboard_${state.pool}_v${TEF_IV_BANK_VERSION}`;
     return state.pool === 'official' ? 'lab_physics_leaderboard_v1' : 'lab_physics_leaderboard_extra_v1';
 }
 
@@ -2901,7 +2906,7 @@ function syncOnlineLeaderboard(isManual = false) {
         cleanRoomName += '-extra';
     }
     if (COURSE_ID === 'iv') {
-        cleanRoomName = `tef-iv-${cleanRoomName}`;
+        cleanRoomName = `tef-iv-v${TEF_IV_BANK_VERSION}-${cleanRoomName}`;
     }
     
     fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${ONLINE_APP_KEY}/${cleanRoomName}?cb=${Date.now()}`)
