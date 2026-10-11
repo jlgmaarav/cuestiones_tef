@@ -2559,7 +2559,8 @@ function loadStateFromLocalStorage() {
 
         // Barajar una sola vez las sesiones TEF IV antiguas, manteniendo las
         // respuestas elegidas y la pregunta que estaba abierta.
-        if (COURSE_ID === 'iv' && (saved.quizShuffleVersion || 0) < 2) {
+        const needsQuizShuffleMigration = COURSE_ID === 'iv' && (saved.quizShuffleVersion || 0) < 2;
+        if (needsQuizShuffleMigration) {
             const currentQuestionId = state.questions[state.currentIndex]?.id;
 
             state.questions.forEach((question, index) => {
@@ -2596,6 +2597,9 @@ function loadStateFromLocalStorage() {
             state.examSubmitted = false;
             state.examTimeElapsed = 0;
             state.onlyFailedMode = false;
+        }
+        if (needsQuizShuffleMigration) {
+            saveStateToLocalStorage();
         }
         return true;
     } catch (e) {
