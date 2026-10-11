@@ -1774,20 +1774,20 @@ function resetQuiz(onlyFailed = false) {
         if (failedIds.length === 0) {
             alert('¡No tienes preguntas falladas para repasar!');
             state.onlyFailedMode = false;
-            // Práctica: sin barajar
-            state.questions = prepareQuestions(activeDatabase, false, false);
+            // En TEF IV, barajar preguntas y opciones también al volver al banco completo.
+            state.questions = prepareQuestions(activeDatabase, COURSE_ID === 'iv', COURSE_ID === 'iv');
         } else {
             const originalFailed = failedIds.map(id => activeDatabase.find(q => q.id === id)).filter(Boolean);
-            // Práctica de fallos: sin barajar
-            state.questions = prepareQuestions(originalFailed, false, false);
+            // En TEF IV, volver a barajar preguntas y opciones al repasar los fallos.
+            state.questions = prepareQuestions(originalFailed, COURSE_ID === 'iv', COURSE_ID === 'iv');
         }
     } else {
         if (state.mode === 'exam') {
             // Modo Examen: Barajar preguntas y opciones
             state.questions = prepareQuestions(activeDatabase, true, true);
         } else {
-            // Modo Práctica: Secuencial, sin barajar
-            state.questions = prepareQuestions(activeDatabase, false, false);
+            // En TEF IV la práctica baraja preguntas y opciones en cada inicio.
+            state.questions = prepareQuestions(activeDatabase, COURSE_ID === 'iv', COURSE_ID === 'iv');
         }
     }
     
@@ -2500,6 +2500,7 @@ function saveStateToLocalStorage() {
             userAnswers: state.userAnswers,
             verified: state.verified,
             mode: state.mode,
+            quizShuffleVersion: COURSE_ID === 'iv' ? 2 : 0,
             onlyFailedMode: state.onlyFailedMode,
             examSubmitted: state.examSubmitted,
             examTimeElapsed: state.examTimeElapsed,
@@ -2556,11 +2557,49 @@ function loadStateFromLocalStorage() {
             state.verified = saved.verified || new Array(state.questions.length).fill(false);
         }
 
+        // Barajar una sola vez las sesiones TEF IV antiguas, manteniendo las
+        // respuestas elegidas y la pregunta que estaba abierta.
+        const needsQuizShuffleMigration = COURSE_ID === 'iv' && (saved.quizShuffleVersion || 0) < 2;
+        if (needsQuizShuffleMigration) {
+            const currentQuestionId = state.questions[state.currentIndex]?.id;
+
+            state.questions.forEach((question, index) => {
+                const selectedIndex = state.userAnswers[index];
+                const selectedText = Number.isInteger(selectedIndex) &&
+                    selectedIndex >= 0 && selectedIndex < question.options.length
+                    ? question.options[selectedIndex]
+                    : null;
+                const correctText = question.options[question.correct_index];
+
+                shuffleArray(question.options);
+                question.correct_index = question.options.indexOf(correctText);
+                if (selectedText !== null) {
+                    state.userAnswers[index] = question.options.indexOf(selectedText);
+                }
+            });
+
+            const questionStates = state.questions.map((question, index) => ({
+                question,
+                userAnswer: state.userAnswers[index],
+                verified: state.verified[index]
+            }));
+            shuffleArray(questionStates);
+            state.questions = questionStates.map(item => item.question);
+            state.userAnswers = questionStates.map(item => item.userAnswer);
+            state.verified = questionStates.map(item => item.verified);
+
+            const newCurrentIndex = state.questions.findIndex(question => question.id === currentQuestionId);
+            state.currentIndex = newCurrentIndex >= 0 ? newCurrentIndex : 0;
+        }
+
         if (state.questions.length === 0) return false;
         if (removedUnavailableQuestions) {
             state.examSubmitted = false;
             state.examTimeElapsed = 0;
             state.onlyFailedMode = false;
+        }
+        if (needsQuizShuffleMigration) {
+            saveStateToLocalStorage();
         }
         return true;
     } catch (e) {
