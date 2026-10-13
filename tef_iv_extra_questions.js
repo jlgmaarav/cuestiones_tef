@@ -971,7 +971,7 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "bank": "extra",
         "origin": "new",
         "topic": "Tema 5",
-        "text": "En una órbita permitida del modelo de Bohr, la circunferencia contiene tres longitudes de onda de de Broglie. Usando λdB = h/p, ¿cuál es el momento angular pr?",
+        "text": "En una órbita circular permitida del modelo de Bohr, la longitud de la circunferencia equivale a tres longitudes de onda del electrón. Con \\(\\lambda_{\\mathrm{dB}} = \\frac{h}{p}\\), siendo \\(p\\) su momento lineal y \\(r\\) el radio de la órbita, ¿cuánto vale su momento angular \\(L = p\\,r\\)?",
         "options": [
             "3ℏ.",
             "3h.",
@@ -992,7 +992,7 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
                 ]
             }
         ],
-        "justification": "La condición es 2πr = 3λdB = 3h/p. De ella se obtiene pr = 3h/(2π) = 3ℏ. Confundir h y ℏ pierde el factor 2π. Se pregunta por el modelo de Bohr, sin interpretar los orbitales cuánticos como trayectorias reales."
+        "justification": "La condición de onda estacionaria es \\(2\\pi r = 3\\lambda_{\\mathrm{dB}} = 3h/p\\). Al despejar, \\(L = p\\,r = \\frac{3h}{2\\pi} = 3\\hbar\\). Aquí \\(p\\) es el módulo del momento lineal y \\(r\\) el radio de la órbita circular. Confundir \\(h\\) y \\(\\hbar\\) pierde el factor \\(2\\pi\\). Se pregunta por el modelo de Bohr, sin interpretar los orbitales cuánticos como trayectorias reales."
     },
     {
         "id": "N_New_29",
