@@ -80,6 +80,8 @@
             </div>
         </header>
 
+        <p id="bank-note" class="bank-note" hidden></p>
+
         <!-- DASHBOARD DE ESTADÍSTICAS Y PROGRESO -->
         <section class="dashboard-section">
             <div class="progress-container">
@@ -145,9 +147,10 @@
                             <p id="question-text">Cargando pregunta...</p>
                         </div>
                         <p class="question-source" id="question-source" aria-live="polite" hidden></p>
+                        <div id="question-figure"></div>
                         
                         <!-- Lista de Opciones -->
-                        <ul class="options-list" id="options-list">
+                        <ul class="options-list" id="options-list" role="radiogroup" aria-labelledby="question-text">
                             <!-- Opciones inyectadas dinámicamente -->
                         </ul>
                         

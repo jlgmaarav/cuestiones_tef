@@ -1480,14 +1480,10 @@ const TEF_III_QUIZ_DATABASE = [
 
 
 const COURSE_ID = new URLSearchParams(window.location.search).get('course') === 'iv' ? 'iv' : 'iii';
-const TEF_IV_BANK_VERSION = 3;
+const TEF_IV_BANK_VERSION = 5;
 const QUIZ_DATABASE = COURSE_ID === 'iv'
     ? [...window.TEF_IV_QUIZ_DATABASE, ...window.TEF_IV_EXTRA_QUIZ_DATABASE]
     : TEF_III_QUIZ_DATABASE;
-const EXCLUDED_TEF_IV_QUESTION_IDS = new Set([
-    'N2', 'N22',
-    'N_Ex_23_02', 'N_Ex_22_08', 'N_Ex_18_02', 'N_Ex_17_02'
-]);
 
 function getActivePoolStorageKey() {
     return COURSE_ID === 'iv' ? 'lab_physics_tef_iv_active_pool' : 'lab_physics_active_pool';
@@ -1498,37 +1494,31 @@ function getRoomStorageKey(type) {
     return `${prefix}_room_${type}`;
 }
 
-function isAssistantCreatedTEFIVQuestion(question) {
-    const match = /^N_Ex_N_(\d+)$/.exec(question.id);
-    return Boolean(match && Number(match[1]) >= 17);
-}
-
 function getActiveDatabase() {
-    const availableQuestions = QUIZ_DATABASE.filter(q =>
-        !(COURSE_ID === 'iv' && EXCLUDED_TEF_IV_QUESTION_IDS.has(q.id))
-    );
-
     if (COURSE_ID !== 'iv') {
-        return availableQuestions.filter(q => state.pool === 'extra'
+        return QUIZ_DATABASE.filter(q => state.pool === 'extra'
             ? q.id.includes('_Ex')
             : !q.id.includes('_Ex'));
     }
-
-    // N_Ex_N_01–16 ya estaban en el repositorio como preguntas de guiones.
-    // En TEF IV separamos convocatorias anteriores y preguntas redactadas
-    // para esta práctica (N_Ex_N_17 en adelante).
-    const examAndCreatedQuestions = availableQuestions.filter(q =>
-        !q.id.startsWith('N_Ex_N_') || isAssistantCreatedTEFIVQuestion(q)
-    );
-
-    if (state.mode === 'exam') return examAndCreatedQuestions;
-    return state.pool === 'extra'
-        ? examAndCreatedQuestions.filter(isAssistantCreatedTEFIVQuestion)
-        : examAndCreatedQuestions.filter(q => !isAssistantCreatedTEFIVQuestion(q));
+    // Los archivos contienen solo las 68 cuestiones vigentes; el origen es explícito.
+    if (state.mode === 'exam') return QUIZ_DATABASE;
+    return QUIZ_DATABASE.filter(q => q.bank === state.pool);
 }
 
 function updateCoursePoolUI() {
     document.getElementById('leaderboard-description').textContent = `Ranking basado en aciertos (máximo ${getActiveDatabase().length}) y tiempo de resolución.`;
+    const note = document.getElementById('bank-note');
+    if (note) {
+        note.hidden = COURSE_ID !== 'iv';
+        note.textContent = state.mode === 'exam'
+            ? '68 cuestiones: 38 de exámenes anteriores y 30 nuevas. Preguntas y opciones barajadas. P2 excluida.'
+            : state.pool === 'extra'
+                ? '30 preguntas nuevas basadas en P1, P3–P6, la introducción teórica y el Tema 5. P2 excluida.'
+                : '38 cuestiones: 10 de test con clave oficial y 28 adaptaciones de desarrollo. La recopilación de 2022–2023 está incompleta y sus anotaciones no son una clave oficial.';
+    }
+    if (COURSE_ID === 'iv') {
+        document.getElementById('btn-restart-failed').classList.toggle('hidden', state.mode === 'exam');
+    }
 }
 
 function updatePoolSelectorVisibility() {
@@ -1550,6 +1540,7 @@ let state = {
     examTimeSeconds: 1800, // 30 minutos
     examTimerInterval: null,
     examTimeElapsed: 0,
+    examDeadline: null,
     examSubmitted: false,
     activeReviewTab: 'all', // 'all', 'correct', 'failed'
     onlyFailedMode: false, // si estamos repasando solo fallos
@@ -1610,9 +1601,9 @@ function initializeCourseUI() {
         courseTabIII.removeAttribute('aria-current');
         courseTabIV.setAttribute('aria-current', 'page');
         document.querySelector('.academy-tag').textContent = 'TÉCNICAS EXPERIMENTALES DE FÍSICA IV';
-        document.querySelector('.logo-area .subtitle').textContent = 'Practica por separado exámenes anteriores y preguntas creadas para ti; el modo examen mezcla ambos bancos.';
+        document.querySelector('.logo-area .subtitle').textContent = 'Practica por separado exámenes anteriores y preguntas nuevas; el modo examen reúne ambos bancos.';
         document.getElementById('pool-official-label').textContent = 'Exámenes anteriores';
-        document.getElementById('pool-extra-label').textContent = 'Preguntas creadas por mí';
+        document.getElementById('pool-extra-label').textContent = 'Preguntas nuevas';
         document.getElementById('app-footer-text').textContent = 'Preparador de Técnicas Experimentales de Física IV. Preguntas contrastadas con los exámenes y guiones de prácticas.';
         document.title = 'Preparador de Examen | TEF IV';
         state.pool = 'official';
@@ -1644,6 +1635,16 @@ function initModeSelectors() {
 
 function switchMode(mode) {
     if (state.mode === mode) return;
+
+    if (COURSE_ID === 'iv') {
+        saveStateToLocalStorage();
+        if (state.examTimerInterval) clearInterval(state.examTimerInterval);
+        state.examTimerInterval = null;
+        state.mode = mode;
+        localStorage.setItem('lab_physics_tef_iv_active_mode', mode);
+        restoreQuizView(loadStateFromLocalStorage());
+        return;
+    }
     
     // Confirmar si hay progreso
     const hasProgress = state.userAnswers.some(ans => ans !== null);
@@ -1683,6 +1684,12 @@ function switchPool(pool) {
     document.getElementById('tab-pool-official').classList.toggle('active', pool === 'official');
     document.getElementById('tab-pool-extra').classList.toggle('active', pool === 'extra');
     updateCoursePoolUI();
+
+    if (COURSE_ID === 'iv') {
+        localStorage.setItem(getActivePoolStorageKey(), pool);
+        restoreQuizView(loadStateFromLocalStorage());
+        return;
+    }
     
     const loaded = loadStateFromLocalStorage();
     if (!loaded) {
@@ -1760,12 +1767,8 @@ function prepareQuestions(originalQuestions, shuffleQuestions = true, shuffleOpt
     let prepped = originalQuestions.map(q => {
         // Clonar la pregunta para no modificar la base de datos estática
         let cloned = {
-            id: q.id,
-            text: q.text,
+            ...q,
             options: [...q.options],
-            correct_index: q.correct_index,
-            justification: q.justification,
-            matched_page: q.matched_page,
             source_file: q.source_file || '',
             source_reference: q.source_reference || ''
         };
@@ -1788,6 +1791,8 @@ function prepareQuestions(originalQuestions, shuffleQuestions = true, shuffleOpt
 
 // Llenado / Reinicio del Quiz
 function resetQuiz(onlyFailed = false) {
+    // Un examen TEF IV siempre usa la unión completa, incluso al restaurarlo.
+    if (COURSE_ID === 'iv' && state.mode === 'exam') onlyFailed = false;
     // Detener temporizador si existe
     if (state.examTimerInterval) {
         clearInterval(state.examTimerInterval);
@@ -1833,6 +1838,7 @@ function resetQuiz(onlyFailed = false) {
     state.userAnswers = new Array(state.questions.length).fill(null);
     state.verified = new Array(state.questions.length).fill(false);
     state.examTimeElapsed = 0;
+    state.examDeadline = null;
     state.examSubmitted = false;
     
     // UI elements resetting
@@ -1859,7 +1865,47 @@ function resetQuiz(onlyFailed = false) {
     updateProgress();
     renderQuestion(0);
     updateStats();
+    updateCoursePoolUI();
+    renderLeaderboard();
     saveStateToLocalStorage();
+}
+
+// Restaurar cada bloque de práctica y el examen sin sobrescribir las otras sesiones.
+function restoreQuizView(loaded) {
+    document.body.className = state.mode + '-mode-active';
+    document.getElementById('tab-mode-practice').classList.toggle('active', state.mode === 'practice');
+    document.getElementById('tab-mode-exam').classList.toggle('active', state.mode === 'exam');
+    document.getElementById('tab-pool-official').classList.toggle('active', state.pool === 'official');
+    document.getElementById('tab-pool-extra').classList.toggle('active', state.pool === 'extra');
+    updatePoolSelectorVisibility();
+    updateCoursePoolUI();
+    if (!loaded) {
+        resetQuiz(false);
+        return;
+    }
+    const isExam = state.mode === 'exam';
+    const submitted = isExam && state.examSubmitted;
+    document.getElementById('quiz-play-container').classList.toggle('hidden', submitted);
+    document.getElementById('exam-results-card').classList.toggle('hidden', !submitted);
+    document.getElementById('timer-container').classList.toggle('hidden', !isExam);
+    document.getElementById('btn-submit-exam').classList.toggle('hidden', !isExam);
+    document.getElementById('btn-verify').classList.toggle('hidden', isExam);
+    document.getElementById('review-board-card').classList.add('hidden');
+    document.getElementById('share-box-container').classList.add('hidden');
+    document.getElementById('share-name-input').value = '';
+    document.getElementById('share-card-text').value = '';
+    updateProgress();
+    renderQuestion(state.currentIndex);
+    updateStats();
+    renderLeaderboard();
+    if (submitted) {
+        renderExamResults();
+    } else if (isExam) {
+        startExamTimer(true);
+    } else if (state.verified.every(Boolean)) {
+        renderReviewBoard();
+        document.getElementById('review-board-card').classList.remove('hidden');
+    }
 }
 
 function initQuiz() {
@@ -1876,6 +1922,12 @@ function initQuiz() {
     }
     updateCoursePoolUI();
 
+    if (COURSE_ID === 'iv') {
+        state.mode = localStorage.getItem('lab_physics_tef_iv_active_mode') === 'exam' ? 'exam' : 'practice';
+        restoreQuizView(loadStateFromLocalStorage());
+        initRoomConnection();
+        return;
+    }
     const loaded = loadStateFromLocalStorage();
     updatePoolSelectorVisibility();
     updateCoursePoolUI();
@@ -1898,8 +1950,7 @@ function initQuiz() {
                 document.getElementById('exam-results-card').classList.remove('hidden');
                 document.getElementById('review-board-card').classList.remove('hidden');
                 document.getElementById('leaderboard-card').classList.remove('hidden');
-                renderReviewBoard();
-                renderLeaderboard();
+                renderExamResults();
             }
         } else {
             document.getElementById('btn-verify').classList.remove('hidden');
@@ -1925,12 +1976,15 @@ function initQuiz() {
 }
 
 // Temporizador Modo Examen
-function startExamTimer() {
+function startExamTimer(resume = false) {
     const timerVal = document.getElementById('timer-val');
-    state.examTimeElapsed = 0;
+    if (!resume || !Number.isFinite(state.examDeadline)) {
+        state.examDeadline = Date.now() + state.examTimeSeconds * 1000;
+    }
     
     const updateTimerUI = () => {
-        const remaining = state.examTimeSeconds - state.examTimeElapsed;
+        const remaining = Math.max(0, Math.ceil((state.examDeadline - Date.now()) / 1000));
+        state.examTimeElapsed = Math.min(state.examTimeSeconds, state.examTimeSeconds - remaining);
         if (remaining <= 0) {
             timerVal.textContent = "00:00";
             clearInterval(state.examTimerInterval);
@@ -1952,13 +2006,49 @@ function startExamTimer() {
     };
     
     updateTimerUI();
+    if (state.examSubmitted) return;
     state.examTimerInterval = setInterval(() => {
-        state.examTimeElapsed++;
         updateTimerUI();
     }, 1000);
 }
 
 // Renderizar Pregunta
+function escapeHTML(value) {
+    return String(value).replace(/[&<>"']/g, char => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[char]));
+}
+
+function getQuestionReference(question) {
+    if (!question.references) return question.source_reference || `Pág. PDF original: ${question.matched_page}`;
+    return question.references.map(reference => `${reference.document} · ${reference.section} · PDF pp. ${reference.pdf_pages.join(', ')}`).join(' | ');
+}
+
+// Gráficas de datos docentes simulados, con una tabla equivalente accesible.
+function getQuestionFigure(question) {
+    const figure = question.figure;
+    if (!figure) return '';
+    const points = figure.series.flatMap(series => series.points);
+    const xs = points.map(point => point[0]), ys = points.map(point => point[1]);
+    const xmin = Math.min(...xs), xmax = Math.max(...xs), ymin = Math.min(...ys), ymax = Math.max(...ys);
+    const x = value => 76 + 440 * (value - xmin) / (xmax - xmin || 1);
+    const y = value => 210 - 170 * (value - ymin) / (ymax - ymin || 1);
+    const colors = ['#67e8f9', '#fbbf24'];
+    let svg = '<path d="M76 32 V210 H530" fill="none" stroke="#94a3b8"/>';
+    for (let i = 0; i <= 4; i++) {
+        const xv = xmin + (xmax - xmin) * i / 4, yv = ymin + (ymax - ymin) * i / 4;
+        svg += `<text x="${x(xv)}" y="232" text-anchor="middle">${Number(xv.toFixed(2))}</text>`;
+        svg += `<text x="65" y="${y(yv)+4}" text-anchor="end">${Number(yv.toFixed(2))}</text>`;
+        svg += `<path d="M76 ${y(yv)} H530" stroke="#334155" stroke-dasharray="3 5"/>`;
+    }
+    figure.series.forEach((series, index) => {
+        svg += `<polyline points="${series.points.map(point => `${x(point[0])},${y(point[1])}`).join(' ')}" fill="none" stroke="${colors[index % colors.length]}" stroke-width="3"/>`;
+        svg += series.points.map(point => `<circle cx="${x(point[0])}" cy="${y(point[1])}" r="4" fill="${colors[index % colors.length]}"/>`).join('');
+    });
+    svg += `<text x="300" y="267" text-anchor="middle">${escapeHTML(figure.x_label)}</text>`;
+    svg += `<text transform="translate(18 125) rotate(-90)" text-anchor="middle">${escapeHTML(figure.y_label)}</text>`;
+    const data = figure.series.map(series => `<p>${escapeHTML(series.label)}</p><table><thead><tr><th>${escapeHTML(figure.x_label)}</th><th>${escapeHTML(figure.y_label)}</th></tr></thead><tbody>${series.points.map(point => `<tr><td>${point[0]}</td><td>${point[1]}</td></tr>`).join('')}</tbody></table>`).join('');
+    return `<figure class="question-figure"><svg viewBox="0 0 560 285" role="img" aria-label="${escapeHTML(`${figure.y_label} frente a ${figure.x_label}`)}">${svg}</svg><figcaption>Datos de ejemplo para esta cuestión.</figcaption><details><summary>Ver valores de la gráfica</summary>${data}</details></figure>`;
+}
+
 function renderQuestion(index) {
     if (index < 0 || index >= state.questions.length) return;
     
@@ -1975,6 +2065,7 @@ function renderQuestion(index) {
     const sourceParts = [q.source_file, q.source_reference].filter(Boolean);
     sourceLabel.textContent = sourceParts.length ? `Procedencia: ${sourceParts.join(' · ')}` : '';
     sourceLabel.hidden = sourceParts.length === 0;
+    document.getElementById('question-figure').innerHTML = getQuestionFigure(q);
     
     // Opciones
     const optionsContainer = document.getElementById('options-list');
@@ -1984,6 +2075,9 @@ function renderQuestion(index) {
         const li = document.createElement('li');
         li.className = 'option-item';
         li.id = `option-${optIdx}`;
+        li.setAttribute('role', 'radio');
+        li.setAttribute('aria-checked', String(state.userAnswers[index] === optIdx));
+        li.tabIndex = state.mode === 'practice' && state.verified[index] ? -1 : 0;
         
         const isSelected = state.userAnswers[index] === optIdx;
         if (isSelected) li.classList.add('selected');
@@ -2019,6 +2113,12 @@ function renderQuestion(index) {
         // Clic en opción
         if (!(state.mode === 'practice' && state.verified[index])) {
             li.addEventListener('click', () => selectOption(optIdx));
+            li.addEventListener('keydown', event => {
+                if (event.key === ' ' || event.key === 'Enter') {
+                    event.preventDefault();
+                    selectOption(optIdx);
+                }
+            });
         }
         
         optionsContainer.appendChild(li);
@@ -2031,7 +2131,7 @@ function renderQuestion(index) {
         document.getElementById('justification-content').innerHTML = `
             <p class="justification-correct"><strong>Respuesta correcta:</strong> ${q.options[q.correct_index]}</p>
             <p class="justification-text">${q.justification || 'No hay justificación disponible para esta pregunta.'}</p>
-            <p class="justification-source"><small>${q.source_file ? `Fuente: ${q.source_file} | ` : ''}${q.source_reference ? `Referencia: ${q.source_reference}` : `Pág. PDF original: ${q.matched_page}`}</small></p>
+            <p class="justification-source"><small>${escapeHTML(getQuestionReference(q))}</small></p>
         `;
         document.getElementById('btn-verify').classList.add('hidden');
     } else {
@@ -2071,6 +2171,7 @@ function selectOption(optIndex) {
     listItems.forEach((li, idx) => {
         const isSelected = idx === optIndex;
         li.classList.toggle('selected', isSelected);
+        li.setAttribute('aria-checked', String(isSelected));
         
         const checkbox = li.querySelector('.opt-checkbox');
         checkbox.classList.toggle('checked', isSelected);
@@ -2092,6 +2193,8 @@ function updateProgress() {
 }
 
 function updateStats() {
+    document.getElementById('label-stat-correct').textContent = state.mode === 'exam' ? 'Respondidas' : 'Aciertos';
+    document.getElementById('label-stat-wrong').textContent = state.mode === 'exam' ? 'Sin responder' : 'Fallos';
     if (state.mode === 'practice') {
         let correct = 0;
         let wrong = 0;
@@ -2155,11 +2258,27 @@ function nextQuestion() {
 
 // Enviar Examen
 function submitExam() {
+    if (state.examSubmitted) return;
     if (state.examTimerInterval) {
         clearInterval(state.examTimerInterval);
+        state.examTimerInterval = null;
+    }
+    if (Number.isFinite(state.examDeadline)) {
+        state.examTimeElapsed = Math.min(state.examTimeSeconds, Math.max(0, state.examTimeSeconds - Math.ceil((state.examDeadline - Date.now()) / 1000)));
     }
     state.examSubmitted = true;
-    
+    const correct = renderExamResults();
+    if (correct / state.questions.length >= 0.7) triggerConfetti();
+    saveStateToLocalStorage();
+    if (state.roomName && state.userName) {
+        saveToLeaderboard(state.userName, correct, state.examTimeElapsed);
+    } else if (state.roomName) {
+        syncOnlineLeaderboard(false);
+    }
+}
+
+// También se utiliza al restaurar un examen terminado, sin enviarlo otra vez.
+function renderExamResults() {
     let correct = 0;
     let wrong = 0;
     let unanswered = 0;
@@ -2205,7 +2324,6 @@ function submitExam() {
     pctCircle.className = 'results-percent-circle';
     if (scorePct >= 70) {
         pctCircle.classList.add('pass');
-        triggerConfetti();
     } else if (scorePct >= 50) {
         pctCircle.classList.add('warning');
     } else {
@@ -2226,14 +2344,7 @@ function submitExam() {
     document.getElementById('review-board-card').classList.remove('hidden');
     document.getElementById('leaderboard-card').classList.remove('hidden');
     renderLeaderboard();
-    saveStateToLocalStorage();
-    
-    // Guardar y sincronizar automáticamente si están conectados a una sala con usuario definido
-    if (state.roomName && state.userName) {
-        saveToLeaderboard(state.userName, correct, state.examTimeElapsed);
-    } else if (state.roomName) {
-        syncOnlineLeaderboard(false);
-    }
+    return correct;
 }
 
 // Resultados en Modo Práctica
@@ -2324,6 +2435,14 @@ function renderReviewBoard() {
         
         const details = document.createElement('div');
         details.className = 'review-item-details hidden';
+        const fullQuestion = document.createElement('p');
+        fullQuestion.textContent = q.text;
+        details.appendChild(fullQuestion);
+        if (q.figure) {
+            const figure = document.createElement('div');
+            figure.innerHTML = getQuestionFigure(q);
+            details.appendChild(figure);
+        }
         
         const optionsList = document.createElement('ul');
         optionsList.className = 'review-options-list';
@@ -2355,7 +2474,7 @@ function renderReviewBoard() {
         justDiv.innerHTML = `
             <h5>Explicación y Justificación Física:</h5>
             <p>${q.justification || 'No hay justificación disponible para esta pregunta.'}</p>
-            <p class="review-meta"><small>Categoría: ${getCategoryName(q.id)} | ${q.source_file ? `Fuente: ${q.source_file} | ` : ''}${q.source_reference ? `Referencia: ${q.source_reference}` : `Pág. PDF: ${q.matched_page}`}</small></p>
+            <p class="review-meta"><small>${q.source_file ? `Procedencia: ${escapeHTML(q.source_file)} · ${escapeHTML(q.source_reference || '')}<br>` : ''}${escapeHTML(getQuestionReference(q))}</small></p>
         `;
         
         details.appendChild(optionsList);
@@ -2534,7 +2653,10 @@ setTimeout(() => {
 
 // --- PERSISTENCIA CON LOCALSTORAGE ---
 function getLocalStorageKey() {
-    if (COURSE_ID === 'iv') return `lab_physics_tef_iv_quiz_state_${state.pool}_v${TEF_IV_BANK_VERSION}`;
+    if (COURSE_ID === 'iv') {
+        const bank = state.mode === 'exam' ? 'exam' : state.pool;
+        return `lab_physics_tef_iv_quiz_state_${bank}_v${TEF_IV_BANK_VERSION}`;
+    }
     return state.pool === 'official' ? 'lab_physics_quiz_state_v1' : 'lab_physics_quiz_state_extra_v1';
 }
 
@@ -2544,10 +2666,11 @@ function saveStateToLocalStorage() {
             userAnswers: state.userAnswers,
             verified: state.verified,
             mode: state.mode,
-            quizShuffleVersion: COURSE_ID === 'iv' ? 2 : 0,
+            bankVersion: COURSE_ID === 'iv' ? TEF_IV_BANK_VERSION : 0,
             onlyFailedMode: state.onlyFailedMode,
             examSubmitted: state.examSubmitted,
             examTimeElapsed: state.examTimeElapsed,
+            examDeadline: state.examDeadline,
             currentIndex: state.currentIndex,
             // Guardamos la lista de preguntas completa (con su orden y opciones barajadas)
             questions: state.questions
@@ -2564,6 +2687,7 @@ function loadStateFromLocalStorage() {
     
     try {
         const saved = JSON.parse(raw);
+        if (COURSE_ID === 'iv') return loadCurrentTEFIVState(saved);
         state.mode = saved.mode || 'practice';
         state.onlyFailedMode = saved.onlyFailedMode || false;
         state.examSubmitted = saved.examSubmitted || false;
@@ -2601,49 +2725,11 @@ function loadStateFromLocalStorage() {
             state.verified = saved.verified || new Array(state.questions.length).fill(false);
         }
 
-        // Barajar una sola vez las sesiones TEF IV antiguas, manteniendo las
-        // respuestas elegidas y la pregunta que estaba abierta.
-        const needsQuizShuffleMigration = COURSE_ID === 'iv' && (saved.quizShuffleVersion || 0) < 2;
-        if (needsQuizShuffleMigration) {
-            const currentQuestionId = state.questions[state.currentIndex]?.id;
-
-            state.questions.forEach((question, index) => {
-                const selectedIndex = state.userAnswers[index];
-                const selectedText = Number.isInteger(selectedIndex) &&
-                    selectedIndex >= 0 && selectedIndex < question.options.length
-                    ? question.options[selectedIndex]
-                    : null;
-                const correctText = question.options[question.correct_index];
-
-                shuffleArray(question.options);
-                question.correct_index = question.options.indexOf(correctText);
-                if (selectedText !== null) {
-                    state.userAnswers[index] = question.options.indexOf(selectedText);
-                }
-            });
-
-            const questionStates = state.questions.map((question, index) => ({
-                question,
-                userAnswer: state.userAnswers[index],
-                verified: state.verified[index]
-            }));
-            shuffleArray(questionStates);
-            state.questions = questionStates.map(item => item.question);
-            state.userAnswers = questionStates.map(item => item.userAnswer);
-            state.verified = questionStates.map(item => item.verified);
-
-            const newCurrentIndex = state.questions.findIndex(question => question.id === currentQuestionId);
-            state.currentIndex = newCurrentIndex >= 0 ? newCurrentIndex : 0;
-        }
-
         if (state.questions.length === 0) return false;
         if (removedUnavailableQuestions) {
             state.examSubmitted = false;
             state.examTimeElapsed = 0;
             state.onlyFailedMode = false;
-        }
-        if (needsQuizShuffleMigration) {
-            saveStateToLocalStorage();
         }
         return true;
     } catch (e) {
@@ -2652,6 +2738,49 @@ function loadStateFromLocalStorage() {
     }
 }
 
+
+function loadCurrentTEFIVState(saved) {
+    if (!saved || saved.mode !== state.mode || !Array.isArray(saved.questions)) return false;
+    const active = getActiveDatabase();
+    const byId = new Map(active.map(question => [question.id, question]));
+    const seen = new Set();
+    const retained = [];
+    let bankChanged = false;
+    for (const [index, stale] of saved.questions.entries()) {
+        const current = stale && byId.get(stale.id);
+        if (!current || seen.has(current.id)) { bankChanged = true; continue; }
+        seen.add(current.id);
+        const orderValid = Array.isArray(stale.options) && stale.options.length === current.options.length &&
+            new Set(stale.options).size === current.options.length && stale.options.every(option => current.options.includes(option));
+        const question = prepareQuestions([current], false, !orderValid)[0];
+        if (orderValid) {
+            question.options = [...stale.options];
+            question.correct_index = question.options.indexOf(current.options[current.correct_index]);
+        } else {
+            bankChanged = true;
+        }
+        const answer = saved.userAnswers?.[index];
+        const answerValid = orderValid && Number.isInteger(answer) && answer >= 0 && answer < question.options.length;
+        retained.push({question, answer: answerValid ? answer : null, verified: answerValid && saved.verified?.[index] === true});
+    }
+    if (retained.length === 0) return false;
+    state.onlyFailedMode = state.mode === 'practice' && saved.onlyFailedMode === true;
+    if (!state.onlyFailedMode) {
+        const missing = active.filter(question => !seen.has(question.id));
+        bankChanged ||= missing.length > 0;
+        for (const question of prepareQuestions(missing)) retained.push({question, answer: null, verified: false});
+    }
+    state.questions = retained.map(item => item.question);
+    state.userAnswers = retained.map(item => item.answer);
+    state.verified = retained.map(item => item.verified);
+    const currentId = saved.questions[saved.currentIndex]?.id;
+    state.currentIndex = Math.max(0, state.questions.findIndex(question => question.id === currentId));
+    state.examSubmitted = saved.examSubmitted === true && !bankChanged;
+    state.examTimeElapsed = Number.isFinite(saved.examTimeElapsed) ? Math.max(0, Math.min(1800, saved.examTimeElapsed)) : 0;
+    state.examDeadline = !bankChanged && Number.isFinite(saved.examDeadline) ? saved.examDeadline : null;
+    saveStateToLocalStorage();
+    return true;
+}
 
 // --- CLASIFICACIÓN Y COMPARTIR RESULTADOS ---
 function getLeaderboardKey() {
