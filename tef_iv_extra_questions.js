@@ -9,9 +9,9 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "text": "En P1, el patrón de 40X muestra 100 μm en 800 píxeles. Con el mismo objetivo y configuración, una traza mide 64 píxeles de diámetro. ¿Cuál es el diámetro?",
         "options": [
             "0,80 μm.",
-            "80 μm.",
-            "8,0 μm.",
-            "512 μm."
+            "80,0 μm.",
+            "8,00 μm.",
+            "8,00 mm."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -36,10 +36,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "P1",
         "text": "Dos CR39 idénticos se irradian el mismo tiempo con 241Am y se revelan juntos. Entre la fuente y uno se interpone el plástico de P1, que detiene alfas y deja pasar gammas. Solo el otro muestra trazas. ¿Qué conclusión permite el control?",
         "options": [
-            "Las trazas observadas se atribuyen a las alfas bajo esas condiciones.",
-            "El plástico impide simultáneamente toda radiación alfa y gamma.",
-            "El NaOH produce trazas solo donde recibe gammas durante el revelado.",
-            "La ausencia de trazas demuestra que no llegó ningún fotón al CR39."
+            "Las alfas producen las trazas en estas condiciones de revelado.",
+            "Las gammas producen las trazas al depositar toda su energía.",
+            "La densidad de trazas determina la energía de cada partícula alfa.",
+            "La ausencia de trazas descarta la irradiación por fotones gamma."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -64,10 +64,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "P1",
         "text": "En dos CR39 irradiados conjuntamente, uno se revela durante más tiempo con el mismo NaOH y temperatura. En el régimen sin solapamiento ni desaparición de trazas, se observan diámetros mayores. ¿Qué interpretación es correcta?",
         "options": [
-            "La mayor duración del revelado ha elevado la energía de las alfas ya absorbidas.",
-            "Cada cono más ancho demuestra que llegaron más partículas por una misma trayectoria.",
-            "El diámetro aumentado exige un mayor tiempo de irradiación, aunque ambos se irradiaron juntos.",
-            "El ataque químico ha ensanchado las zonas dañadas; el diámetro no mide por sí solo la energía alfa."
+            "El mayor diámetro indica una mayor energía inicial de las alfas.",
+            "El mayor diámetro indica una mayor cantidad de alfas por traza.",
+            "El mayor diámetro mide la energía con independencia del revelado.",
+            "El mayor diámetro refleja un crecimiento químico de la zona dañada."
         ],
         "correct_index": 3,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -92,10 +92,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "P1",
         "text": "Para un único tipo de trampa de LiF y una rampa térmica constante, la intensidad primero sube y después baja. ¿Qué ocurre en la parte descendente del pico?",
         "options": [
-            "La probabilidad de escape disminuye al aumentar la temperatura del cristal.",
-            "El agotamiento de trampas ocupadas domina el aumento de la probabilidad de escape.",
-            "Los electrones vuelven a las trampas porque aumenta la energía de activación con la dosis.",
-            "La fuente pierde actividad al calentarse el lector, aunque ya fue retirada."
+            "Disminuye la probabilidad de escape y esa caída domina el aumento de temperatura.",
+            "Disminuye la población atrapada y ese descenso domina el aumento del escape.",
+            "Aumenta la población atrapada y ese aumento reduce la probabilidad de recombinación.",
+            "Aumenta la profundidad de las trampas y ese cambio reduce la probabilidad de escape."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -120,10 +120,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "P1",
         "text": "Un chip de P1 da 180 nC en su primera lectura y, sin nueva irradiación, 12 nC al releerlo. Un chip de control da 11 nC. Con el mismo lector y programa térmico, ¿qué explica mejor el resultado?",
         "options": [
-            "La primera lectura vació casi todas las trampas que contribuían a la señal medida.",
-            "La actividad del 241Am disminuyó quince veces entre ambas lecturas del mismo chip.",
-            "La señal mide solo la irradiación entre lecturas, incluso si las trampas anteriores no se vacían.",
-            "El control demuestra que la primera lectura tuvo una ganancia quince veces mayor."
+            "La lectura libera la carga almacenada y deja una señal próxima al control.",
+            "La lectura conserva la carga almacenada y reparte por igual la señal entre lecturas.",
+            "La lectura aumenta la profundidad de las trampas y retrasa la emisión luminosa.",
+            "La lectura mide solo irradiación reciente y conserva la carga previamente retenida."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -148,10 +148,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "P3",
         "text": "En P3 se anotan cuentas acumuladas de 137mBa: C(30 s)=230 y C(60 s)=420. El fondo fue 300 cuentas en 300 s. ¿Cuántas cuentas netas corresponden al intervalo 30–60 s?",
         "options": [
-            "190.",
-            "120.",
-            "160.",
-            "390."
+            "190 cuentas.",
+            "120 cuentas.",
+            "160 cuentas.",
+            "390 cuentas."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -179,8 +179,8 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "options": [
             "(222 ± 7) s.",
             "(154 ± 5) s.",
-            "(154 ± 0,15) s.",
-            "(4,50 ± 0,15)×10⁻³ s."
+            "(154 ± 15) s.",
+            "(154 ± 10) s."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -234,12 +234,12 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "bank": "extra",
         "origin": "new",
         "topic": "P3",
-        "text": "En la recuperación del 137mBa se registran 120 cuentas en 15 s y, más tarde, 240 en 30 s. El fondo constante es 2 s⁻¹ y la geometría no cambia. ¿Qué indican las tasas netas?",
+        "text": "En la recuperación del 137mBa se registran 120 cuentas en 15 s y, más tarde, 240 en 30 s. El fondo constante es 2 s⁻¹ y la geometría no cambia. ¿Cuáles son las tasas netas de ambos intervalos, respectivamente?",
         "options": [
-            "La actividad se duplicó, porque las cuentas aumentaron de 120 a 240.",
-            "La segunda tasa neta es la mitad, porque el intervalo dura el doble.",
-            "Ambos intervalos dan 8 s⁻¹ de actividad neta, sin necesidad de corregir fondo.",
-            "Ambos intervalos dan 6 s⁻¹; esos datos no prueban un aumento de actividad."
+            "8 s⁻¹ y 8 s⁻¹.",
+            "6 s⁻¹ y 3 s⁻¹.",
+            "4 s⁻¹ y 6 s⁻¹.",
+            "6 s⁻¹ y 6 s⁻¹."
         ],
         "correct_index": 3,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -272,10 +272,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "P3",
         "text": "La gráfica muestra ln(I/Iref) del torón, con una corriente de fondo constante no restada. La curva se aplana a tiempos largos. Si se obliga a ajustar una recta a toda la curva como si el fondo fuera cero, ¿qué sesgo se espera?",
         "options": [
-            "Mayor |pendiente| y una semivida subestimada.",
-            "La misma pendiente; el fondo solo cambia la ordenada inicial.",
-            "Menor |pendiente| y una semivida sobreestimada.",
-            "Pendiente positiva y una semivida negativa en todos los casos."
+            "Pendiente más negativa y semivida menor que la real.",
+            "Pendiente menos negativa y semivida menor que la real.",
+            "Pendiente menos negativa y semivida mayor que la real.",
+            "Pendiente más negativa y semivida mayor que la real."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -339,10 +339,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "P3",
         "text": "En la cámara de ionización de P3, a geometría fija, la gráfica I(U) alcanza una meseta. Dentro de la región de cámara de ionización, ¿qué significa aumentar U de 375 a 450 V sin que aumente I?",
         "options": [
-            "La recogida ya es prácticamente completa; aumentar U no crea más pares primarios.",
-            "Ha comenzado una descarga Geiger cuya carga ya no depende de la radiación.",
-            "La actividad de la fuente disminuye justo lo necesario para compensar el aumento de U.",
-            "La meseta prueba que la radiación dejó de ionizar el aire del recinto."
+            "Se recoge casi toda la carga primaria que produce la radiación.",
+            "Se multiplican las cargas en avalanchas de tipo Geiger.",
+            "Se recombina casi toda la carga primaria antes de alcanzar los electrodos.",
+            "Se estabiliza la carga espacial que extingue la multiplicación de electrones."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -445,7 +445,7 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
             "0,295 MeV.",
             "0,737 MeV.",
             "0,663 MeV.",
-            "368,695 MeV."
+            "0,368 MeV."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -461,7 +461,7 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
                 ]
             }
         ],
-        "justification": "El cruce cumple 6 − 0,020e = 2, por lo que R = 200 mg/cm² = 0,200 g/cm². Emax = 1,842 × 0,200 + 0,295 = 0,6634 MeV, dentro del intervalo menor de 0,8 MeV donde se usa la fórmula. 368,695 es el error de no convertir mg a g; el alcance no es un espesor hemirreductor.",
+        "justification": "El cruce cumple 6 − 0,020e = 2, por lo que R = 200 mg/cm² = 0,200 g/cm². Emax = 1,842 × 0,200 + 0,295 = 0,6634 MeV, dentro del intervalo menor de 0,8 MeV donde se usa la fórmula. El valor 0,368 MeV omite el término independiente 0,295 MeV; tomar R = 240 mg/cm² en vez de la intersección da 0,737 MeV. El alcance no es un espesor hemirreductor.",
         "figure": {
             "x_label": "e (mg/cm²)",
             "y_label": "ln[r/(1 min⁻¹)]",
@@ -514,9 +514,9 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "P4",
         "text": "Una medida del alcance beta en Al da R = 216 mg/cm². Si ρAl = 2,70 g/cm³, ¿cuál es el alcance lineal correspondiente?",
         "options": [
-            "0,080 mm.",
-            "8,0 mm.",
-            "0,583 mm.",
+            "0,08 mm.",
+            "8,00 mm.",
+            "0,58 mm.",
             "0,80 mm."
         ],
         "correct_index": 3,
@@ -543,10 +543,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "P4",
         "text": "En el Geiger de P4, las betas de dos fuentes dan amplitudes semejantes a 600 V. Al aumentar a 700 V crece la amplitud en ambas. ¿Qué se puede concluir?",
         "options": [
-            "La amplitud depende del voltaje; la coincidencia a 600 V no implica igual espectro beta.",
-            "La coincidencia a 600 V demuestra que ambas fuentes tienen la misma energía máxima.",
-            "El aumento a 700 V demuestra que las dos fuentes aumentaron su actividad.",
-            "La región Geiger permite calibrar energía beta mediante la amplitud individual."
+            "La amplitud depende de la tensión aplicada, aunque las energías beta difieran.",
+            "La amplitud depende de la energía beta, aunque la tensión aplicada coincida.",
+            "La amplitud depende de la actividad beta, aunque la tensión aplicada coincida.",
+            "La amplitud depende de la energía máxima, aunque las energías medias coincidan."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -573,8 +573,8 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "options": [
             "0,25 %.",
             "0,50 %.",
-            "5,0 %.",
-            "20 %."
+            "5,00 %.",
+            "20,0 %."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -599,12 +599,12 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "bank": "extra",
         "origin": "new",
         "topic": "P5",
-        "text": "Dos fotopicos gaussianos de la misma energía se miden con iguales canales y tiempo vivo, tras restar el continuo. El de A tiene altura doble y FWHM mitad que el de B. ¿Qué relación tienen sus áreas netas?",
+        "text": "Dos fotopicos gaussianos de la misma energía se miden con iguales canales y tiempo vivo, tras restar el continuo. El de A tiene altura doble y FWHM mitad que el de B. ¿Cuánto vale el cociente entre el área neta de A y la de B?",
         "options": [
-            "El área de A es doble, como su altura máxima.",
-            "Son iguales: el producto altura × FWHM es el mismo.",
-            "El área de A es la mitad, como su anchura.",
-            "El área de A es cuatro veces mayor por su mejor resolución."
+            "2,0.",
+            "1,0.",
+            "0,5.",
+            "4,0."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -630,7 +630,7 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "text": "En P5, dos adquisiciones de un fotopico dan 1200 cuentas netas en 60 s sin plomo y 1200 en 120 s con espesor másico e = 6,60 g/cm². A geometría fija y con pérdidas despreciables, ¿cuál es el coeficiente de atenuación másico?",
         "options": [
             "0,105 cm²/g.",
-            "0 cm²/g.",
+            "0,000 cm²/g.",
             "−0,105 cm²/g.",
             "0,210 cm²/g."
         ],
@@ -658,10 +658,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "P5",
         "text": "Al colocar el imán sobre el PMT de P5, el fotopico de 137Cs pasa del canal 900 al 720 y baja la amplitud observada. La electrónica restante no cambia. ¿Qué explica el desplazamiento?",
         "options": [
-            "La energía emitida por 137Cs disminuye en proporción 720/900 por el campo magnético.",
-            "Se ha añadido una lámina absorbente que resta siempre el 20 % de energía a cada gamma.",
-            "El imán aumenta la población de trampas termoluminiscentes del NaI(Tl).",
-            "Disminuye la multiplicación del PMT; no ha cambiado la energía nuclear del gamma."
+            "Aumenta la ganancia del PMT al desviarse electrones entre sus dínodos.",
+            "Disminuye la eficiencia del cristal, manteniéndose iguales las amplitudes del PMT.",
+            "Disminuye la energía emitida por 137Cs, manteniéndose estable la multiplicación del PMT.",
+            "Disminuye la ganancia del PMT al desviarse electrones entre sus dínodos."
         ],
         "correct_index": 3,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -693,10 +693,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "P5",
         "text": "Con electrónica lineal y coincidencias accidentales despreciables, dos gammas de 60Co de 1,17 y 1,33 MeV depositan toda su energía dentro del mismo intervalo de integración. ¿Qué registra el multicanal?",
         "options": [
-            "Dos impulsos separados, uno de 1,17 y otro de 1,33 MeV.",
-            "Un impulso correspondiente al promedio, 1,25 MeV.",
-            "Un impulso correspondiente a 2,50 MeV.",
-            "Un impulso correspondiente a la diferencia, 0,16 MeV."
+            "Dos pulsos; energías de 1,17 y 1,33 MeV.",
+            "Un pulso; energía asignada de 1,25 MeV.",
+            "Un pulso; energía asignada de 2,50 MeV.",
+            "Un pulso; energía asignada de 0,16 MeV."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -776,12 +776,12 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "bank": "extra",
         "origin": "new",
         "topic": "P6",
-        "text": "Dos gammas depositan 300 y 600 keV en un CZT con igual energía media por par y recogida completa. La electrónica es lineal. ¿Qué relación se espera entre las cargas y las amplitudes?",
+        "text": "Dos gammas depositan 300 y 600 keV en un CZT con igual energía media por par y recogida completa. La electrónica es lineal. Si Q es la carga recogida y V la amplitud del impulso, ¿qué relación se espera entre el segundo suceso y el primero?",
         "options": [
-            "La carga y la amplitud del segundo impulso son aproximadamente dobles.",
-            "La carga es doble, pero la amplitud es igual por apantallamiento Geiger.",
-            "La amplitud es doble, pero ambos sucesos crean el mismo número de pares.",
-            "La carga y la amplitud son aproximadamente cuatro veces mayores."
+            "Q₂ = 2Q₁ y V₂ = 2V₁.",
+            "Q₂ = 2Q₁ y V₂ = V₁.",
+            "Q₂ = Q₁ y V₂ = 2V₁.",
+            "Q₂ = 4Q₁ y V₂ = 4V₁."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -813,10 +813,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "Introducción",
         "text": "Se observa un fotón de 80 keV por una transición nuclear y otro de 120 keV por una transición electrónica atómica. Según su origen, ¿cómo se clasifican?",
         "options": [
-            "El de 80 keV es un rayo X y el de 120 keV es gamma.",
-            "Ambos son gamma porque su energía supera decenas de keV.",
-            "El de 80 keV es gamma y el de 120 keV es un rayo X.",
-            "Ambos son rayos X porque sus energías son menores de 511 keV."
+            "80 keV: rayos X; 120 keV: gamma.",
+            "80 keV: gamma; 120 keV: gamma.",
+            "80 keV: gamma; 120 keV: rayos X.",
+            "80 keV: rayos X; 120 keV: rayos X."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -848,10 +848,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "Introducción",
         "text": "En una desintegración β⁻ de un núcleo de número másico A y número atómico Z, ¿qué ocurre con el núcleo y por qué hay un continuo de energías beta aun fijando el estado final?",
         "options": [
-            "A no cambia, Z disminuye en uno y la energía se reparte entre beta, neutrino y retroceso.",
-            "A no cambia, Z aumenta en uno y la energía se reparte entre beta, antineutrino y retroceso.",
-            "A disminuye en uno, Z no cambia y la beta lleva toda la energía disponible.",
-            "A no cambia, Z aumenta en uno y el continuo nace solo de pérdidas en el aire exterior."
+            "A constante, Z−1; energía compartida con el antineutrino.",
+            "A constante, Z+1; energía compartida con el antineutrino.",
+            "A−1, Z constante; energía compartida con el antineutrino.",
+            "A constante, Z+1; energía distribuida por pérdidas en aire."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -921,7 +921,7 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
             "T₂ = 8T₁.",
             "T₂ = T₁/ln 8.",
             "T₂ = T₁/8.",
-            "T₂ = T₁ − ln 8."
+            "T₂ = (ln 8)T₁."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
@@ -945,10 +945,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "Tema 5",
         "text": "En el modelo de Gamow, dos estados alfa tienen la misma frecuencia de intentos ν. Sus probabilidades de transmisión son P y 2P, ambas mucho menores que uno. Si λ = νP, ¿cómo cambia la semivida?",
         "options": [
-            "Se duplica porque una transmisión mayor retiene más tiempo a la alfa.",
-            "No cambia: la transmisión solo modifica la energía final, no λ.",
-            "Se reduce a la mitad porque cada intento aporta energía hasta superar la barrera.",
-            "Se reduce a la mitad sin que la alfa deba superar clásicamente la barrera."
+            "Se duplica porque la transmisión reduce λ.",
+            "No cambia porque ν permanece constante.",
+            "Se reduce a la mitad porque se duplica ν.",
+            "Se reduce a la mitad porque se duplica λ."
         ],
         "correct_index": 3,
         "source_file": "Pregunta nueva · Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
@@ -976,7 +976,7 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
             "3ℏ.",
             "3h.",
             "ℏ/3.",
-            "0."
+            "h/3."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
@@ -1001,10 +1001,10 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "topic": "Tema 5",
         "text": "Un tubo de rayos X con el mismo ánodo pasa de 40 a 60 kV. Se supone que ambas tensiones superan el umbral de excitación de la línea característica considerada. ¿Qué cambia en las energías del espectro?",
         "options": [
-            "El extremo del continuo permanece fijo; la línea característica pasa a energía 1,5 veces mayor.",
-            "El extremo del continuo pasa de 40 a 60 keV; la energía de la línea característica permanece fija.",
-            "El extremo del continuo y todas las líneas características pasan a energía 1,5 veces mayor.",
-            "El extremo del continuo pasa de 40 a 60 keV; desaparecen necesariamente las líneas características."
+            "Extremo en 40 keV; líneas a sus energías iniciales.",
+            "Extremo en 60 keV; líneas a sus energías iniciales.",
+            "Extremo en 60 keV; líneas con energía 1,5 veces mayor.",
+            "Extremo en 40 keV; líneas con energía 1,5 veces mayor."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Física Cuántica - Tema 5 - Núcleos y átomos.pdf",

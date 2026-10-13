@@ -140,9 +140,10 @@ test('100 barajados conservan IDs, opciones, referencias y respuesta válida sin
     assert.deepEqual(a.json('QUIZ_DATABASE'),original);
 });
 
-test('sesiones v3 no se recuperan; payloads retirados, duplicados o de otro bloque tampoco', () => {
+test('sesiones v3/v4 no se recuperan; payloads retirados, duplicados o de otro bloque tampoco', () => {
     const a = app();
     a.storage.set('lab_physics_tef_iv_quiz_state_official_v3',JSON.stringify({mode:'practice',questions:[{id:'N_Ex_N_39'}]}));
+    a.storage.set('lab_physics_tef_iv_quiz_state_official_v4',JSON.stringify({mode:'practice',questions:[{id:'N_New_01'}]}));
     assert.equal(a.run('loadStateFromLocalStorage()'),false);
     a.run('resetQuiz();');
     const saved = JSON.parse(a.storage.get(a.run('getLocalStorageKey()')));
@@ -246,15 +247,39 @@ test('TEF III conserva íntegramente sus 101 preguntas, ambos bloques y la corre
 test('cálculos de las cuestiones nuevas verificados independientemente', () => {
     const a=app(); const byId=Object.fromEntries(a.json('window.TEF_IV_EXTRA_QUIZ_DATABASE').map(q=>[q.id,q]));
     const answer=n=>byId[`N_New_${String(n).padStart(2,'0')}`].options[byId[`N_New_${String(n).padStart(2,'0')}`].correct_index];
-    assert.equal(100/800*64,8); assert.equal(answer(1),'8,0 μm.');
-    assert.equal(420-230-300*30/300,160); assert.equal(answer(6),'160.');
+    assert.equal(100/800*64,8); assert.equal(answer(1),'8,00 μm.');
+    assert.equal(420-230-300*30/300,160); assert.equal(answer(6),'160 cuentas.');
     assert.ok(Math.abs(Math.log(2)/0.0045-154)<1); assert.ok(Math.abs(Math.log(2)/0.0045**2*0.00015-5)<1);
     assert.equal(1-2**-3,7/8); assert.equal(answer(11),'7/8.');
     assert.ok(Math.abs(1.842*((6-2)/0.020/1000)+0.295-0.663)<0.001);
     assert.ok(Math.abs(0.216/2.7*10-0.8)<1e-12); assert.equal(answer(13),'0,80 mm.');
-    assert.equal(150/(1000*60*0.05)*100,5); assert.equal(answer(15),'5,0 %.');
+    assert.equal(150/(1000*60*0.05)*100,5); assert.equal(answer(15),'5,00 %.');
+    assert.equal(answer(8),'6 s⁻¹ y 6 s⁻¹.');
+    assert.equal(answer(16),'1,0.');
+    assert.equal(answer(22),'Q₂ = 2Q₁ y V₂ = 2V₁.');
     assert.ok(Math.abs(Math.log(2)/6.6-0.105)<0.001);
     assert.ok(Math.abs(100*0.8*20/(0.8*800+20)-2.42)<0.01);
     assert.equal(0.20/4*3.7e4,1850); assert.equal(answer(25),'1850 Bq.');
     assert.ok(Math.abs(0.662-0.662/(1+2*0.662/0.511)-0.478)<0.001); assert.equal(answer(30),'0,478 MeV.');
+});
+
+test('elegir por longitud no aporta ventaja sistemática, tampoco eligiendo la más corta', () => {
+    const a=app(); const questions=a.json('window.TEF_IV_EXTRA_QUIZ_DATABASE');
+    const measures={characters: text=>[...text.normalize('NFC')].length, words: text=>text.trim().split(/\s+/u).length};
+    for (const [name,measure] of Object.entries(measures)) {
+        for (const extreme of [Math.max,Math.min]) {
+            // El barajado hace equiprobables los empates; se calcula su nota esperada exacta.
+            const expected=questions.reduce((sum,q)=>{
+                const lengths=q.options.map(measure);
+                const target=extreme(...lengths);
+                return sum+(lengths[q.correct_index]===target ? 1/lengths.filter(length=>length===target).length : 0);
+            },0);
+            assert.ok(expected<=questions.length/4+1e-10,`${name}: ${extreme===Math.max?'más larga':'más corta'} espera ${expected}/30`);
+        }
+    }
+    // Evita volver a dar solo a la correcta una segunda frase explicativa.
+    for (const q of questions) {
+        const sentences=q.options.map(option=>(option.match(/[.!?](?:\s|$)/gu)||[]).length);
+        assert.ok(!(sentences[q.correct_index]>1 && sentences[q.correct_index]===Math.max(...sentences) && sentences.filter(n=>n===sentences[q.correct_index]).length===1),q.id);
+    }
 });

@@ -41,9 +41,15 @@ Las nuevas cuestiones tienen identificadores N_New_01–30 y nunca se etiquetan 
 
 ## Comprobación funcional
 
-La suite sin dependencias se ejecuta con node --test tests/quiz.test.cjs. Comprueba 14 casos, incluido un centenar de barajados y la correspondencia entre cada opción válida y su texto después de barajar. Los cálculos se verifican por separado con sus fórmulas y unidades. Las pruebas estructurales de referencias comprueban rangos de página; la correspondencia con los apartados fue revisada documentalmente.
+La suite sin dependencias se ejecuta con node --test tests/quiz.test.cjs. Comprueba 15 casos, incluido un centenar de barajados y la correspondencia entre cada opción válida y su texto después de barajar. Los cálculos se verifican por separado con sus fórmulas y unidades. Las pruebas estructurales de referencias comprueban rangos de página; la correspondencia con los apartados fue revisada documentalmente.
 
-Se comprueban las tres sesiones independientes (práctica anterior, práctica nueva y examen), la reconstrucción desde datos vigentes, el rechazo de identificadores retirados o de otro bloque, la actualización de opciones modificadas, el plazo real del examen y la recuperación del resumen final. Las claves v3 no se leen como v4. El banco de TEF III se verifica con una huella SHA-256 de sus 101 registros y se ejercitan sus grupos y la corrección de examen.
+Se comprueban las tres sesiones independientes (práctica anterior, práctica nueva y examen), la reconstrucción desde datos vigentes, el rechazo de identificadores retirados o de otro bloque, la actualización de opciones modificadas, el plazo real del examen y la recuperación del resumen final. Las claves v3/v4 no se leen como v5. El banco de TEF III se verifica con una huella SHA-256 de sus 101 registros y se ejercitan sus grupos y la corrección de examen.
+
+### Revisión de las alternativas tras detectar pistas por longitud
+
+Se revisan las alternativas de las 30 nuevas y se reescriben las descompensadas con respuestas paralelas y comparables. Las explicaciones adicionales quedan en la justificación y las preguntas cuantitativas presentan magnitudes con el mismo formato. Se conservan problemas, referencias, respuesta física válida y distribución de posiciones 8/7/8/7. Las alternativas de N_New_08, N_New_16 y N_New_22 se expresan como tasas, cociente de áreas y relaciones carga-amplitud, respectivamente; sus enunciados se ajustan para pedir esas magnitudes explícitamente.
+
+La comprobación de pistas calcula la nota esperada exacta de elegir un extremo de longitud, contando los empates con la probabilidad que les da el barajado. Se ensayan caracteres y palabras, y tanto la opción más larga como la más corta. Esto comprueba una estrategia superficial concreta; no sustituye la revisión física ni mide por sí solo la dificultad del banco. Se añade una prueba de regresión para impedir que esas estrategias superen los 7,5/30 aciertos esperados al responder al azar y para evitar una segunda frase explicativa exclusiva de la correcta. Se renuevan las sesiones y rankings de TEF IV a v5, de modo que los resultados obtenidos con las alternativas anteriores no se recuperen como nuevos intentos.
 
 ## Huellas de los originales revisados
 

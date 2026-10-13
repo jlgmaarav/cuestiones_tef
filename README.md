@@ -9,7 +9,7 @@ Aplicación estática para practicar TEF III y Física Nuclear de TEF IV. Abre `
 - **Examen:** unión de los dos bancos, con preguntas y opciones barajadas. El plazo es de 30 minutos y continúa al recargar o cambiar temporalmente a práctica.
 - P2 está excluida: cámara de niebla, espectrometría alfa, frenado de alfas y dispersión de Rutherford. Se mantienen las cuestiones alfa de las prácticas realizadas y la teoría de desintegración nuclear.
 
-El progreso de los dos bloques de práctica y el examen se guarda por separado en este navegador. La revisión del banco usa sesiones v4: las sesiones v3 anteriores no se importan. Al restaurar una sesión vigente se reconstruyen los enunciados, soluciones y referencias desde el banco actual; el contenido retirado no puede volver desde el almacenamiento.
+El progreso de los dos bloques de práctica y el examen se guarda por separado en este navegador. La revisión del banco usa sesiones v5: las sesiones v3/v4 anteriores no se importan, para no conservar intentos realizados con opciones descompensadas. Al restaurar una sesión vigente se reconstruyen los enunciados, soluciones y referencias desde el banco actual; el contenido retirado no puede volver desde el almacenamiento.
 
 Los resultados finales se conservan al recargar. TEF III mantiene su banco de 101 cuestiones y sus dos grupos de 53 y 48.
 
@@ -21,7 +21,7 @@ Con Node.js 22 o posterior, sin instalar paquetes:
 node --test tests/quiz.test.cjs
 ```
 
-Las pruebas cubren recuentos, procedencia, clave oficial, exclusiones, referencias, cálculos, 100 barajados, cambios de bloque y modo, sesiones retiradas, recarga, vencimiento del examen y regresión de TEF III. La corrección física de los enunciados y la correspondencia documental se revisan además con los originales; una prueba de estructura no sustituye esa revisión.
+Las pruebas cubren recuentos, procedencia, clave oficial, exclusiones, referencias, cálculos, 100 barajados, cambios de bloque y modo, sesiones retiradas, recarga, vencimiento del examen y regresión de TEF III. Se comprueba además que elegir siempre la opción más larga o más corta, por caracteres o palabras, no supera los 7,5/30 aciertos esperados al responder al azar, resolviendo los empates según el orden barajado. La corrección física de los enunciados y la correspondencia documental se revisan además con los originales; una prueba de estructura no sustituye esa revisión.
 
 Para servir la web localmente con Python:
 

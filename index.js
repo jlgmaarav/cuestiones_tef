@@ -1480,7 +1480,7 @@ const TEF_III_QUIZ_DATABASE = [
 
 
 const COURSE_ID = new URLSearchParams(window.location.search).get('course') === 'iv' ? 'iv' : 'iii';
-const TEF_IV_BANK_VERSION = 4;
+const TEF_IV_BANK_VERSION = 5;
 const QUIZ_DATABASE = COURSE_ID === 'iv'
     ? [...window.TEF_IV_QUIZ_DATABASE, ...window.TEF_IV_EXTRA_QUIZ_DATABASE]
     : TEF_III_QUIZ_DATABASE;
