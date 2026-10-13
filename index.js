@@ -1605,6 +1605,14 @@ function initModeSelectors() {
     
     practiceTab.addEventListener('click', () => switchMode('practice'));
     examTab.addEventListener('click', () => switchMode('exam'));
+    document.getElementById('btn-reset-practice').addEventListener('click', () => {
+        if (state.mode !== 'practice') return;
+        const hasProgress = state.currentIndex > 0 ||
+            state.userAnswers.some(answer => answer !== null) ||
+            state.verified.some(Boolean);
+        if (hasProgress && !confirm('Se borrará el progreso de esta práctica. ¿Quieres reiniciarla?')) return;
+        resetQuiz(false);
+    });
 }
 
 function switchMode(mode) {
@@ -1929,8 +1937,12 @@ function renderQuestion(index) {
     document.getElementById('question-category').textContent = getCategoryName(q.id);
     document.getElementById('question-number').textContent = `Pregunta ${index + 1} de ${state.questions.length} [${q.id}]`;
     
-    // Texto de Pregunta
+    // Texto de Pregunta y procedencia
     document.getElementById('question-text').textContent = q.text;
+    const sourceLabel = document.getElementById('question-source');
+    const sourceParts = [q.source_file, q.source_reference].filter(Boolean);
+    sourceLabel.textContent = sourceParts.length ? `Procedencia: ${sourceParts.join(' · ')}` : '';
+    sourceLabel.hidden = sourceParts.length === 0;
     
     // Opciones
     const optionsContainer = document.getElementById('options-list');

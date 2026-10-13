@@ -174,98 +174,548 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
     },
     {
         id: 'N_Ex_N_01', text: '¿En qué momento se libera la señal luminosa de un dosímetro termoluminiscente irradiado?',
-        options: ['Al calentarlo, cuando los electrones atrapados reciben energía suficiente para escapar de sus trampas.', 'Durante la irradiación, como luz reflejada directamente por la fuente.', 'Al disolver el cristal, cuando sus átomos emiten partículas alfa.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P1, §1.2',
+        options: ["La luz se produce durante la irradiación; el calentamiento solo facilita la lectura de cargas libres, no de trampas.","Al calentar, aumenta la liberación de portadores atrapados; su recombinación luminiscente genera luz y el pico refleja el balance entre liberación y población restante.","El máximo aparece cuando el cristal alcanza su mayor temperatura, porque la señal es radiación térmica del material.","La curva reproduce la actividad de la fuente que irradió el dosímetro, de modo que el pico lo fija su semivida."],
+        correct_index: 1, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P1, §1.2',
         justification: 'La irradiación deja electrones atrapados en defectos del cristal. El calentamiento permite que algunos escapen y, al volver a estados de menor energía, emitan luz.'
     },
     {
         id: 'N_Ex_N_02', text: '¿Por qué se observa el CR39 al microscopio después de irradiarlo y revelarlo químicamente?',
-        options: ['Porque el ataque selectivo ensancha las zonas dañadas por las alfas y hace visibles sus trazas.', 'Porque el NaOH vuelve radiactivo todo el plástico y produce destellos.', 'Porque el calor convierte las trazas en burbujas independientes de la radiación.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P1, §1.1.1',
+        options: ["El grabado elimina una capa uniforme; las trazas aparecen por variaciones de espesor inicial.","Las alfas dejan núcleos de helio visibles en el plástico, y el NaOH los disuelve.","La radiación vuelve fluorescente el CR39 y el grabado aumenta el brillo de las zonas irradiadas.","Las alfas producen daño molecular que el NaOH ataca más deprisa que el material intacto, ensanchando las trazas latentes hasta hacerlas observables."],
+        correct_index: 3, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P1, §1.1.1',
         justification: 'Las alfas alteran las cadenas moleculares del CR39. El NaOH ataca esas zonas más deprisa que el plástico intacto y amplía la traza hasta que puede observarse.'
     },
     {
         id: 'N_Ex_N_03', text: 'Tras separar químicamente el 137mBa del generador de 137Cs para medirlo, ¿qué tendencia se espera en sus cuentas gamma?',
-        options: ['Disminuyen aproximadamente de forma exponencial porque el bario metastable separado se desintegra.', 'Aumentan sin límite porque el bario se transforma íntegramente en cesio en cada segundo.', 'Permanecen constantes porque el 137mBa no es radiactivo.'],
+        options: ["Tras separar el bario, las cuentas netas por intervalos iguales decrecen aproximadamente de forma exponencial; se corrige el fondo para compararlas con la actividad.","Las cuentas brutas disminuyen linealmente porque cada intervalo elimina la misma cantidad de bario.","Las cuentas netas se mantienen constantes mientras quede ¹³⁷Cs en el generador, que repone inmediatamente todo el bario separado.","El número acumulado de cuentas sigue una exponencial decreciente incluso con intervalos distintos y sin sustraer el fondo."],
         correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P3, §3.1',
         justification: 'La muestra de 137mBa separada del generador decae sin que se reponga el material padre. Por eso las cuentas de sus fotones gamma disminuyen aproximadamente de forma exponencial, una vez corregidas por el fondo.'
     },
     {
         id: 'N_Ex_N_04', text: 'En una gráfica de ln(Δ) frente al tiempo para medir la desintegración del 137mBa, ¿qué representa la pendiente?',
-        options: ['El negativo de la constante de desintegración, m = −λ.', 'La actividad inicial, expresada en cuentas por segundo.', 'La semivida directamente, con unidades de segundos.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P3, §3.1.8',
+        options: ["La pendiente es +λ porque cae la actividad, y la semivida es ln 2/m.","La pendiente representa el fondo constante; λ se obtiene del valor de Δ inicial.","Si Δ es proporcional a actividad neta, ln(Δ)=constante−λt: la pendiente es −λ y T₁/₂=−ln2/m.","La pendiente es −T₁/₂; solo puede usarse cuando Δ son cuentas acumuladas."],
+        correct_index: 2, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P3, §3.1.8',
         justification: 'Al corregir las cuentas por el fondo, Δ es proporcional a la actividad y sigue una exponencial. Al tomar logaritmos, ln(Δ) = constante − λt, así que la pendiente es −λ y T₁/₂ = −ln(2)/m.'
     },
     {
         id: 'N_Ex_N_05', text: 'Al calcular la semivida del torón con la corriente de la cámara de ionización, ¿qué conviene hacer con la señal de fondo?',
-        options: ['Medirla y restarla a cada lectura antes de ajustar el decaimiento exponencial.', 'Sumarla a cada lectura para aumentar la pendiente de la recta.', 'Ignorarla aunque sea comparable con la corriente medida al final.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P3, §3.2.4',
+        options: ["Se suma la corriente de fondo para aislar el torón; el fondo aumenta la pendiente.","Se mide el fondo por separado y se resta antes del ajuste; si se omite, domina a tiempos largos, aplana la pendiente y suele sobreestimar T₁/₂.","Se resta el fondo solo de la primera lectura, porque luego su contribución relativa es constante.","Se incluye el fondo como punto adicional al final de ln(I) para que el ajuste lo compense."],
+        correct_index: 1, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P3, §3.2.4',
         justification: 'La corriente de fondo no decae con el torón. Si no se resta, domina las lecturas tardías y aplana la recta de ln(I) frente al tiempo, sesgando la semivida.'
     },
     {
         id: 'N_Ex_N_06', text: '¿Por qué se usa una lámina de aluminio de espesor creciente al determinar el alcance de las partículas beta?',
-        options: ['Para seguir cómo disminuye el contaje beta hasta aproximarse al fondo y localizar el alcance máximo.', 'Para aumentar la energía de las betas mediante aceleración electrostática.', 'Para convertir el espectro continuo beta en un único fotopico gamma.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P4, §4.9',
+        options: ["Se aumenta el espesor geométrico y se define el alcance cuando el contaje bruto llega exactamente a cero.","Una lámina separa betas por energía; cada aumento desplaza un fotopico.","Se registra el contaje neto frente al espesor másico; el alcance se estima cuando la contribución de la fuente deja de distinguirse del fondo.","Se calcula el alcance con una sola medida restando el fondo, sin variar el espesor."],
+        correct_index: 2, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P4, §4.9',
         justification: 'Las láminas absorben progresivamente las betas. Al representar la tasa de cuentas frente al espesor másico, el punto de transición entre el decaimiento y la señal de fondo permite estimar el alcance máximo.'
     },
     {
         id: 'N_Ex_N_07', text: '¿Por qué las partículas beta de una misma fuente no tienen todas la misma energía cinética?',
-        options: ['Porque la energía disponible se reparte de forma variable entre la beta y el neutrino o antineutrino.', 'Porque cada beta atraviesa un espesor distinto de aluminio dentro del núcleo.', 'Porque el detector Geiger asigna al azar una energía a cada desintegración.'],
+        options: ["La energía se reparte de forma variable entre la beta, el neutrino o antineutrino y el retroceso nuclear; así surge un continuo hasta una energía máxima.","Cada beta sale con la misma energía, pero la resolución del detector produce el continuo observado.","El continuo aparece porque el número de electrones por desintegración varía, aunque cada electrón tenga energía fija.","La energía solo se comparte entre la beta y el núcleo hijo; la dirección de retroceso crea el continuo."],
         correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P4, §4.4',
         justification: 'En la desintegración beta, la energía disponible se comparte entre la partícula beta y el neutrino o antineutrino. Por eso se obtiene un espectro continuo con una energía máxima característica.'
     },
     {
         id: 'N_Ex_N_08', text: 'En el ajuste del alcance beta, ¿qué indica que las cuentas detrás de una lámina de aluminio son ya compatibles con el fondo?',
-        options: ['Que la mayoría de las partículas beta ya no alcanza el detector a través de ese espesor.', 'Que el aluminio ha empezado a emitir la misma radiación beta que la fuente.', 'Que la actividad de la fuente se ha vuelto exactamente nula.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P4, §4.9',
+        options: ["Que la fuente ya no se desintegra: si coincide con el fondo, su actividad física es cero.","Que el aluminio ha eliminado también los gammas y no llega radiación al detector.","Que la señal de fuente iguala el fondo con independencia del espesor y del tiempo de medida.","Que, con esa medida y su incertidumbre, la señal adicional no se distingue del fondo; no demuestra actividad exactamente nula."],
+        correct_index: 3, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P4, §4.9',
         justification: 'Cuando la señal con la fuente y el absorbente se aproxima a la medida de fondo, el contaje adicional debido a la fuente es pequeño. Esa región ayuda a localizar el alcance máximo.'
     },
     {
         id: 'N_Ex_N_09', text: 'En un espectro gamma de NaI(Tl), ¿qué diferencia básica hay entre el fotopico y el continuo Compton?',
-        options: ['En el fotopico se deposita prácticamente toda la energía del gamma; en el continuo Compton solo una parte.', 'El fotopico cuenta alfas y el continuo Compton cuenta neutrones.', 'El fotopico mide el tiempo de vuelo y el continuo, la semivida.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P5, §5.1',
+        options: ["El fotopico reúne sucesos donde el gamma transfiere solo parte de su energía; el continuo exige absorción total.","El fotopico corresponde a depósito prácticamente total; el continuo Compton aparece si el fotón dispersado escapa tras ceder parte de su energía.","El fotopico procede de electrones Compton y el continuo de fotones absorbidos fotoeléctricamente.","El borde Compton marca el máximo número de fotones que llegan, mientras el fotopico mide el fondo."],
+        correct_index: 1, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P5, §5.1',
         justification: 'El fotopico corresponde a sucesos en los que el detector absorbe toda la energía del fotón. En sucesos Compton, el fotón dispersado puede escapar y deja solo parte de su energía en el cristal.'
     },
     {
         id: 'N_Ex_N_10', text: '¿Qué condición puede producir un pico suma al medir el 60Co con un detector de centelleo?',
-        options: ['Que los dos fotones gamma emitidos en cascada depositen su energía en el detector durante el mismo suceso registrado.', 'Que dos partículas beta atraviesen el detector en días distintos.', 'Que el detector sume el fondo medido antes y después de retirar la fuente.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P5, §5.4',
+        options: ["Se suman amplitudes de dos fotones independientes aunque lleguen muy separados en el tiempo.","Un fotón de la cascada se dispersa y el otro genera un pico a su energía; la suma es superposición de ambos en el espectro.","Si los dos gammas casi simultáneos depositan energía dentro del tiempo de integración, se registra un impulso cercano a la suma de energías.","El pico suma es una transición nuclear única emitida directamente con energía igual a ambas transiciones sumadas."],
+        correct_index: 2, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P5, §5.4',
         justification: 'Los dos fotones del 60Co se emiten casi simultáneamente. Si ambos se absorben dentro del mismo intervalo de integración, sus energías se registran como un único impulso suma.'
     },
     {
         id: 'N_Ex_N_11', text: 'Dos detectores miden el mismo fotopico, pero uno tiene una anchura a media altura menor. ¿Qué se concluye?',
-        options: ['El detector con el pico más estrecho tiene mejor resolución energética y distingue mejor energías próximas.', 'El detector con el pico más estrecho tiene necesariamente menor eficiencia para todas las energías.', 'Ambos tienen la misma resolución porque el centro del pico coincide.'],
+        options: ["Un FWHM/Ep menor indica un pico relativamente más estrecho y mejor resolución, pero no implica mayor eficiencia.","Un FWHM/Ep mayor indica mejor resolución porque cubre más energías alrededor del fotopico.","La anchura mide eficiencia: si es menor, necesariamente se detectan más fotones.","Con igual energía central, dos picos tienen la misma resolución aunque sus anchuras difieran."],
         correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P5, §5.2 y P6, §6.3',
         justification: 'La resolución energética es la anchura a media altura dividida por la energía del fotopico. A menor valor, más estrecho es el pico y mejor se separan energías cercanas.'
     },
     {
         id: 'N_Ex_N_12', text: '¿Para qué se miden fuentes patrón de energías gamma conocidas antes de analizar una muestra con el CZT?',
-        options: ['Para relacionar los canales del analizador con la energía y poder asignar energía a los picos observados.', 'Para hacer que el cristal produzca más pares electrón-hueco en todas las medidas posteriores.', 'Para eliminar la radiación de fondo sin medirla.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P6, §6.2',
+        options: ["Para medir eficiencia absoluta; la posición de picos conocidos da directamente el número emitido.","Para determinar el fondo; la intensidad relativa de las fuentes fija el cero de energía.","Para medir el umbral de creación de pares y la banda prohibida del CZT.","Para calibrar canal frente a energía con fotopicos conocidos, normalmente E=aC+b; luego se asigna energía a picos de muestra."],
+        correct_index: 3, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P6, §6.2',
         justification: 'La calibración determina la correspondencia entre canal y energía a partir de fotopicos conocidos. Con esa relación se pueden identificar las energías de los picos de una muestra.'
     },
     {
         id: 'N_Ex_N_13', text: 'En una medida del 60Co con CZT, ¿por qué puede ser más alto el fotopico de 1,17 MeV que el de 1,33 MeV aunque se emitan en igual cantidad?',
-        options: ['Porque la probabilidad de interacción fotoeléctrica en el detector disminuye al aumentar la energía del fotón.', 'Porque el fotón de 1,17 MeV se emite el doble de veces en cada desintegración.', 'Porque el canal de mayor energía siempre se representa con menos cuentas por definición.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P6, §6.2',
+        options: ["El fotón de 1,17 MeV siempre deposita más energía que el de 1,33 MeV, por lo que su pico es necesariamente más alto.","La altura puede depender de la probabilidad de absorción total y del ancho del pico; el guion relaciona la diferencia con mayor probabilidad fotoeléctrica a menor energía, pero la comparación rigurosa usa áreas y eficiencia.","El pico de 1,17 MeV es la suma de ambas líneas y el de 1,33 MeV una línea de escape.","La altura depende solo de la energía gamma, no de eficiencia, geometría, fondo ni resolución."],
+        correct_index: 1, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P6, §6.2',
         justification: 'La intensidad de un fotopico depende tanto del número de fotones emitidos como de la probabilidad de que el detector absorba toda su energía. El guion explica la diferencia entre estos picos por la menor probabilidad de interacción fotoeléctrica a mayor energía.'
     },
     {
         id: 'N_Ex_N_14', text: 'Al interponer plomo entre una fuente de 137Cs y el CZT, ¿de dónde procede el pico de rayos X característicos del plomo?',
-        options: ['De una vacante en una capa interna del átomo de plomo, rellenada por un electrón de una capa superior tras absorber un gamma.', 'De la desintegración beta del plomo creada por el detector.', 'De la conversión de los rayos X del CZT en fotones de 662 keV.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P6, §6.4',
+        options: ["El plomo desplaza el gamma de ¹³⁷Cs a 74 keV por efecto Compton, independientemente de sus niveles electrónicos.","El cesio emite rayos X de plomo directamente, incluso sin plomo entre fuente y detector.","Un gamma puede expulsar un electrón de capa interna del plomo; al llenarse la vacante se emite un rayo X característico del elemento.","El CZT convierte cualquier gamma de 662 keV en una línea fija de 74 keV propia del detector."],
+        correct_index: 2, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P6, §6.4',
         justification: 'El fotón gamma puede expulsar un electrón de una capa interna mediante efecto fotoeléctrico. Al rellenarse la vacante se emiten rayos X característicos del elemento; para el plomo el guion indica un pico de unos 74 keV.'
     },
     {
         id: 'N_Ex_N_15', text: '¿Por qué el CZT puede funcionar a temperatura ambiente mientras que el germanio suele enfriarse durante la espectrometría?',
-        options: ['El germanio tiene una banda prohibida menor y necesita reducir la generación térmica de portadores; el CZT puede trabajar a temperatura ambiente.', 'El CZT no produce portadores de carga y por eso no necesita refrigeración.', 'El germanio solo detecta partículas alfa y el CZT únicamente neutrones.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P6, §6.1',
+        options: ["El CZT tiene menor banda prohibida que el Ge, por eso produce menos portadores térmicos y requiere menos refrigeración.","El Ge no genera pares electrón-hueco a temperatura ambiente y el CZT detecta por centelleo.","Se enfría Ge para aumentar movilidad; en CZT la amplitud no depende de la energía depositada.","La banda prohibida del CZT es mayor, así que a temperatura ambiente produce menos portadores térmicos; el Ge, con banda menor, suele enfriarse."],
+        correct_index: 3, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P6, §6.1',
         justification: 'El germanio tiene una banda prohibida menor, por lo que la generación térmica de portadores puede producir ruido; se enfría, habitualmente con nitrógeno líquido. El CZT trabaja a temperatura ambiente.'
     },
     {
         id: 'N_Ex_N_16', text: 'Las fuentes gamma usadas para calibrar el CZT pueden emitir betas en sus desintegraciones. ¿Por qué se detectan principalmente fotones gamma fuera de la fuente?',
-        options: ['Porque las fuentes están encapsuladas o blindadas para absorber las partículas beta.', 'Porque los fotones gamma transforman todas las betas en electrones de conducción.', 'Porque el CZT solo acepta señales de gamma por una selección automática de partículas.'],
-        correct_index: 0, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P6, §6.2',
+        options: ["Las betas se convierten en gammas en el encapsulado, por lo que ambas llegan con igual probabilidad.","Las betas son más penetrantes, pero el CZT solo registra fotones por estar polarizado.","La encapsulación absorbe buena parte de las betas, menos penetrantes, mientras una fracción mayor de gammas puede atravesarla y alcanzar el detector.","El CZT discrimina automáticamente betas por su masa, aunque lleguen sin atenuación."],
+        correct_index: 2, matched_page: '', source_file: 'Nuevas · Guiones de prácticas', source_reference: 'P6, §6.2',
         justification: 'Las fuentes patrón de rayos gamma están blindadas frente a las partículas beta, que quedan absorbidas antes de salir de la fuente; los fotones gamma sí llegan al detector.'
+    },
+    {
+        "id": "N_Ex_N_17",
+        "text": "¿Qué comparación entre un Geiger, un NaI(Tl) y un CZT es correcta para radiación gamma?",
+        "options": [
+            "El Geiger cuenta descargas sin amplitud espectrométrica fiable; NaI(Tl) convierte energía en luz y CZT en carga, permitiendo espectros.",
+            "El Geiger da el espectro por amplitud, mientras NaI(Tl) y CZT solo cuentan sucesos.",
+            "Los tres generan impulsos proporcionales a energía, pero solo el Geiger requiere calibración.",
+            "NaI(Tl) y CZT miden actividad únicamente; el Geiger distingue fotopico y continuo."
+        ],
+        "correct_index": 0,
+        "matched_page": "Propuesta propia",
+        "source_file": "Propuesta propia · no oficial",
+        "source_reference": "Síntesis de prácticas P4–P6; no pregunta literal",
+        "justification": "La descarga Geiger no conserva proporcionalidad con la ionización inicial; el NaI(Tl) produce luz y el CZT carga que se relacionan con la energía depositada."
+    },
+    {
+        "id": "N_Ex_N_18",
+        "text": "Tienes cuentas acumuladas cada 30 s para ¹³⁷ᵐBa separado. ¿Qué análisis estima su semivida?",
+        "options": [
+            "Ajustar ln de las cuentas acumuladas brutas; la pendiente positiva da λ, sin medir fondo.",
+            "Obtener las cuentas por intervalo, restar fondo y ajustar ln de la tasa neta frente al tiempo; m=−λ y T₁/₂=−ln2/m.",
+            "Ajustar cuentas netas sin logaritmo; la pendiente lineal es la semivida.",
+            "Comparar un intervalo inicial y uno final; su diferencia dividida por 30 s da λ."
+        ],
+        "correct_index": 1,
+        "matched_page": "Propuesta propia",
+        "source_file": "Propuesta propia · no oficial",
+        "source_reference": "Síntesis de exámenes y N_Ex_N_03–05; no literal",
+        "justification": "Se restan el fondo y se ajusta el logaritmo de las cuentas netas por intervalos iguales. La pendiente es −λ; conviene excluir puntos tardíos dominados por el fondo."
+    },
+    {
+        "id": "N_Ex_N_19",
+        "text": "Un espectro desconocido tiene fotopico y continuo inferior. ¿Qué interpretación es correcta?",
+        "options": [
+            "El máximo de cuentas da la energía sin calibrar; el continuo corresponde a gammas emitidos con menor energía.",
+            "Calibrar canales con fuentes patrón; el fotopico indica depósito total y el continuo Compton, depósito parcial si escapa el fotón dispersado.",
+            "Calibrar solo con el borde Compton; el fotopico mide la energía cinética del electrón.",
+            "La altura del pico da energía y actividad directamente, sin corregir fondo o eficiencia."
+        ],
+        "correct_index": 1,
+        "matched_page": "Propuesta propia",
+        "source_file": "Propuesta propia · no oficial",
+        "source_reference": "Síntesis de prácticas P5–P6; no literal",
+        "justification": "La calibración convierte canales en energía. El fotopico corresponde a absorción total; Compton con escape deja un depósito menor. La actividad necesita correcciones adicionales."
+    },
+    {
+        "id": "N_Ex_N_20",
+        "text": "En un espectro de ⁶⁰Co aparecen picos de 1,17 y 1,33 MeV y otro próximo a 2,50 MeV. ¿Qué explica el tercero?",
+        "options": [
+            "Una transición única del núcleo emite directamente 2,50 MeV en cada desintegración.",
+            "Los dos gammas casi simultáneos se absorben en el mismo detector dentro del tiempo de integración y forman un impulso suma.",
+            "Es el borde Compton de 1,33 MeV desplazado por el pico de 1,17 MeV.",
+            "Es necesariamente pile-up de fotones independientes, sin relación con la cascada."
+        ],
+        "correct_index": 1,
+        "matched_page": "Propuesta propia",
+        "source_file": "Propuesta propia · no oficial",
+        "source_reference": "Síntesis de examen 2021–22 y N_Ex_N_10; no literal",
+        "justification": "Los gammas del ⁶⁰Co se emiten en cascada; si ambos se absorben dentro del intervalo de integración se registra su energía suma."
+    },
+    {
+        "id": "N_Ex_N_21",
+        "text": "¿Por qué pueden diferir los espectros gamma de pechblenda y uranio recién purificado?",
+        "options": [
+            "La purificación altera las energías de los niveles nucleares del uranio.",
+            "La pechblenda puede conservar descendientes en equilibrio secular; la purificación los separa y cambia qué emisores contribuyen temporalmente.",
+            "El uranio purificado deja de ser radiactivo hasta mezclarse de nuevo con pechblenda.",
+            "El equilibrio secular iguala todas las energías gamma, por lo que los espectros deberían coincidir."
+        ],
+        "correct_index": 1,
+        "matched_page": "Propuesta propia",
+        "source_file": "Propuesta propia · no oficial",
+        "source_reference": "Síntesis de exámenes 2023, 2022–23 y 2021–22; no literal",
+        "justification": "La purificación separa descendientes de la cadena. Estos pueden estar en equilibrio secular en la pechblenda y tardan en regenerarse en el uranio purificado."
+    },
+    {
+        "id": "N_Ex_N_22",
+        "text": "Un gamma de 3,00 MeV crea un par electrón-positrón. ¿Qué energías de escape pueden aparecer?",
+        "options": [
+            "2,489 MeV si escapa un fotón de aniquilación de 0,511 MeV y 1,978 MeV si escapan ambos; sin escape se registran 3,00 MeV.",
+            "2,50 MeV si escapa uno y 2,00 MeV si escapan ambos, usando 0,50 MeV por fotón.",
+            "1,978 MeV si escapa uno y 2,489 MeV si escapan ambos; cada escape aumenta el depósito.",
+            "Solo aparece 3,00 MeV, pues los fotones de aniquilación siempre se absorben."
+        ],
+        "correct_index": 0,
+        "matched_page": "Propuesta propia",
+        "source_file": "Propuesta propia · no oficial",
+        "source_reference": "Síntesis de exámenes 2018 y 2017; no literal",
+        "justification": "La aniquilación produce dos fotones de 0,511 MeV. Escapar uno resta 0,511 MeV; escapar ambos resta 1,022 MeV."
+    },
+    {
+        "id": "N_Ex_N_23",
+        "text": "¿Por qué la amplitud de un impulso Geiger no mide directamente la energía de cada partícula?",
+        "options": [
+            "La avalancha Geiger se desarrolla hasta que la carga espacial apantalla el campo y se pierde proporcionalidad con la ionización inicial.",
+            "El Geiger no detecta ionización, sino la carga de la fuente.",
+            "Solo mide energía para gammas; un espectrómetro mide la tasa de emisión.",
+            "El voltaje fija una energía distinta para cada impulso y el espectrómetro usa el tiempo entre pulsos."
+        ],
+        "correct_index": 0,
+        "matched_page": "Propuesta propia",
+        "source_file": "Propuesta propia · no oficial",
+        "source_reference": "Síntesis de exámenes 2017–18 y 2021–22; no literal",
+        "justification": "En régimen Geiger la amplitud queda gobernada por el desarrollo y extinción de la avalancha, no por la ionización primaria."
+    },
+    {
+        "id": "N_Ex_N_24",
+        "text": "¿Qué medidas distinguen mejor la resolución energética de la eficiencia de dos detectores?",
+        "options": [
+            "La altura máxima basta: menos cuentas implican peor resolución.",
+            "FWHM/Ep caracteriza resolución; la fracción de sucesos detectados caracteriza eficiencia, controlando geometría y energía.",
+            "La eficiencia se obtiene del ancho y la resolución del área neta.",
+            "Un mismo canal central garantiza igual resolución y eficiencia."
+        ],
+        "correct_index": 1,
+        "matched_page": "Propuesta propia",
+        "source_file": "Propuesta propia · no oficial",
+        "source_reference": "Síntesis de N_Ex_N_11–13 y Guion P6; no literal",
+        "justification": "FWHM/Ep cuantifica la resolución; eficiencia y resolución son magnitudes distintas y no se deducen una de otra."
+    },
+    {
+        "id": "N_Ex_N_25",
+        "text": "Un fotopico parece más alto en una fuente. ¿Qué comprobar antes de afirmar que emite más fotones?",
+        "options": [
+            "Comparar solo alturas: la calibración elimina geometría y eficiencia.",
+            "Comparar áreas netas con igual tiempo y geometría, restar el fondo y considerar eficiencia dependiente de energía, autoabsorción y encapsulado.",
+            "Comparar canales centrales: mayor energía implica más fotones.",
+            "Usar la altura del continuo Compton como actividad sin normalizar el tiempo."
+        ],
+        "correct_index": 1,
+        "matched_page": "Propuesta propia",
+        "source_file": "Propuesta propia · no oficial",
+        "source_reference": "Síntesis de exámenes 2023/2022–23 y Guiones P5–P6; no literal",
+        "justification": "La altura también depende del ancho del pico. La comparación requiere áreas netas y condiciones controladas, además de correcciones de fondo y eficiencia."
+    },
+    {
+        "id": "N_Ex_N_26",
+        "text": "¿En qué se diferencian las señales de CR39 y de un dosímetro termoluminiscente?",
+        "options": [
+            "CR39 almacena cargas que se leen al calentarlo; el termoluminiscente revela daños con NaOH.",
+            "Ambos generan impulsos proporcionales instantáneos, pero CR39 requiere fotomultiplicador.",
+            "CR39 conserva daño localizado que un grabado revela como trazas; el termoluminiscente almacena portadores y emite luz al calentarlo.",
+            "CR39 detecta principalmente gamma y el termoluminiscente solo neutrones."
+        ],
+        "correct_index": 2,
+        "matched_page": "Propuesta propia",
+        "source_file": "Propuesta propia · no oficial",
+        "source_reference": "Síntesis propia de P1; no literal",
+        "justification": "El CR39 revela químicamente el daño de las alfas; el termoluminiscente almacena carga en trampas y se lee por la luz al calentarlo."
+    },
+    {
+        "id": "N_Ex_N_27",
+        "text": "¿Qué diferencia a los rayos X de los rayos gamma si sus energías pueden solaparse?",
+        "options": [
+            "Los gamma siempre superan 100 keV; por debajo se llaman rayos X.",
+            "Los X suelen originarse en procesos electrónicos y los gamma en transiciones nucleares; el origen, no una frontera fija de energía, los distingue.",
+            "Los rayos X son fotones y los gamma partículas masivas.",
+            "Los gamma solo siguen a desintegración alfa y los X a beta."
+        ],
+        "correct_index": 1,
+        "matched_page": "3–4",
+        "source_file": "Guiones de prácticas de Física Nuclear · introducción teórica",
+        "source_reference": "§ I.1, PDF pp. 3–4",
+        "justification": "La diferencia es el origen: procesos electrónicos frente a transiciones nucleares. Los rangos de energía se solapan."
+    },
+    {
+        "id": "N_Ex_N_28",
+        "text": "¿Qué significa dN/dt=−λN en una muestra radiactiva?",
+        "options": [
+            "Cada núcleo tiene un instante fijo de desintegración y el total disminuye linealmente.",
+            "La tasa es proporcional a N; la ley es estadística y no predice cuándo se desintegra un núcleo concreto.",
+            "λ es la fracción que desaparece en cualquier intervalo sin importar su duración.",
+            "La actividad es constante y la probabilidad de cada núcleo crece con su edad."
+        ],
+        "correct_index": 1,
+        "matched_page": "4–5",
+        "source_file": "Guiones de prácticas de Física Nuclear · introducción teórica",
+        "source_reference": "§ I.2.1, PDF pp. 4–5",
+        "justification": "La tasa macroscópica es λN y la ley integrada es exponencial. λ es la probabilidad por unidad de tiempo para cada núcleo."
+    },
+    {
+        "id": "N_Ex_N_29",
+        "text": "¿Qué orden cualitativo de penetración suele observarse para α, β y γ en materia?",
+        "options": [
+            "Alfas ionizan intensamente y suelen tener poco alcance; beta es intermedia y los gammas pueden atravesar más material sin interactuar.",
+            "Los gammas siempre depositan más energía por longitud que las alfas.",
+            "Las betas penetran menos que las alfas porque su carga es menor.",
+            "Las tres recorren distancias parecidas si tienen la misma energía."
+        ],
+        "correct_index": 0,
+        "matched_page": "3–8",
+        "source_file": "Guiones de prácticas de Física Nuclear · introducción teórica",
+        "source_reference": "§§ I.1–I.3, PDF pp. 3–8",
+        "justification": "En términos generales las alfas tienen gran poder ionizante y poco alcance, las betas un alcance intermedio y los fotones son más penetrantes; depende de material y energía."
+    },
+    {
+        "id": "N_Ex_N_30",
+        "text": "¿Por qué la desintegración beta produce un continuo de energías?",
+        "options": [
+            "El detector no resuelve una colección de energías beta monoenergéticas.",
+            "La energía se reparte de manera variable entre beta, neutrino o antineutrino y retroceso nuclear.",
+            "La beta pierde una cantidad aleatoria en aire aunque todas nazcan con igual energía.",
+            "La constante λ varía entre núcleos de una misma muestra."
+        ],
+        "correct_index": 1,
+        "matched_page": "6–7",
+        "source_file": "Guiones de prácticas de Física Nuclear · introducción teórica",
+        "source_reference": "§ I.2.4, PDF pp. 6–7",
+        "justification": "El reparto variable de energía entre beta, neutrino/antineutrino y núcleo de retroceso produce un continuo con energía máxima."
+    },
+    {
+        "id": "N_Ex_N_31",
+        "text": "¿Qué suceso contribuye al fotopico de un detector gamma?",
+        "options": [
+            "Compton con escape del fotón tras transferir parte de su energía.",
+            "Absorción fotoeléctrica cuyos productos secundarios depositan prácticamente toda la energía del gamma.",
+            "Dispersión elástica que conserva dirección y energía.",
+            "Absorción solo de la energía de ligadura, con escape del resto como gamma."
+        ],
+        "correct_index": 1,
+        "matched_page": "10–11",
+        "source_file": "Guiones de prácticas de Física Nuclear · introducción teórica",
+        "source_reference": "§§ I.3.2 e I.5, PDF pp. 10–11 y 15–16",
+        "justification": "El fotopico aparece cuando se registra prácticamente toda la energía del fotón; un gamma Compton que escapa produce depósito parcial."
+    },
+    {
+        "id": "N_Ex_N_32",
+        "text": "¿Qué umbral energético requiere la creación de un par electrón-positrón cerca de un núcleo?",
+        "options": [
+            "Más de 511 keV, energía de reposo de una sola partícula.",
+            "Al menos 1,022 MeV para ambas energías de reposo; el exceso puede ser cinético.",
+            "Menos de 1,022 MeV si el electrón atómico absorbe el momento.",
+            "Exactamente 1,022 MeV; por encima domina siempre Compton."
+        ],
+        "correct_index": 1,
+        "matched_page": "10",
+        "source_file": "Guiones de prácticas de Física Nuclear · introducción teórica",
+        "source_reference": "§ I.3.2, PDF p. 10",
+        "justification": "Se necesitan 2mₑc²=1,022 MeV. El campo del núcleo permite conservar el momento y el exceso puede convertirse en energía cinética."
+    },
+    {
+        "id": "N_Ex_N_33",
+        "text": "En I(x)=I₀e^(−μx), ¿qué representa μ?",
+        "options": [
+            "La fracción absorbida por unidad de masa, con unidades de área/masa.",
+            "La probabilidad de interacción por longitud; μ tiene unidades de longitud inversa y μ/ρ es másico.",
+            "La energía media depositada por fotón, en MeV.",
+            "El número de fotones dispersados por área, independiente del material."
+        ],
+        "correct_index": 1,
+        "matched_page": "11",
+        "source_file": "Guiones de prácticas de Física Nuclear · introducción teórica",
+        "source_reference": "§ I.3.2, PDF p. 11",
+        "justification": "El coeficiente lineal tiene unidades inversas de longitud; al dividirlo por densidad se obtiene el coeficiente másico."
+    },
+    {
+        "id": "N_Ex_N_34",
+        "text": "¿Cómo se detecta un neutrón que no ioniza directamente?",
+        "options": [
+            "Midiendo su trayectoria eléctrica entre electrodos.",
+            "Registrando partículas cargadas o fotones producidos en una reacción nuclear inducida por el neutrón.",
+            "Aumentando la tensión hasta que el neutrón ionice el gas por interacción coulombiana.",
+            "Midiendo calentamiento aunque no interaccione con núcleos."
+        ],
+        "correct_index": 1,
+        "matched_page": "12",
+        "source_file": "Guiones de prácticas de Física Nuclear · introducción teórica",
+        "source_reference": "§ I.3.3, PDF p. 12",
+        "justification": "El neutrón se detecta indirectamente mediante productos secundarios que sí ionizan, como protones, alfas o fotones."
+    },
+    {
+        "id": "N_Ex_N_35",
+        "text": "¿Cuál es la secuencia típica de señal en un detector NaI(Tl)?",
+        "options": [
+            "El cristal emite luz; el fotocátodo produce fotoelectrones; los dínodos los multiplican y se forma un impulso.",
+            "El cristal recoge pares electrón-hueco; el fotocátodo calibra la energía y los dínodos recogen iones.",
+            "El gamma crea una alfa y el fotomultiplicador mide su recorrido.",
+            "La luz pasa a rayos X y luego a electrones recogidos en cámara de gas."
+        ],
+        "correct_index": 0,
+        "matched_page": "13–15",
+        "source_file": "Guiones de prácticas de Física Nuclear · introducción teórica",
+        "source_reference": "§ I.4.1, PDF pp. 13–15",
+        "justification": "El centelleador convierte energía en luz; el fotocátodo la convierte en fotoelectrones y los dínodos los multiplican."
+    },
+    {
+        "id": "N_Ex_N_36",
+        "text": "Con estadística de Poisson, ¿cómo varía la incertidumbre relativa de una medida con N cuentas?",
+        "options": [
+            "Como 1/√N; reducirla a la mitad requiere cerca de cuatro veces más cuentas.",
+            "Como 1/N; duplicar cuentas reduce la incertidumbre a la mitad.",
+            "Es constante, independiente del número de eventos.",
+            "Como √N; una medida larga empeora la precisión relativa."
+        ],
+        "correct_index": 0,
+        "matched_page": "16",
+        "source_file": "Guiones de prácticas de Física Nuclear · introducción teórica",
+        "source_reference": "§ I.4.2, PDF p. 16",
+        "justification": "La desviación típica es √N, luego la incertidumbre relativa es 1/√N. Para reducirla a la mitad se requieren aproximadamente cuatro veces las cuentas."
+    },
+    {
+        "id": "N_Ex_N_37",
+        "text": "¿Qué actividad corresponde a 1 Bq y cómo se compara con el curio?",
+        "options": [
+            "Una desintegración por segundo; 1 Ci equivale a 3,7×10¹⁰ Bq.",
+            "Una desintegración por minuto; 1 Ci equivale a 3,7×10¹⁰ Bq.",
+            "Un núcleo; el curio mide energía total emitida.",
+            "Una semivida; el curio mide probabilidad por hora."
+        ],
+        "correct_index": 0,
+        "matched_page": "2",
+        "source_file": "Física Cuántica - Tema 5 - Núcleos y átomos",
+        "source_reference": "Actividad radiactiva, PDF p. 2",
+        "justification": "El becquerel corresponde a una desintegración por segundo; el curio equivale a 3,7×10¹⁰ desintegraciones por segundo."
+    },
+    {
+        "id": "N_Ex_N_38",
+        "text": "¿Qué tendencia da λ=Ae^(−B/√E) para emisores alfa comparables?",
+        "options": [
+            "Al aumentar E, λ disminuye porque el exponente se hace más negativo.",
+            "Al aumentar E, el exponente se hace menos negativo y λ puede crecer mucho; disminuye la semivida.",
+            "λ no depende de E, solo de la masa del núcleo hijo.",
+            "λ crece linealmente con E y la semivida se reduce exactamente a la mitad al duplicarla."
+        ],
+        "correct_index": 1,
+        "matched_page": "4–6",
+        "source_file": "Física Cuántica - Tema 5 - Núcleos y átomos",
+        "source_reference": "Geiger–Nuttall, PDF pp. 4 y 6",
+        "justification": "A mayor E, −B/√E es menos negativo. λ aumenta rápidamente y la semivida puede cambiar muchos órdenes de magnitud."
+    },
+    {
+        "id": "N_Ex_N_39",
+        "text": "¿Qué revelaron las grandes desviaciones de partículas alfa en el experimento de Rutherford?",
+        "options": [
+            "La carga positiva está distribuida uniformemente por el átomo.",
+            "Las alfas chocan muchas veces con electrones ligeros y giran gradualmente.",
+            "Algunos retrocesos requieren un centro pequeño, masivo y cargado positivamente: el núcleo.",
+            "El átomo no tiene estructura y las desviaciones son ruido."
+        ],
+        "correct_index": 2,
+        "matched_page": "6–8",
+        "source_file": "Física Cuántica - Tema 5 - Núcleos y átomos",
+        "source_reference": "Dispersión de Rutherford, PDF pp. 6–8",
+        "justification": "Las desviaciones grandes e infrecuentes se explican por la repulsión coulombiana de un centro nuclear compacto que concentra la carga positiva y la masa."
+    },
+    {
+        "id": "N_Ex_N_40",
+        "text": "¿Qué significa el punto de retroceso r₁=2,88Z/E fm para una alfa incidente?",
+        "options": [
+            "La distancia donde la energía cinética se convierte en potencial coulombiano y la partícula se detiene antes de retroceder.",
+            "El radio nuclear, independiente de E.",
+            "La distancia mínima permitida por túnel dentro del núcleo.",
+            "El alcance medio de la alfa en aire."
+        ],
+        "correct_index": 0,
+        "matched_page": "7–8",
+        "source_file": "Física Cuántica - Tema 5 - Núcleos y átomos",
+        "source_reference": "Punto de retroceso, PDF pp. 7–8",
+        "justification": "Clásicamente la alfa alcanza su máxima aproximación cuando su energía cinética inicial se convierte en energía potencial coulombiana."
+    },
+    {
+        "id": "N_Ex_N_41",
+        "text": "¿Cómo permite el efecto túnel emitir una alfa con energía inferior a la barrera coulombiana?",
+        "options": [
+            "La alfa adquiere energía térmica y supera clásicamente la barrera.",
+            "La función de onda tiene probabilidad no nula de transmitirse por la región clásicamente prohibida; λ combina transmisión y frecuencia de intentos.",
+            "La barrera desaparece al neutralizarse el núcleo hijo.",
+            "Un gamma convierte la energía cinética en potencial y abre un canal clásico."
+        ],
+        "correct_index": 1,
+        "matched_page": "8–9",
+        "source_file": "Física Cuántica - Tema 5 - Núcleos y átomos",
+        "source_reference": "Gamow y efecto túnel, PDF pp. 8–9",
+        "justification": "La emisión se explica por transmisión cuántica a través de la barrera; la probabilidad de transmisión multiplicada por la frecuencia de intentos determina λ."
+    },
+    {
+        "id": "N_Ex_N_42",
+        "text": "¿Qué vínculo conecta la cuantización de Bohr con las ondas de de Broglie?",
+        "options": [
+            "mvr=nℏ implica que un número entero de longitudes de onda cabe en la circunferencia orbital.",
+            "La cuantización exige λ menor que r, sin relación con momento angular.",
+            "Los radios permitidos corresponden a electrones en reposo.",
+            "De Broglie hace estables todas las órbitas clásicas con momento angular continuo."
+        ],
+        "correct_index": 0,
+        "matched_page": "10",
+        "source_file": "Física Cuántica - Tema 5 - Núcleos y átomos",
+        "source_reference": "Bohr y de Broglie, PDF p. 10",
+        "justification": "Con λ=h/mv y mvr=nℏ se obtiene 2πr=nλ, condición de onda estacionaria alrededor de la órbita."
+    },
+    {
+        "id": "N_Ex_N_43",
+        "text": "¿Qué representa un orbital s?",
+        "options": [
+            "Una órbita circular de Bohr con radio definido.",
+            "Una trayectoria elíptica que pasa por el núcleo.",
+            "Un estado con l=0 y probabilidad esféricamente simétrica, sin trayectoria clásica definida.",
+            "Un electrón inmóvil a distancia fija."
+        ],
+        "correct_index": 2,
+        "matched_page": "10",
+        "source_file": "Física Cuántica - Tema 5 - Núcleos y átomos",
+        "source_reference": "Orbitales s, PDF p. 10",
+        "justification": "El orbital s tiene l=0 y simetría esférica de probabilidad; no describe una trayectoria clásica ni un electrón en reposo."
+    },
+    {
+        "id": "N_Ex_N_44",
+        "text": "¿Qué componentes aparecen en el espectro de rayos X de un tubo?",
+        "options": [
+            "Continuo de frenado y líneas características de transiciones electrónicas propias del material del ánodo.",
+            "Solo líneas discretas fijadas por voltaje, independientes del ánodo.",
+            "Continuo de transiciones nucleares y una línea en la energía inicial del electrón.",
+            "Continuo Compton y líneas de aniquilación originadas en el cátodo."
+        ],
+        "correct_index": 0,
+        "matched_page": "10–11",
+        "source_file": "Física Cuántica - Tema 5 - Núcleos y átomos",
+        "source_reference": "Rayos X, PDF pp. 10–11",
+        "justification": "El frenado produce continuo; el llenado de vacantes electrónicas internas produce líneas características del elemento del ánodo."
+    },
+    {
+        "id": "N_Ex_N_45",
+        "text": "Para un gamma de ¹³⁷Cs de 0,662 MeV, ¿qué representa el borde Compton cercano a 0,478 MeV?",
+        "options": [
+            "La energía mínima del fotón dispersado que escapa, con transferencia mínima al electrón.",
+            "La máxima energía del electrón en retrodispersión de 180°, si escapa el fotón de unos 0,184 MeV.",
+            "El umbral de creación de pares reducido por la masa del núcleo.",
+            "La energía fotoeléctrica total menos la energía de ligadura."
+        ],
+        "correct_index": 1,
+        "matched_page": "12–13",
+        "source_file": "Física Cuántica - Tema 5 - Núcleos y átomos",
+        "source_reference": "Espectro gamma y borde Compton, PDF pp. 12–13",
+        "justification": "En retrodispersión de 180° el gamma saliente tiene unos 0,184 MeV; la diferencia con 0,662 MeV (0,478 MeV) es la máxima energía depositada."
+    },
+    {
+        "id": "N_Ex_N_46",
+        "text": "¿Cómo produce un CZT un impulso cuya amplitud informa de la energía gamma depositada?",
+        "options": [
+            "El gamma crea pares electrón-hueco; el campo recoge carga y el impulso depende del número de pares.",
+            "El cristal produce luz multiplicada en dínodos como un NaI(Tl).",
+            "El detector cuenta fotones con amplitud fija; la energía sale del número de cuentas.",
+            "El gamma ioniza un gas interno y la amplitud depende solo del tiempo de deriva."
+        ],
+        "correct_index": 0,
+        "matched_page": "15",
+        "source_file": "Física Cuántica - Tema 5 - Núcleos y átomos",
+        "source_reference": "Detector semiconductor, PDF p. 15",
+        "justification": "La radiación crea pares electrón-hueco y el campo eléctrico recoge la carga; el tamaño de la señal se relaciona con la energía depositada."
     }
 ];
