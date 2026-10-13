@@ -1480,7 +1480,7 @@ const TEF_III_QUIZ_DATABASE = [
 
 
 const COURSE_ID = new URLSearchParams(window.location.search).get('course') === 'iv' ? 'iv' : 'iii';
-const TEF_IV_BANK_VERSION = 2;
+const TEF_IV_BANK_VERSION = 3;
 const QUIZ_DATABASE = COURSE_ID === 'iv'
     ? [...window.TEF_IV_QUIZ_DATABASE, ...window.TEF_IV_EXTRA_QUIZ_DATABASE]
     : TEF_III_QUIZ_DATABASE;
@@ -1498,19 +1498,45 @@ function getRoomStorageKey(type) {
     return `${prefix}_room_${type}`;
 }
 
-function getActiveDatabase() {
-    const isExtraQuestion = q => COURSE_ID === 'iv'
-        ? q.id.startsWith('N_Ex_N_')
-        : q.id.includes('_Ex');
+function isAssistantCreatedTEFIVQuestion(question) {
+    const match = /^N_Ex_N_(\d+)$/.exec(question.id);
+    return Boolean(match && Number(match[1]) >= 17);
+}
 
-    return QUIZ_DATABASE.filter(q =>
-        !(COURSE_ID === 'iv' && EXCLUDED_TEF_IV_QUESTION_IDS.has(q.id)) &&
-        (state.pool === 'extra' ? isExtraQuestion(q) : !isExtraQuestion(q))
+function getActiveDatabase() {
+    const availableQuestions = QUIZ_DATABASE.filter(q =>
+        !(COURSE_ID === 'iv' && EXCLUDED_TEF_IV_QUESTION_IDS.has(q.id))
     );
+
+    if (COURSE_ID !== 'iv') {
+        return availableQuestions.filter(q => state.pool === 'extra'
+            ? q.id.includes('_Ex')
+            : !q.id.includes('_Ex'));
+    }
+
+    // N_Ex_N_01–16 ya estaban en el repositorio como preguntas de guiones.
+    // En TEF IV separamos convocatorias anteriores y preguntas redactadas
+    // para esta práctica (N_Ex_N_17 en adelante).
+    const examAndCreatedQuestions = availableQuestions.filter(q =>
+        !q.id.startsWith('N_Ex_N_') || isAssistantCreatedTEFIVQuestion(q)
+    );
+
+    if (state.mode === 'exam') return examAndCreatedQuestions;
+    return state.pool === 'extra'
+        ? examAndCreatedQuestions.filter(isAssistantCreatedTEFIVQuestion)
+        : examAndCreatedQuestions.filter(q => !isAssistantCreatedTEFIVQuestion(q));
 }
 
 function updateCoursePoolUI() {
     document.getElementById('leaderboard-description').textContent = `Ranking basado en aciertos (máximo ${getActiveDatabase().length}) y tiempo de resolución.`;
+}
+
+function updatePoolSelectorVisibility() {
+    const officialTab = document.getElementById('tab-pool-official');
+    const poolSelector = officialTab?.closest('.mode-selector-wrapper');
+    if (poolSelector) {
+        poolSelector.classList.toggle('hidden', COURSE_ID === 'iv' && state.mode === 'exam');
+    }
 }
 
 // Estado del Quiz
@@ -1584,9 +1610,9 @@ function initializeCourseUI() {
         courseTabIII.removeAttribute('aria-current');
         courseTabIV.setAttribute('aria-current', 'page');
         document.querySelector('.academy-tag').textContent = 'TÉCNICAS EXPERIMENTALES DE FÍSICA IV';
-        document.querySelector('.logo-area .subtitle').textContent = 'Exámenes de TEF IV juntos (2021–2022 y convocatorias); preguntas nuevas de guiones aparte.';
-        document.getElementById('pool-official-label').textContent = 'Exámenes y convocatorias';
-        document.getElementById('pool-extra-label').textContent = 'Nuevas (guiones)';
+        document.querySelector('.logo-area .subtitle').textContent = 'Practica por separado exámenes anteriores y preguntas creadas para ti; el modo examen mezcla ambos bancos.';
+        document.getElementById('pool-official-label').textContent = 'Exámenes anteriores';
+        document.getElementById('pool-extra-label').textContent = 'Preguntas creadas por mí';
         document.getElementById('app-footer-text').textContent = 'Preparador de Técnicas Experimentales de Física IV. Preguntas contrastadas con los exámenes y guiones de prácticas.';
         document.title = 'Preparador de Examen | TEF IV';
         state.pool = 'official';
@@ -1595,6 +1621,7 @@ function initializeCourseUI() {
     } else {
         document.title = 'Preparador de Examen | TEF III';
     }
+    updatePoolSelectorVisibility();
     updateCoursePoolUI();
 }
 
@@ -1629,6 +1656,8 @@ function switchMode(mode) {
     document.getElementById('tab-mode-exam').classList.toggle('active', mode === 'exam');
     
     document.body.className = mode + '-mode-active';
+    updatePoolSelectorVisibility();
+    updateCoursePoolUI();
     
     resetQuiz(false);
 }
@@ -1644,6 +1673,7 @@ function initPoolSelectors() {
 }
 
 function switchPool(pool) {
+    if (COURSE_ID === 'iv' && state.mode === 'exam') return;
     if (state.pool === pool) return;
     
     // Guardar progreso actual del pool que dejamos
@@ -1847,6 +1877,8 @@ function initQuiz() {
     updateCoursePoolUI();
 
     const loaded = loadStateFromLocalStorage();
+    updatePoolSelectorVisibility();
+    updateCoursePoolUI();
     if (loaded) {
         // Aplicar clases y modos visuales cargados
         document.body.className = state.mode + '-mode-active';
@@ -2623,7 +2655,10 @@ function loadStateFromLocalStorage() {
 
 // --- CLASIFICACIÓN Y COMPARTIR RESULTADOS ---
 function getLeaderboardKey() {
-    if (COURSE_ID === 'iv') return `lab_physics_tef_iv_leaderboard_${state.pool}_v${TEF_IV_BANK_VERSION}`;
+    if (COURSE_ID === 'iv') {
+        const bank = state.mode === 'exam' ? 'exam' : state.pool;
+        return `lab_physics_tef_iv_leaderboard_${bank}_v${TEF_IV_BANK_VERSION}`;
+    }
     return state.pool === 'official' ? 'lab_physics_leaderboard_v1' : 'lab_physics_leaderboard_extra_v1';
 }
 
@@ -2953,11 +2988,11 @@ function syncOnlineLeaderboard(isManual = false) {
     }
     
     let cleanRoomName = state.roomName.trim().toLowerCase().replace(/[^a-z0-9_-]/g, '');
-    if (state.pool === 'extra') {
-        cleanRoomName += '-extra';
-    }
     if (COURSE_ID === 'iv') {
-        cleanRoomName = `tef-iv-v${TEF_IV_BANK_VERSION}-${cleanRoomName}`;
+        const bank = state.mode === 'exam' ? 'exam' : state.pool;
+        cleanRoomName = `tef-iv-v${TEF_IV_BANK_VERSION}-${bank}-${cleanRoomName}`;
+    } else if (state.pool === 'extra') {
+        cleanRoomName += '-extra';
     }
     
     fetch(`https://keyvalue.immanuel.co/api/KeyVal/GetValue/${ONLINE_APP_KEY}/${cleanRoomName}?cb=${Date.now()}`)
