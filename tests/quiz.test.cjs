@@ -140,11 +140,17 @@ test('100 barajados conservan IDs, opciones, referencias y respuesta válida sin
     assert.deepEqual(a.json('QUIZ_DATABASE'),original);
 });
 
-test('sesiones v3/v4 no se recuperan; payloads retirados, duplicados o de otro bloque tampoco', () => {
+test('sesiones v3/v4/v5 no se recuperan; payloads retirados, duplicados o de otro bloque tampoco', () => {
     const a = app();
     a.storage.set('lab_physics_tef_iv_quiz_state_official_v3',JSON.stringify({mode:'practice',questions:[{id:'N_Ex_N_39'}]}));
     a.storage.set('lab_physics_tef_iv_quiz_state_official_v4',JSON.stringify({mode:'practice',questions:[{id:'N_New_01'}]}));
+    a.storage.set('lab_physics_tef_iv_quiz_state_official_v5',JSON.stringify({mode:'practice',questions:[{id:'N_Ex_22_04'}]}));
+    a.storage.set('lab_physics_tef_iv_quiz_state_extra_v5',JSON.stringify({mode:'practice',questions:[{id:'N_New_01',text:'Calcular el diámetro numérico'}]}));
+    a.storage.set('lab_physics_tef_iv_quiz_state_exam_v5',JSON.stringify({mode:'exam',questions:[{id:'N_New_28'}]}));
     assert.equal(a.run('loadStateFromLocalStorage()'),false);
+    a.run("state.pool='extra';"); assert.equal(a.run('loadStateFromLocalStorage()'),false);
+    a.run("state.mode='exam';"); assert.equal(a.run('loadStateFromLocalStorage()'),false);
+    a.run("state.mode='practice'; state.pool='official';");
     a.run('resetQuiz();');
     const saved = JSON.parse(a.storage.get(a.run('getLocalStorageKey()')));
     const canonical = saved.questions[0];
@@ -244,23 +250,25 @@ test('TEF III conserva íntegramente sus 101 preguntas, ambos bloques y la corre
     assert.equal(a.run('getLocalStorageKey()'),'lab_physics_quiz_state_extra_v1');
 });
 
-test('cálculos de las cuestiones nuevas verificados independientemente', () => {
-    const a=app(); const byId=Object.fromEntries(a.json('window.TEF_IV_EXTRA_QUIZ_DATABASE').map(q=>[q.id,q]));
-    const answer=n=>byId[`N_New_${String(n).padStart(2,'0')}`].options[byId[`N_New_${String(n).padStart(2,'0')}`].correct_index];
-    assert.equal(100/800*64,8); assert.equal(answer(1),'8,00 μm.');
-    assert.equal(420-230-300*30/300,160); assert.equal(answer(6),'160 cuentas.');
-    assert.ok(Math.abs(Math.log(2)/0.0045-154)<1); assert.ok(Math.abs(Math.log(2)/0.0045**2*0.00015-5)<1);
-    assert.equal(1-2**-3,7/8); assert.equal(answer(11),'7/8.');
-    assert.ok(Math.abs(1.842*((6-2)/0.020/1000)+0.295-0.663)<0.001);
-    assert.ok(Math.abs(0.216/2.7*10-0.8)<1e-12); assert.equal(answer(13),'0,80 mm.');
-    assert.equal(150/(1000*60*0.05)*100,5); assert.equal(answer(15),'5,00 %.');
-    assert.equal(answer(8),'6 s⁻¹ y 6 s⁻¹.');
-    assert.equal(answer(16),'1,0.');
-    assert.equal(answer(22),'Q₂ = 2Q₁ y V₂ = 2V₁.');
-    assert.ok(Math.abs(Math.log(2)/6.6-0.105)<0.001);
-    assert.ok(Math.abs(100*0.8*20/(0.8*800+20)-2.42)<0.01);
-    assert.equal(0.20/4*3.7e4,1850); assert.equal(answer(25),'1850 Bq.');
-    assert.ok(Math.abs(0.662-0.662/(1+2*0.662/0.511)-0.478)<0.001); assert.equal(answer(30),'0,478 MeV.');
+test('las nuevas exigen interpretación sin cuentas; gráficas cualitativas accesibles sin tablas numéricas', () => {
+    const a=app(); const questions=a.json('window.TEF_IV_EXTRA_QUIZ_DATABASE');
+    assert.deepEqual(questions.reduce((m,q)=>(m[q.topic]=(m[q.topic]||0)+1,m),{}),
+        {P1:5,P3:6,P4:4,P5:5,P6:2,Introducción:2,'Tema 5':6});
+    for (const q of questions) {
+        const visible=[q.text,...q.options].join(' ').replace(/\b(?:CR39|P[13456])\b/gu,'');
+        assert.ok(!/\d|calcula|valor numérico|cuánto vale|cuál es el diámetro/iu.test(visible),q.id);
+        if (q.figure) {
+            assert.equal(q.figure.qualitative,true,q.id);
+            assert.ok(q.figure.description.length>20,q.id);
+            const rendered=a.run(`getQuestionFigure(QUIZ_DATABASE.find(q=>q.id===${JSON.stringify(q.id)}))`);
+            assert.ok(rendered.includes('Esquema cualitativo, sin escala numérica.'),q.id);
+            assert.ok(rendered.includes(q.figure.description),q.id);
+            assert.ok(!/<table|<details|<text[^>]*>\d/iu.test(rendered),q.id);
+            for (const series of q.figure.series) assert.ok(rendered.includes(series.label),q.id);
+        }
+    }
+    const annotated=a.json("QUIZ_DATABASE.find(q=>q.id==='N_Ex_22_04')");
+    assert.ok(!/mitad|duplicando|factor dos/iu.test(annotated.text+annotated.options.join(' ')));
 });
 
 test('elegir por longitud no aporta ventaja sistemática, tampoco eligiendo la más corta', () => {

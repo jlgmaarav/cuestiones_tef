@@ -1480,7 +1480,7 @@ const TEF_III_QUIZ_DATABASE = [
 
 
 const COURSE_ID = new URLSearchParams(window.location.search).get('course') === 'iv' ? 'iv' : 'iii';
-const TEF_IV_BANK_VERSION = 5;
+const TEF_IV_BANK_VERSION = 6;
 const QUIZ_DATABASE = COURSE_ID === 'iv'
     ? [...window.TEF_IV_QUIZ_DATABASE, ...window.TEF_IV_EXTRA_QUIZ_DATABASE]
     : TEF_III_QUIZ_DATABASE;
@@ -2022,7 +2022,7 @@ function getQuestionReference(question) {
     return question.references.map(reference => `${reference.document} · ${reference.section} · PDF pp. ${reference.pdf_pages.join(', ')}`).join(' | ');
 }
 
-// Gráficas de datos docentes simulados, con una tabla equivalente accesible.
+// Esquemas cualitativos con descripción accesible; tablas solo para datos cuantitativos.
 function getQuestionFigure(question) {
     const figure = question.figure;
     if (!figure) return '';
@@ -2035,18 +2035,22 @@ function getQuestionFigure(question) {
     let svg = '<path d="M76 32 V210 H530" fill="none" stroke="#94a3b8"/>';
     for (let i = 0; i <= 4; i++) {
         const xv = xmin + (xmax - xmin) * i / 4, yv = ymin + (ymax - ymin) * i / 4;
-        svg += `<text x="${x(xv)}" y="232" text-anchor="middle">${Number(xv.toFixed(2))}</text>`;
-        svg += `<text x="65" y="${y(yv)+4}" text-anchor="end">${Number(yv.toFixed(2))}</text>`;
+        if (!figure.qualitative) {
+            svg += `<text x="${x(xv)}" y="232" text-anchor="middle">${Number(xv.toFixed(2))}</text>`;
+            svg += `<text x="65" y="${y(yv)+4}" text-anchor="end">${Number(yv.toFixed(2))}</text>`;
+        }
         svg += `<path d="M76 ${y(yv)} H530" stroke="#334155" stroke-dasharray="3 5"/>`;
     }
     figure.series.forEach((series, index) => {
         svg += `<polyline points="${series.points.map(point => `${x(point[0])},${y(point[1])}`).join(' ')}" fill="none" stroke="${colors[index % colors.length]}" stroke-width="3"/>`;
-        svg += series.points.map(point => `<circle cx="${x(point[0])}" cy="${y(point[1])}" r="4" fill="${colors[index % colors.length]}"/>`).join('');
+        if (!figure.qualitative) svg += series.points.map(point => `<circle cx="${x(point[0])}" cy="${y(point[1])}" r="4" fill="${colors[index % colors.length]}"/>`).join('');
     });
     svg += `<text x="300" y="267" text-anchor="middle">${escapeHTML(figure.x_label)}</text>`;
     svg += `<text transform="translate(18 125) rotate(-90)" text-anchor="middle">${escapeHTML(figure.y_label)}</text>`;
-    const data = figure.series.map(series => `<p>${escapeHTML(series.label)}</p><table><thead><tr><th>${escapeHTML(figure.x_label)}</th><th>${escapeHTML(figure.y_label)}</th></tr></thead><tbody>${series.points.map(point => `<tr><td>${point[0]}</td><td>${point[1]}</td></tr>`).join('')}</tbody></table>`).join('');
-    return `<figure class="question-figure"><svg viewBox="0 0 560 285" role="img" aria-label="${escapeHTML(`${figure.y_label} frente a ${figure.x_label}`)}">${svg}</svg><figcaption>Datos de ejemplo para esta cuestión.</figcaption><details><summary>Ver valores de la gráfica</summary>${data}</details></figure>`;
+    const legend = figure.series.map((series, index) => `<span style="color:${colors[index % colors.length]}">${escapeHTML(series.label)}</span>`).join(' · ');
+    const description = figure.description || `${figure.y_label} frente a ${figure.x_label}`;
+    const data = figure.qualitative ? '' : `<details><summary>Ver valores de la gráfica</summary>${figure.series.map(series => `<p>${escapeHTML(series.label)}</p><table><thead><tr><th>${escapeHTML(figure.x_label)}</th><th>${escapeHTML(figure.y_label)}</th></tr></thead><tbody>${series.points.map(point => `<tr><td>${point[0]}</td><td>${point[1]}</td></tr>`).join('')}</tbody></table>`).join('')}</details>`;
+    return `<figure class="question-figure"><svg viewBox="0 0 560 285" role="img" aria-label="${escapeHTML(description)}">${svg}</svg><figcaption>${figure.qualitative ? 'Esquema cualitativo, sin escala numérica.' : 'Datos de ejemplo para esta cuestión.'} ${legend}</figcaption>${data}</figure>`;
 }
 
 function renderQuestion(index) {

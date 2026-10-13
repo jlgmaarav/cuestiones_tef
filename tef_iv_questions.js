@@ -682,10 +682,10 @@ window.TEF_IV_QUIZ_DATABASE = [
         "origin": "adapted-exam",
         "exam_year": "2022–2023",
         "exam_question": "4",
-        "text": "En la situación descrita por las anotaciones de 2022–2023, un pico común de pechblenda tiene la mitad de área neta que el de uranio tras medir el mismo tiempo. Si las tasas permanecen constantes y no cambia el montaje, ¿cómo igualar sus cuentas?",
+        "text": "En la situación concreta descrita en las anotaciones de 2022–2023, un pico común de la pechblenda registra menos cuentas netas que el del uranio al medir ambos el mismo tiempo. Si las tasas permanecen constantes y no cambia el montaje, ¿cómo aumentar las cuentas de ese pico de pechblenda hasta igualarlas?",
         "options": [
-            "Duplicando el tiempo de adquisición de la pechblenda.",
-            "Duplicando el tiempo de adquisición del uranio.",
+            "Prolongando el tiempo de adquisición de la pechblenda.",
+            "Prolongando el tiempo de adquisición del uranio.",
             "Igualando únicamente las energías centrales mediante la calibración."
         ],
         "correct_index": 0,
@@ -711,7 +711,7 @@ window.TEF_IV_QUIZ_DATABASE = [
                 ]
             }
         ],
-        "justification": "Es una situación particular de las anotaciones, no una jerarquía universal de intensidades entre materiales. Con tasa constante, área neta = tasa × tiempo; duplicar el tiempo de la señal menor iguala ese pico. No restaura el equilibrio secular ni hace iguales todos los picos: las actividades, composiciones y eficiencias pueden diferir. El factor dos es una condición explícita añadida para convertir el desarrollo en un test inequívoco."
+        "justification": "Es una situación particular de las anotaciones, no una jerarquía universal de intensidades entre materiales. Con tasa constante, el área neta crece con el tiempo de adquisición: prolongar la medida de la señal menor permite igualar las cuentas de ese pico común. Las anotaciones no dan un cociente numérico y aquí tampoco se añade uno. Cambiar el tiempo no restaura el equilibrio secular ni hace iguales todos los picos: actividades, composiciones y eficiencias pueden diferir."
     },
     {
         "id": "N_Ex_22_05",
