@@ -1157,3 +1157,26 @@ body {
     to { transform: rotate(360deg); }
 }
 
+
+
+/* Procedencia de preguntas y reinicio directo del modo práctica */
+.practice-reset-btn {
+    padding: 0.7rem 1rem;
+    font-size: 0.85rem;
+    white-space: nowrap;
+}
+
+.exam-mode-active .practice-reset-btn {
+    display: none;
+}
+
+.question-source {
+    margin: 0.65rem 0 0;
+    color: var(--text-muted);
+    font-size: 0.78rem;
+    line-height: 1.45;
+}
+
+.question-source[hidden] {
+    display: none;
+}
