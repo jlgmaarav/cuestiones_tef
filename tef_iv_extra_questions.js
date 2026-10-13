@@ -1,101 +1,109 @@
-// Banco definitivo de TEF IV. Páginas PDF contadas desde 1, incluida la portada.
-// Procedencia y referencias de cada cuestión verificadas en los materiales originales.
+// Banco de preguntas nuevas de TEF IV: explicación e interpretación conceptual.
+// Referencias PDF desde 1, incluida la portada; no procede de exámenes.
 window.TEF_IV_EXTRA_QUIZ_DATABASE = [
     {
         "id": "N_New_01",
         "bank": "extra",
         "origin": "new",
         "topic": "P1",
-        "text": "En P1, el patrón de 40X muestra 100 μm en 800 píxeles. Con el mismo objetivo y configuración, una traza mide 64 píxeles de diámetro. ¿Cuál es el diámetro?",
+        "text": "En P1, las partículas alfa dejan un daño latente en el CR39. ¿Por qué se trata después el detector con NaOH antes de observar las trazas al microscopio?",
         "options": [
-            "0,80 μm.",
-            "80,0 μm.",
-            "8,00 μm.",
-            "8,00 mm."
+            "El ataque químico atrapa las alfas que aún atraviesan el detector.",
+            "El ataque químico convierte la energía almacenada en luz visible.",
+            "El ataque químico agranda las zonas dañadas hasta hacerlas visibles.",
+            "El ataque químico ioniza uniformemente toda la superficie expuesta."
         ],
         "correct_index": 2,
-        "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
-        "source_reference": "Elaboración propia a partir de los materiales docentes; no procede de un examen",
-        "matched_page": 30,
-        "references": [
-            {
-                "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P1, §§1.1.10–1.1.11",
-                "pdf_pages": [
-                    30,
-                    31
-                ]
-            }
-        ],
-        "justification": "La escala es 100/800 = 0,125 μm/píxel; el diámetro es 64 × 0,125 = 8,0 μm. Usar 10 μm en vez de los diez intervalos del patrón da un factor diez de error. La calibración debe corresponder al mismo objetivo y configuración, no a otro aumento."
-    },
-    {
-        "id": "N_New_02",
-        "bank": "extra",
-        "origin": "new",
-        "topic": "P1",
-        "text": "Dos CR39 idénticos se irradian el mismo tiempo con 241Am y se revelan juntos. Entre la fuente y uno se interpone el plástico de P1, que detiene alfas y deja pasar gammas. Solo el otro muestra trazas. ¿Qué conclusión permite el control?",
-        "options": [
-            "Las alfas producen las trazas en estas condiciones de revelado.",
-            "Las gammas producen las trazas al depositar toda su energía.",
-            "La densidad de trazas determina la energía de cada partícula alfa.",
-            "La ausencia de trazas descarta la irradiación por fotones gamma."
-        ],
-        "correct_index": 0,
-        "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
-        "source_reference": "Elaboración propia a partir de los materiales docentes; no procede de un examen",
-        "matched_page": 22,
-        "references": [
-            {
-                "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P1, irradiación y control del CR39",
-                "pdf_pages": [
-                    22,
-                    24
-                ]
-            }
-        ],
-        "justification": "El control mantiene irradiación y revelado y retira la contribución alfa. La ausencia de trazas en él indica que la señal característica procede de alfas. No permite afirmar ausencia de gammas: el diseño del control deja pasar esa contribución."
-    },
-    {
-        "id": "N_New_03",
-        "bank": "extra",
-        "origin": "new",
-        "topic": "P1",
-        "text": "En dos CR39 irradiados conjuntamente, uno se revela durante más tiempo con el mismo NaOH y temperatura. En el régimen sin solapamiento ni desaparición de trazas, se observan diámetros mayores. ¿Qué interpretación es correcta?",
-        "options": [
-            "El mayor diámetro indica una mayor energía inicial de las alfas.",
-            "El mayor diámetro indica una mayor cantidad de alfas por traza.",
-            "El mayor diámetro mide la energía con independencia del revelado.",
-            "El mayor diámetro refleja un crecimiento químico de la zona dañada."
-        ],
-        "correct_index": 3,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
         "source_reference": "Elaboración propia a partir de los materiales docentes; no procede de un examen",
         "matched_page": 19,
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P1, §1.1.1",
+                "section": "P1, §1.1.1: formación y revelado de trazas",
                 "pdf_pages": [
                     19,
                     20
                 ]
             }
         ],
-        "justification": "La traza cónica crece con el tiempo de revelado. Por eso no se atribuye un diámetro mayor a una energía o dosis mayor sin controlar condiciones de ataque, incidencia y calibración. Se especifica un régimen donde sigue siendo posible reconocer las trazas individualmente."
+        "justification": "El paso de una partícula muy ionizante altera localmente la estructura del polímero. El NaOH, que es una base, ataca con mayor rapidez esa región que el material intacto y abre una cavidad observable. La traza latente ya existía antes del revelado: no se crea una nueva irradiación ni se lee una emisión luminosa."
+    },
+    {
+        "id": "N_New_02",
+        "bank": "extra",
+        "origin": "new",
+        "topic": "P1",
+        "text": "Los detectores CR39 y termoluminiscentes de P1 se leen después de retirarlos de la fuente. ¿Qué permite conservar información de la irradiación durante ese intervalo?",
+        "options": [
+            "El CR39 conserva daño estructural y el termoluminiscente conserva portadores atrapados.",
+            "El CR39 conserva portadores atrapados y el termoluminiscente conserva daño estructural.",
+            "El CR39 conserva alfas retenidas y el termoluminiscente conserva fotones retenidos.",
+            "El CR39 conserva una corriente eléctrica y el termoluminiscente conserva luz emitida."
+        ],
+        "correct_index": 0,
+        "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
+        "source_reference": "Elaboración propia a partir de los materiales docentes; no procede de un examen",
+        "matched_page": 12,
+        "references": [
+            {
+                "document": "Guiones de prácticas de Física Nuclear.pdf",
+                "section": "Introducción, I4: detectores pasivos",
+                "pdf_pages": [
+                    12
+                ]
+            },
+            {
+                "document": "Guiones de prácticas de Física Nuclear.pdf",
+                "section": "P1, §1.1.1 y §1.2",
+                "pdf_pages": [
+                    19,
+                    33,
+                    34
+                ]
+            }
+        ],
+        "justification": "Son detectores pasivos que almacenan efectos de la irradiación. En CR39 persiste el daño microscópico del polímero, revelado químicamente; en el material termoluminiscente quedan portadores en trampas hasta su liberación térmica. No almacenan las partículas incidentes ni una corriente o luz que continúe circulando."
+    },
+    {
+        "id": "N_New_03",
+        "bank": "extra",
+        "origin": "new",
+        "topic": "P1",
+        "text": "Dos CR39 se irradian y revelan en iguales condiciones con una fuente de americio. Entre la fuente y uno se interpone el plástico de P1, que detiene las alfas y deja pasar gammas. Solo el otro presenta trazas. ¿Qué demuestra ese control?",
+        "options": [
+            "Las gammas originan las trazas si alcanzan directamente el polímero.",
+            "El plástico elimina la emisión gamma de la fuente durante la irradiación.",
+            "La ausencia de trazas permite descartar que lleguen fotones al detector.",
+            "Las alfas originan las trazas observadas en estas condiciones de revelado."
+        ],
+        "correct_index": 3,
+        "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
+        "source_reference": "Elaboración propia a partir de los materiales docentes; no procede de un examen",
+        "matched_page": 22,
+        "references": [
+            {
+                "document": "Guiones de prácticas de Física Nuclear.pdf",
+                "section": "P1: irradiación con y sin plástico; comparación de trazas",
+                "pdf_pages": [
+                    22,
+                    24
+                ]
+            }
+        ],
+        "justification": "La intervención elimina la contribución alfa sin eliminar la gamma, y se mantienen la exposición y el revelado. Por tanto, atribuye las trazas observadas a las alfas. Un CR39 sin trazas no prueba ausencia de fotones: el control está diseñado precisamente para dejar pasar gammas."
     },
     {
         "id": "N_New_04",
         "bank": "extra",
         "origin": "new",
         "topic": "P1",
-        "text": "Para un único tipo de trampa de LiF y una rampa térmica constante, la intensidad primero sube y después baja. ¿Qué ocurre en la parte descendente del pico?",
+        "text": "Al calentar a ritmo constante un detector termoluminiscente irradiado, la luz pasa por un máximo y después disminuye. Para un pico aislado y sin reposición de portadores, ¿por qué aparece esa forma?",
         "options": [
-            "Disminuye la probabilidad de escape y esa caída domina el aumento de temperatura.",
-            "Disminuye la población atrapada y ese descenso domina el aumento del escape.",
-            "Aumenta la población atrapada y ese aumento reduce la probabilidad de recombinación.",
-            "Aumenta la profundidad de las trampas y ese cambio reduce la probabilidad de escape."
+            "Se liberan más portadores, pero después deja de subir la temperatura.",
+            "Aumenta la liberación térmica, pero acaba agotándose la población atrapada.",
+            "Aumenta la energía de los fotones, pero acaba agotándose la fuente radiactiva.",
+            "Aumenta la irradiación del detector, pero acaba saturándose su respuesta óptica."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -104,26 +112,26 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P1, §1.2",
+                "section": "P1, §1.2: curva de emisión termoluminiscente",
                 "pdf_pages": [
                     33,
                     34
                 ]
             }
         ],
-        "justification": "La intensidad tiene la forma n(T) × probabilidad de escape. El factor térmico crece, pero la población disponible disminuye. Tras el máximo, esa disminución domina. La fuente no está suministrando la señal durante la lectura diferida."
+        "justification": "Al principio, el calentamiento facilita cada vez más la salida de portadores de las trampas y su recombinación luminosa. Más adelante quedan tan pocos portadores atrapados que la emisión disminuye aunque la temperatura siga subiendo. La competencia entre liberación y agotamiento explica el pico; no hace falta una fuente presente durante la lectura."
     },
     {
         "id": "N_New_05",
         "bank": "extra",
         "origin": "new",
         "topic": "P1",
-        "text": "Un chip de P1 da 180 nC en su primera lectura y, sin nueva irradiación, 12 nC al releerlo. Un chip de control da 11 nC. Con el mismo lector y programa térmico, ¿qué explica mejor el resultado?",
+        "text": "Se completa la lectura térmica de un dosímetro de P1 y se repite el mismo ciclo sin irradiarlo de nuevo. ¿Por qué el segundo registro debería acercarse al de un detector sin irradiar?",
         "options": [
-            "La lectura libera la carga almacenada y deja una señal próxima al control.",
-            "La lectura conserva la carga almacenada y reparte por igual la señal entre lecturas.",
-            "La lectura aumenta la profundidad de las trampas y retrasa la emisión luminosa.",
-            "La lectura mide solo irradiación reciente y conserva la carga previamente retenida."
+            "La primera lectura ha vaciado las trampas responsables de la señal.",
+            "La primera lectura ha destruido los centros emisores del material.",
+            "La primera lectura ha reducido permanentemente la sensibilidad óptica.",
+            "La primera lectura ha reducido la actividad de la fuente utilizada."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -132,55 +140,56 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P1, §1.2 y lectura de chips",
+                "section": "P1, §1.2: almacenamiento y lectura; repetición de lectura",
                 "pdf_pages": [
                     34,
                     40
                 ]
             }
         ],
-        "justification": "El calentamiento libera la carga atrapada: una segunda lectura sin reirradiación se aproxima a la señal residual o de control. No mide de nuevo la misma dosis acumulada. El resultado es consistente con el vaciado, sin demostrar por sí solo que todas las trampas del material estén vacías."
+        "justification": "La lectura es destructiva para la información almacenada: el calentamiento libera y recombina los portadores atrapados. Si el ciclo ha vaciado las trampas que originan el pico y no hay nueva irradiación, no puede repetirse la misma señal. Puede quedar emisión de fondo o residual; no se afirma que toda luz deba ser exactamente nula."
     },
     {
         "id": "N_New_06",
         "bank": "extra",
         "origin": "new",
         "topic": "P3",
-        "text": "En P3 se anotan cuentas acumuladas de 137mBa: C(30 s)=230 y C(60 s)=420. El fondo fue 300 cuentas en 300 s. ¿Cuántas cuentas netas corresponden al intervalo 30–60 s?",
+        "text": "En la medida de semivida del bario de P3, el contador acumula pulsos desde el inicio. ¿Por qué se restan lecturas consecutivas antes de estudiar la disminución de la actividad?",
         "options": [
-            "190 cuentas.",
-            "120 cuentas.",
-            "160 cuentas.",
-            "390 cuentas."
+            "La diferencia da las cuentas totales, que siguen creciendo durante la medida.",
+            "La diferencia elimina el fondo, aunque este se acumule durante cada intervalo.",
+            "La diferencia da las cuentas del intervalo, que siguen la actividad de la muestra.",
+            "La diferencia corrige la eficiencia, aunque cambie la posición de la muestra."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
         "source_reference": "Elaboración propia a partir de los materiales docentes; no procede de un examen",
-        "matched_page": 68,
+        "matched_page": 71,
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P3, §§3.1.7 y 3.1.9",
+                "section": "P3, §3.1.9: registro integral, cuentas por intervalo y ajuste",
                 "pdf_pages": [
-                    68,
+                    71,
                     72,
-                    73
+                    73,
+                    74
                 ]
             }
         ],
-        "justification": "El intervalo tiene 420 − 230 = 190 cuentas. El fondo esperado en 30 s es 300 × 30/300 = 30 cuentas. Quedan 190 − 30 = 160. Restar todo el fondo de 300 s o usar directamente las cuentas acumuladas no describe la actividad de ese intervalo."
+        "justification": "La lectura integral reúne todos los pulsos anteriores y no decrece con la actividad. Restar dos lecturas permite obtener los pulsos del intervalo entre ambas. Con intervalos iguales, fondo descontado y geometría fija, esas cuentas siguen el decaimiento. La resta entre lecturas no elimina por sí sola el fondo ni corrige la eficiencia."
     },
     {
         "id": "N_New_07",
         "bank": "extra",
         "origin": "new",
         "topic": "P3",
-        "text": "La recta de ln(Δ neta) frente a t de 137mBa tiene pendiente m = (−4,50 ± 0,15)×10⁻³ s⁻¹. Usando propagación de error de primer orden, ¿cuál es la semivida?",
+        "text": "La figura compara dos rectas de ln(tasa neta) frente al tiempo, con la misma escala y condiciones de detección constantes. ¿Qué indica que la recta A descienda más deprisa que la B?",
         "options": [
-            "(222 ± 7) s.",
-            "(154 ± 5) s.",
-            "(154 ± 15) s.",
-            "(154 ± 10) s."
+            "La muestra A tiene menor constante de desintegración y mayor semivida.",
+            "La muestra A tiene mayor constante de desintegración y menor semivida.",
+            "La muestra A tiene mayor constante de desintegración y mayor semivida.",
+            "La muestra A tiene menor constante de desintegración y menor semivida."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -189,40 +198,74 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P3, §3.1.9, ecuación (3.9)",
+                "section": "P3, §3.1.9: pendiente del ajuste y semivida",
                 "pdf_pages": [
                     73,
                     74
                 ]
+            },
+            {
+                "document": "Guiones de prácticas de Física Nuclear.pdf",
+                "section": "Introducción, I2.1: ley de desintegración",
+                "pdf_pages": [
+                    5
+                ]
             }
         ],
-        "justification": "T₁/₂ = −ln 2/m = 154,03 s y σ(T) = (ln 2/m²) σ(m) = 5,13 s. La vida media 1/λ daría unos 222 s y es distinta de la semivida. El error relativo es σ(m)/|m|, no el mismo error absoluto que el de la pendiente.",
+        "justification": "En una desintegración exponencial, la pendiente de ln(tasa neta) es el opuesto de la constante de desintegración. Una pendiente más negativa corresponde a un decaimiento más rápido y a una semivida menor. La altura inicial de cada recta depende de la tasa inicial y no determina la semivida.",
         "figure": {
-            "x_label": "t (s)",
-            "y_label": "ln(Δ neta / 1 cuenta)",
+            "qualitative": true,
+            "x_label": "Tiempo",
+            "y_label": "ln(tasa neta)",
+            "description": "Esquema: A y B parten del mismo nivel; A desciende con una pendiente más negativa que B.",
             "series": [
                 {
-                    "label": "Recta ajustada",
+                    "label": "A",
                     "points": [
                         [
                             0,
-                            5.4
+                            9
                         ],
                         [
-                            60,
-                            5.13
+                            1,
+                            7
                         ],
                         [
-                            120,
-                            4.86
+                            2,
+                            5
                         ],
                         [
-                            180,
-                            4.59
+                            3,
+                            3
                         ],
                         [
-                            240,
-                            4.32
+                            4,
+                            1
+                        ]
+                    ]
+                },
+                {
+                    "label": "B",
+                    "points": [
+                        [
+                            0,
+                            9
+                        ],
+                        [
+                            1,
+                            8
+                        ],
+                        [
+                            2,
+                            7
+                        ],
+                        [
+                            3,
+                            6
+                        ],
+                        [
+                            4,
+                            5
                         ]
                     ]
                 }
@@ -234,48 +277,41 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "bank": "extra",
         "origin": "new",
         "topic": "P3",
-        "text": "En la recuperación del 137mBa se registran 120 cuentas en 15 s y, más tarde, 240 en 30 s. El fondo constante es 2 s⁻¹ y la geometría no cambia. ¿Cuáles son las tasas netas de ambos intervalos, respectivamente?",
+        "text": "En P3 se registran cuentas netas en intervalos de distinta duración. Suponiendo que la actividad cambia poco dentro de cada intervalo, ¿qué magnitud debe compararse para estudiar el decaimiento?",
         "options": [
-            "8 s⁻¹ y 8 s⁻¹.",
-            "6 s⁻¹ y 3 s⁻¹.",
-            "4 s⁻¹ y 6 s⁻¹.",
-            "6 s⁻¹ y 6 s⁻¹."
+            "Las cuentas netas acumuladas desde el inicio de la medida.",
+            "Las cuentas netas sin considerar la duración del intervalo.",
+            "Las cuentas de fondo por unidad de tiempo en cada intervalo.",
+            "Las cuentas netas por unidad de tiempo en cada intervalo."
         ],
         "correct_index": 3,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
         "source_reference": "Elaboración propia a partir de los materiales docentes; no procede de un examen",
-        "matched_page": 74,
+        "matched_page": 71,
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P3, §3.1.10",
+                "section": "P3, §3.1.9: elección de intervalos y tratamiento de cuentas",
                 "pdf_pages": [
-                    74,
-                    75
-                ]
-            },
-            {
-                "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "Introducción, §I.4.2",
-                "pdf_pages": [
-                    15,
-                    16
+                    71,
+                    72,
+                    73
                 ]
             }
         ],
-        "justification": "Las dos tasas brutas son 120/15 = 240/30 = 8 s⁻¹. Restando 2 s⁻¹ de fondo quedan 6 s⁻¹ en ambos intervalos. La comparación requiere normalizar la duración; la actividad de la fuente no es idéntica a la tasa detectada sin corregir eficiencia y geometría."
+        "justification": "Un intervalo más largo puede acumular más pulsos aunque la actividad sea menor. La tasa neta separa esa duración de la intensidad de la señal, siempre que se mantengan geometría y eficiencia. Si la actividad varía mucho dentro del intervalo, la tasa obtenida es un promedio temporal y el modelo de ajuste debe tenerlo en cuenta."
     },
     {
         "id": "N_New_09",
         "bank": "extra",
         "origin": "new",
         "topic": "P3",
-        "text": "La gráfica muestra ln(I/Iref) del torón, con una corriente de fondo constante no restada. La curva se aplana a tiempos largos. Si se obliga a ajustar una recta a toda la curva como si el fondo fuera cero, ¿qué sesgo se espera?",
+        "text": "En una medida de semivida del torón, la figura muestra el logaritmo de la corriente registrada. Se supone un decaimiento exponencial más un fondo constante no restado, que aplana la curva al final. Si se ajusta una sola recta incluyendo esa región, ¿cómo se altera la semivida estimada?",
         "options": [
-            "Pendiente más negativa y semivida menor que la real.",
-            "Pendiente menos negativa y semivida menor que la real.",
-            "Pendiente menos negativa y semivida mayor que la real.",
-            "Pendiente más negativa y semivida mayor que la real."
+            "Se subestima, porque el fondo hace más negativa la pendiente.",
+            "Se conserva, porque el fondo solo cambia la ordenada inicial.",
+            "Se sobreestima, porque el fondo hace menos negativa la pendiente.",
+            "Se anula, porque el fondo elimina el decaimiento de la muestra."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -284,7 +320,7 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P3, §3.2.4",
+                "section": "P3, §3.2.4: corriente del torón y ajuste de semivida",
                 "pdf_pages": [
                     84,
                     85,
@@ -293,39 +329,49 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
             },
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "Introducción, §I.2.1",
+                "section": "Introducción, I2.1: semivida y constante de desintegración",
                 "pdf_pages": [
                     5
                 ]
             }
         ],
-        "justification": "Para I(t)=S₀ exp(−λt)+B, d ln I/dt = −λS/(S+B). Su magnitud disminuye cuando el fondo domina: los puntos finales quedan por encima de la recta del decaimiento puro. El ajuste único da una pendiente menos negativa y T₁/₂ = ln 2/|m| demasiado grande. La gráfica es un ejemplo simulado, no una medida del guion.",
+        "justification": "La corriente total es la suma de una contribución exponencial y un fondo constante, según el supuesto de esta cuestión. Cuando la muestra decae, domina el fondo y el logaritmo tiende a una meseta. Un ajuste global que incluya esa región reduce la magnitud de la pendiente negativa; al inferir la semivida a partir de ella, resulta demasiado larga. La introducción del fondo en este ejemplo es una condición didáctica, no un dato de la tabla del guion. Se debe tratar ese fondo antes de linealizar o incluirlo en un ajuste apropiado; expresar todas las corrientes en una unidad fija solo modifica la ordenada del logaritmo.",
         "figure": {
-            "x_label": "t (s)",
-            "y_label": "ln(I/Iref)",
+            "qualitative": true,
+            "x_label": "Tiempo",
+            "y_label": "ln(corriente medida)",
+            "description": "Esquema: al principio la señal desciende casi linealmente; al final se curva y tiende a una meseta por el fondo.",
             "series": [
                 {
-                    "label": "Señal + fondo (ejemplo)",
+                    "label": "Señal sin restar fondo",
                     "points": [
                         [
                             0,
-                            2.1972
+                            9
                         ],
                         [
-                            60,
-                            1.6094
+                            1,
+                            7
                         ],
                         [
-                            120,
-                            1.0986
+                            2,
+                            5.2
                         ],
                         [
-                            180,
-                            0.6931
+                            3,
+                            3.8
                         ],
                         [
-                            240,
-                            0.4055
+                            4,
+                            3.1
+                        ],
+                        [
+                            5,
+                            2.8
+                        ],
+                        [
+                            6,
+                            2.7
                         ]
                     ]
                 }
@@ -337,12 +383,12 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "bank": "extra",
         "origin": "new",
         "topic": "P3",
-        "text": "En la cámara de ionización de P3, a geometría fija, la gráfica I(U) alcanza una meseta. Dentro de la región de cámara de ionización, ¿qué significa aumentar U de 375 a 450 V sin que aumente I?",
+        "text": "En la cámara de ionización de P3, la corriente aumenta al subir la tensión y luego llega a una meseta, como en la figura. Manteniendo fija la irradiación y sin multiplicación gaseosa, ¿qué caracteriza esa meseta?",
         "options": [
-            "Se recoge casi toda la carga primaria que produce la radiación.",
-            "Se multiplican las cargas en avalanchas de tipo Geiger.",
-            "Se recombina casi toda la carga primaria antes de alcanzar los electrodos.",
-            "Se estabiliza la carga espacial que extingue la multiplicación de electrones."
+            "Se recogen prácticamente todas las cargas creadas por la radiación.",
+            "Se inicia una descarga gaseosa que amplifica cada ionización primaria.",
+            "Se crean más pares primarios al aumentar la energía del campo eléctrico.",
+            "Se recombinan prácticamente todas las cargas antes de llegar al electrodo."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -351,56 +397,51 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P3, §3.2.3",
+                "section": "P3, §3.2.3: curva corriente-tensión y saturación",
                 "pdf_pages": [
                     81,
                     82,
                     83
                 ]
-            },
-            {
-                "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P4, §4.1",
-                "pdf_pages": [
-                    90
-                ]
             }
         ],
-        "justification": "A bajas tensiones parte de las cargas se recombina; aumentar el campo mejora su recogida. En saturación se recoge prácticamente toda la carga producida por la radiación y la corriente se estabiliza. Se explicita la región de trabajo para no confundir esta meseta con multiplicación proporcional o descarga Geiger.",
+        "justification": "Con tensión baja, parte de los pares se recombina antes de recogerse. Al aumentar el campo, la colección mejora hasta recoger prácticamente toda la ionización primaria. En ese régimen la corriente depende de la irradiación y cambia poco con la tensión. La meseta no es la descarga de un Geiger ni implica multiplicación gaseosa.",
         "figure": {
-            "x_label": "U (V)",
-            "y_label": "I / (10⁻¹¹ A)",
+            "qualitative": true,
+            "x_label": "Tensión aplicada",
+            "y_label": "Corriente",
+            "description": "Esquema: la corriente aumenta con la tensión y después permanece en una meseta de saturación.",
             "series": [
                 {
-                    "label": "Corriente (ejemplo)",
+                    "label": "Cámara de ionización",
                     "points": [
                         [
                             0,
                             0
                         ],
                         [
-                            75,
-                            0.25
+                            1,
+                            3
                         ],
                         [
-                            150,
-                            0.5
+                            2,
+                            6
                         ],
                         [
-                            225,
-                            0.75
+                            3,
+                            7.5
                         ],
                         [
-                            300,
-                            0.9
+                            4,
+                            8
                         ],
                         [
-                            375,
-                            1
+                            5,
+                            8
                         ],
                         [
-                            450,
-                            1
+                            6,
+                            8
                         ]
                     ]
                 }
@@ -412,112 +453,77 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "bank": "extra",
         "origin": "new",
         "topic": "P3",
-        "text": "Tras retirar todos los hijos de un sistema ideal padre→hijo de rama 100 %, cerrado y con actividad del padre constante, ¿qué fracción de la actividad de equilibrio tiene el hijo después de tres de sus semividas?",
+        "text": "Después de extraer el bario del generador de P3, la actividad del eluido disminuye, mientras el generador recupera bario. ¿Por qué tienen evoluciones distintas?",
         "options": [
-            "1/8.",
-            "7/8.",
-            "3/4.",
-            "1/2."
+            "El cesio pasa al eluido y deja de producir nuevos núcleos dentro del generador.",
+            "El cesio permanece en el generador y sigue produciendo nuevos núcleos de bario.",
+            "El bario del eluido se transforma de nuevo en cesio y vuelve al generador.",
+            "El eluyente activa el bario del generador mediante nuevas reacciones nucleares."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
         "source_reference": "Elaboración propia a partir de los materiales docentes; no procede de un examen",
-        "matched_page": 63,
+        "matched_page": 62,
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P3, §3.1.1, ecuación (3.8)",
+                "section": "P3, §3.1.1: generador cesio-bario",
                 "pdf_pages": [
+                    62,
                     63,
                     64
                 ]
+            },
+            {
+                "document": "Guiones de prácticas de Física Nuclear.pdf",
+                "section": "P3, §3.1.10: regeneración",
+                "pdf_pages": [
+                    74,
+                    75
+                ]
             }
         ],
-        "justification": "La recuperación sigue A₂/A₁ = 1 − exp(−λ₂t). A las tres semividas, exp(−λ₂t)=2⁻³=1/8 y la fracción es 7/8. El 1/8 es lo que falta para el equilibrio. La igualdad no se alcanza exactamente en un tiempo finito; el modelo supone padre constante, rama 100 % y ausencia de hijos iniciales."
+        "justification": "La separación química arrastra el bario y retiene el cesio en la resina. En el eluido, sin una aportación relevante del padre, se observa el decaimiento del bario extraído. En el generador, el cesio retenido produce nueva hija y la actividad se recupera hacia el balance entre producción y desintegración. El bario no vuelve químicamente al generador ni se regenera por activación del eluyente."
     },
     {
         "id": "N_New_12",
         "bank": "extra",
         "origin": "new",
         "topic": "P4",
-        "text": "En P4 se ajustan las dos regiones de la gráfica indicada: y = 6,0 − 0,020 e y y = 2,0, con e en mg/cm² e y = ln[r/(1 min⁻¹)]. Si Emax = 1,842 R + 0,295 con R en g/cm², ¿qué energía máxima resulta?",
+        "text": "En P4, el Geiger no distingue energías beta por la altura de sus pulsos, pero la amplitud de estos cambia al variar la tensión aplicada. ¿Cómo se explican ambos hechos?",
         "options": [
-            "0,295 MeV.",
-            "0,737 MeV.",
-            "0,663 MeV.",
-            "0,368 MeV."
+            "La ionización primaria conserva la energía y su carga depende de la tensión.",
+            "La tensión modifica la energía de las betas y la descarga conserva esa energía.",
+            "La descarga borra la información de energía y su carga depende de la tensión.",
+            "La amplitud mide la energía beta y la tensión solo modifica el número de pulsos."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
         "source_reference": "Elaboración propia a partir de los materiales docentes; no procede de un examen",
-        "matched_page": 106,
+        "matched_page": 91,
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P4, §4.9, ecuación (4.5)",
+                "section": "P4, §4.2: descarga y carga espacial; §4.7: amplitud de pulsos",
                 "pdf_pages": [
-                    106,
-                    107
+                    91,
+                    100
                 ]
             }
         ],
-        "justification": "El cruce cumple 6 − 0,020e = 2, por lo que R = 200 mg/cm² = 0,200 g/cm². Emax = 1,842 × 0,200 + 0,295 = 0,6634 MeV, dentro del intervalo menor de 0,8 MeV donde se usa la fórmula. El valor 0,368 MeV omite el término independiente 0,295 MeV; tomar R = 240 mg/cm² en vez de la intersección da 0,737 MeV. El alcance no es un espesor hemirreductor.",
-        "figure": {
-            "x_label": "e (mg/cm²)",
-            "y_label": "ln[r/(1 min⁻¹)]",
-            "series": [
-                {
-                    "label": "Tramo descendente",
-                    "points": [
-                        [
-                            0,
-                            6
-                        ],
-                        [
-                            100,
-                            4
-                        ],
-                        [
-                            200,
-                            2
-                        ]
-                    ]
-                },
-                {
-                    "label": "Fondo",
-                    "points": [
-                        [
-                            150,
-                            2
-                        ],
-                        [
-                            200,
-                            2
-                        ],
-                        [
-                            250,
-                            2
-                        ],
-                        [
-                            300,
-                            2
-                        ]
-                    ]
-                }
-            ]
-        }
+        "justification": "Un evento inicia una descarga que se extiende por el contador hasta que los mecanismos de extinción la detienen. La carga final ya no es proporcional a la ionización inicial ni a la energía depositada. Sí depende de las condiciones eléctricas, incluida la tensión. Por eso comparar amplitudes a distintas tensiones no convierte al Geiger en un espectrómetro beta."
     },
     {
         "id": "N_New_13",
         "bank": "extra",
         "origin": "new",
         "topic": "P4",
-        "text": "Una medida del alcance beta en Al da R = 216 mg/cm². Si ρAl = 2,70 g/cm³, ¿cuál es el alcance lineal correspondiente?",
+        "text": "En P4 se mantiene la geometría y se compara la tasa al interponer espesores crecientes de absorbente. La figura muestra una caída seguida de una meseta compatible con el fondo. ¿Qué se estima con el final de esa caída?",
         "options": [
-            "0,08 mm.",
-            "8,00 mm.",
-            "0,58 mm.",
-            "0,80 mm."
+            "El alcance medio de las betas que contribuyen a la señal.",
+            "La semivida de los núcleos que emiten la radiación beta.",
+            "La eficiencia absoluta del contador para la radiación beta.",
+            "El alcance máximo de las betas que contribuyen a la señal."
         ],
         "correct_index": 3,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -526,55 +532,109 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P4, §4.9",
+                "section": "P4, §4.9: absorción y alcance máximo de las betas",
                 "pdf_pages": [
                     104,
                     105,
+                    106,
                     107
                 ]
             }
         ],
-        "justification": "El espesor másico es ρx. Se convierte R = 0,216 g/cm² y x = 0,216/2,70 = 0,080 cm = 0,80 mm. Multiplicar por la densidad en lugar de dividir o mezclar mg y g produce unidades y valores incorrectos."
+        "justification": "La caída corresponde a la desaparición progresiva de la contribución beta al aumentar el absorbente. La intersección de la prolongación de ese tramo con el fondo se utiliza para estimar el alcance máximo, asociado al extremo de mayor energía del espectro. El fondo restante no significa que las betas tengan alcance infinito; incluye contribuciones que el absorbente beta no elimina.",
+        "figure": {
+            "qualitative": true,
+            "x_label": "Espesor de absorbente",
+            "y_label": "Tasa de cuentas",
+            "description": "Esquema: la tasa disminuye al aumentar el espesor y después permanece al nivel del fondo.",
+            "series": [
+                {
+                    "label": "Medida",
+                    "points": [
+                        [
+                            0,
+                            9
+                        ],
+                        [
+                            1,
+                            7
+                        ],
+                        [
+                            2,
+                            5
+                        ],
+                        [
+                            3,
+                            3
+                        ],
+                        [
+                            4,
+                            1
+                        ],
+                        [
+                            5,
+                            1
+                        ],
+                        [
+                            6,
+                            1
+                        ]
+                    ]
+                },
+                {
+                    "label": "Fondo",
+                    "points": [
+                        [
+                            0,
+                            1
+                        ],
+                        [
+                            6,
+                            1
+                        ]
+                    ]
+                }
+            ]
+        }
     },
     {
         "id": "N_New_14",
         "bank": "extra",
         "origin": "new",
         "topic": "P4",
-        "text": "En el Geiger de P4, las betas de dos fuentes dan amplitudes semejantes a 600 V. Al aumentar a 700 V crece la amplitud en ambas. ¿Qué se puede concluir?",
+        "text": "En el Geiger de P4, los iones positivos llegan al cátodo mucho después que los electrones al ánodo. ¿Qué problema ayuda a evitar el gas de extinción cuando esos iones alcanzan el cátodo?",
         "options": [
-            "La amplitud depende de la tensión aplicada, aunque las energías beta difieran.",
-            "La amplitud depende de la energía beta, aunque la tensión aplicada coincida.",
-            "La amplitud depende de la actividad beta, aunque la tensión aplicada coincida.",
-            "La amplitud depende de la energía máxima, aunque las energías medias coincidan."
+            "La emisión de electrones secundarios que iniciarían descargas posteriores.",
+            "La recombinación de pares que reduciría la ionización primaria del gas.",
+            "La llegada de iones al cátodo, necesaria para cerrar el circuito eléctrico.",
+            "La colección completa de los iones que haría proporcional el tamaño del pulso."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
         "source_reference": "Elaboración propia a partir de los materiales docentes; no procede de un examen",
-        "matched_page": 91,
+        "matched_page": 92,
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P4, §§4.2 y 4.7",
+                "section": "P4, §4.3: descarga y gas de extinción",
                 "pdf_pages": [
-                    91,
-                    100
+                    92
                 ]
             }
         ],
-        "justification": "La descarga Geiger termina por apantallamiento, perdiendo la proporcionalidad con la ionización inicial. Ambas fuentes pueden tener energías máximas muy distintas y dar impulsos similares. La respuesta al cambio de tensión es del detector; para comparar las betas se usan, por ejemplo, curvas de absorción."
+        "justification": "Los iones positivos pueden liberar electrones al neutralizarse en el cátodo y originar nuevos pulsos sin otra partícula incidente. La transferencia de carga a las moléculas del gas de extinción y su forma de disipar energía reducen ese mecanismo. Hay además propagación de la descarga por fotones ultravioletas, pero aquí se pregunta específicamente por el efecto tardío de los iones sobre el cátodo."
     },
     {
         "id": "N_New_15",
         "bank": "extra",
         "origin": "new",
         "topic": "P4",
-        "text": "Una fuente emite en promedio una gamma por desintegración. Su actividad actual es 1000 Bq y la fracción geométrica que alcanza el detector es 0,050. En 60 s se registran 150 cuentas netas, con pérdidas por tiempo muerto despreciables. ¿Cuál es la eficiencia intrínseca de contaje?",
+        "text": "Si se compara el mismo número de betas y de gammas que alcanzan un Geiger de pared fina, ¿por qué suele ser mayor la eficiencia intrínseca para betas en las condiciones de P4?",
         "options": [
-            "0,25 %.",
-            "0,50 %.",
-            "5,00 %.",
-            "20,0 %."
+            "Las betas depositan siempre toda su energía; los fotones solo depositan una parte.",
+            "Las betas originan pulsos proporcionales; los fotones originan pulsos de menor altura.",
+            "Las betas ionizan directamente; muchos fotones atraviesan el detector sin interactuar.",
+            "Las betas recorren más distancia desde la fuente; los fotones llegan menos al detector."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -583,28 +643,27 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P4, §§4.8 y 4.8.3–4.8.5",
+                "section": "P4, §4.8: eficiencia intrínseca beta y gamma",
                 "pdf_pages": [
                     101,
                     102,
-                    103,
                     104
                 ]
             }
         ],
-        "justification": "Llegan 1000 × 1 × 60 × 0,050 = 3000 fotones. La eficiencia intrínseca es 150/3000 = 0,05 = 5 %. Dividir por todas las emisiones daría 0,25 %, la eficiencia absoluta de esa geometría. El enunciado especifica actividad actual, probabilidad de emisión, cuentas netas y pérdidas despreciables."
+        "justification": "Las partículas cargadas que atraviesan la ventana ionizan el gas con facilidad. Un gamma debe interactuar primero y generar una partícula cargada capaz de iniciar una descarga, lo que sucede con menor probabilidad en este montaje. No es necesario absorber toda la energía para contar un pulso. Se especifica el número que alcanza el detector para separar la eficiencia intrínseca del factor geométrico."
     },
     {
         "id": "N_New_16",
         "bank": "extra",
         "origin": "new",
         "topic": "P5",
-        "text": "Dos fotopicos gaussianos de la misma energía se miden con iguales canales y tiempo vivo, tras restar el continuo. El de A tiene altura doble y FWHM mitad que el de B. ¿Cuánto vale el cociente entre el área neta de A y la de B?",
+        "text": "Dos espectros gamma del mismo pico se han adquirido con igual tiempo vivo, geometría y eficiencia. Uno presenta un fotopico más alto y más estrecho. ¿Qué comparación permite decidir cuál registró más eventos de energía completa?",
         "options": [
-            "2,0.",
-            "1,0.",
-            "0,5.",
-            "4,0."
+            "Comparar las alturas máximas de los fotopicos sin considerar su anchura.",
+            "Comparar las áreas netas de los fotopicos después de restar el continuo.",
+            "Comparar las anchuras de los fotopicos sin considerar su altura máxima.",
+            "Comparar las energías centrales de los fotopicos después de calibrar."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -613,26 +672,26 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P5, §§5.2–5.3",
+                "section": "P5, §5.2: resolución; §5.3: área del fotopico",
                 "pdf_pages": [
                     122,
                     123
                 ]
             }
         ],
-        "justification": "Para un pico gaussiano, área = altura × σ × √(2π) y FWHM = 2√(2 ln 2) σ. Por ello el área es proporcional a altura × FWHM: 2H × Γ/2 = HΓ. La altura no mide por sí sola el total de cuentas. Igual área detectada no implica igual emisión sin controlar eficiencia y geometría."
+        "justification": "El total de eventos atribuidos al fotopico corresponde a su área neta, no a la altura de un solo canal. Una resolución mejor concentra cuentas en menos canales y puede aumentar la altura sin aumentar el total. El tiempo vivo, la eficiencia y la geometría se fijan para que no introduzcan diferencias adicionales; el continuo bajo el pico debe descontarse."
     },
     {
         "id": "N_New_17",
         "bank": "extra",
         "origin": "new",
         "topic": "P5",
-        "text": "En P5, dos adquisiciones de un fotopico dan 1200 cuentas netas en 60 s sin plomo y 1200 en 120 s con espesor másico e = 6,60 g/cm². A geometría fija y con pérdidas despreciables, ¿cuál es el coeficiente de atenuación másico?",
+        "text": "En P5 se mide la atenuación de un mismo gamma con varios espesores, pero se prolongan las adquisiciones más débiles. Con geometría y eficiencia constantes, ¿por qué no deben ajustarse directamente las áreas netas sin normalizarlas?",
         "options": [
-            "0,105 cm²/g.",
-            "0,000 cm²/g.",
-            "−0,105 cm²/g.",
-            "0,210 cm²/g."
+            "El tiempo adicional aumenta las cuentas y puede ocultar parte de la atenuación.",
+            "El tiempo adicional aumenta la energía y puede desplazar el centro del fotopico.",
+            "El tiempo adicional cambia el absorbente y puede reducir su densidad efectiva.",
+            "El tiempo adicional cambia la semivida y puede aumentar la actividad nuclear."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -641,7 +700,7 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P5, §5.3, ecuación (5.4)",
+                "section": "P5, §5.3: atenuación, áreas y tiempos de adquisición",
                 "pdf_pages": [
                     122,
                     123,
@@ -649,19 +708,19 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
                 ]
             }
         ],
-        "justification": "Las tasas son 20 y 10 s⁻¹. El cociente es 1/2 y μ/ρ = −ln(1/2)/6,60 = 0,105 cm²/g. En ln(tasa) frente a espesor másico la pendiente es NEGATIVA y vale −μ/ρ: el coeficiente positivo es su opuesto. Igualar cuentas sin normalizar tiempos ocultaría la atenuación."
+        "justification": "El área neta cuenta eventos durante toda la adquisición. Debe compararse su tasa, usando el tiempo vivo, para que una exposición más larga no se confunda con mayor transmisión. Para un haz monoenergético en la geometría de atenuación indicada, el logaritmo de esa tasa disminuye con el espesor; el coeficiente de atenuación positivo es el opuesto de la pendiente."
     },
     {
         "id": "N_New_18",
         "bank": "extra",
         "origin": "new",
         "topic": "P5",
-        "text": "Al colocar el imán sobre el PMT de P5, el fotopico de 137Cs pasa del canal 900 al 720 y baja la amplitud observada. La electrónica restante no cambia. ¿Qué explica el desplazamiento?",
+        "text": "Al acercar un imán al fotomultiplicador del centelleador de P5, un fotopico se desplaza a canales menores. Con la fuente y el cristal sin cambios, ¿cuál es la explicación más adecuada?",
         "options": [
-            "Aumenta la ganancia del PMT al desviarse electrones entre sus dínodos.",
-            "Disminuye la eficiencia del cristal, manteniéndose iguales las amplitudes del PMT.",
-            "Disminuye la energía emitida por 137Cs, manteniéndose estable la multiplicación del PMT.",
-            "Disminuye la ganancia del PMT al desviarse electrones entre sus dínodos."
+            "El campo altera las energías nucleares y reduce la energía gamma emitida por la fuente.",
+            "El campo altera la atenuación externa y reduce la energía de todos los fotones incidentes.",
+            "El campo altera la semivida nuclear y reduce la carga producida por cada desintegración.",
+            "El campo altera las trayectorias electrónicas y reduce la ganancia del fotomultiplicador."
         ],
         "correct_index": 3,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -670,33 +729,33 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P5, §5.1.3",
+                "section": "P5, §5.1.3: efecto del campo magnético",
                 "pdf_pages": [
                     121
                 ]
             },
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "Introducción, §I.4.1",
+                "section": "Introducción, I4.1: centelleo y fotomultiplicador",
                 "pdf_pages": [
                     14,
                     15
                 ]
             }
         ],
-        "justification": "El campo desvía los electrones entre dínodos y reduce la recogida y multiplicación. Para el mismo depósito de energía se obtiene un impulso menor. La calibración canal-energía anterior deja de servir mientras esté el imán; no cambia la transición del 137Cs."
+        "justification": "La señal se amplifica mediante electrones que viajan entre los dinodos. Un campo magnético puede desviar sus trayectorias, empeorar la colección y reducir la ganancia, de modo que la misma energía depositada produce pulsos menores. Ese desplazamiento instrumental no prueba un cambio en la energía emitida por los núcleos; habría que recuperar o recalibrar la respuesta del detector."
     },
     {
         "id": "N_New_19",
         "bank": "extra",
         "origin": "new",
         "topic": "P5",
-        "text": "Con electrónica lineal y coincidencias accidentales despreciables, dos gammas de 60Co de 1,17 y 1,33 MeV depositan toda su energía dentro del mismo intervalo de integración. ¿Qué registra el multicanal?",
+        "text": "En P5 puede aparecer un pico a la suma de las energías de los dos gammas emitidos en cascada por el cobalto. ¿Qué condición da lugar a ese pico de suma verdadera?",
         "options": [
-            "Dos pulsos; energías de 1,17 y 1,33 MeV.",
-            "Un pulso; energía asignada de 1,25 MeV.",
-            "Un pulso; energía asignada de 2,50 MeV.",
-            "Un pulso; energía asignada de 0,16 MeV."
+            "Ambos gammas producen pulsos separados que después se promedian.",
+            "Dos gammas de desintegraciones independientes coinciden en un solo pulso.",
+            "Ambos gammas depositan toda su energía dentro del mismo pulso registrado.",
+            "El núcleo emite una tercera transición cuya energía coincide con la suma indicada."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -705,26 +764,26 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P5, §5.4",
+                "section": "P5, §5.4: coincidencias de cascada y pico suma",
                 "pdf_pages": [
                     124,
                     125
                 ]
             }
         ],
-        "justification": "Las cargas de ambos depósitos se integran en un solo impulso cuando no se resuelven temporalmente. La amplitud representa la suma 1,17 + 1,33 = 2,50 MeV. No se trata de una tercera transición de 60Co y tampoco de una coincidencia entre desintegraciones distintas."
+        "justification": "Si los dos gammas de la cascada son detectados con absorción completa dentro del intervalo de integración, la electrónica registra un pulso con la suma de sus energías. No implica una nueva transición nuclear. La cercanía de la fuente aumenta la probabilidad de detectar ambos; se distingue este fenómeno de la coincidencia accidental de desintegraciones independientes."
     },
     {
         "id": "N_New_20",
         "bank": "extra",
         "origin": "new",
         "topic": "P5",
-        "text": "Un gamma de 3,00 MeV crea un par dentro del cristal. Las partículas cargadas se frenan allí y solo uno de los dos fotones de aniquilación escapa. ¿Qué energía se registra?",
+        "text": "Un gamma produce un par electrón-positrón dentro del cristal. Sus energías cinéticas se depositan allí, y el positrón se aniquila en reposo. ¿Por qué aparecen picos de escape a energías menores que el fotopico completo?",
         "options": [
-            "1,978 MeV.",
-            "2,489 MeV.",
-            "0,511 MeV.",
-            "1,500 MeV."
+            "Uno o ambos fotones de aniquilación se absorben en el cristal y añaden energía.",
+            "Uno o ambos fotones de aniquilación salen del cristal sin depositar su energía.",
+            "El electrón y el positrón salen del cristal sin depositar ninguna energía cinética.",
+            "La energía de creación del par se pierde y nunca puede contribuir a la señal."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -733,26 +792,26 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P5, introducción y §5.6",
+                "section": "P5: espectro de producción de pares; §5.6: escape simple y doble",
                 "pdf_pages": [
                     118,
                     129
                 ]
             }
         ],
-        "justification": "La energía no depositada es la del único fotón que escapa: 0,511 MeV. Se registra 3,00 − 0,511 = 2,489 MeV, escape simple. Restar 1,022 MeV correspondería a la fuga de ambos fotones. Las condiciones sobre recogida de las partículas cargadas excluyen otras pérdidas."
+        "justification": "Los picos de escape corresponden a una pérdida bien definida: la energía que transporta uno o ambos fotones de aniquilación fuera del cristal. Si se absorben los dos, además de contenerse las partículas cargadas, se registra la energía completa. Un escape parcial de las partículas cargadas no es la condición descrita y puede dar otras pérdidas, no esos picos bien definidos."
     },
     {
         "id": "N_New_21",
         "bank": "extra",
         "origin": "new",
         "topic": "P6",
-        "text": "En un CZT la calibración es E(c) = 0,80c + 20 keV. Un pico centrado en c = 800 tiene FWHM = 20 canales. ¿Cuál es su resolución energética relativa?",
+        "text": "En P6 se calibran las posiciones de varios fotopicos de energías conocidas. ¿Qué permite hacer esa calibración al medir después una fuente desconocida sin cambiar la ganancia?",
         "options": [
-            "2,50 %.",
-            "3,03 %.",
-            "5,45 %.",
-            "2,42 %."
+            "Asignar una actividad al área del pico sin calibrar la eficiencia.",
+            "Relacionar la anchura de cada pico con una semivida sin registrar su evolución temporal.",
+            "Relacionar la altura de cada pico con una energía sin considerar su posición en canales.",
+            "Relacionar el canal de cada pico con una energía para identificar posibles emisores."
         ],
         "correct_index": 3,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -761,62 +820,63 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P6, §§6.2–6.3",
+                "section": "P6, §6.2: calibración energética",
                 "pdf_pages": [
                     143,
-                    144,
-                    145
+                    144
                 ]
             }
         ],
-        "justification": "La energía central es 0,80 × 800 + 20 = 660 keV; la FWHM en energía es 0,80 × 20 = 16 keV, porque el término independiente se cancela en una diferencia. R = 100 × 16/660 = 2,42 %. El cociente 20/800 solo sería exacto con ordenada de calibración nula."
+        "justification": "La calibración determina la relación entre el canal, ligado a la amplitud del pulso, y la energía depositada. Así se estiman energías de picos desconocidos y se contrastan con líneas de radionúclidos. No proporciona por sí sola actividad ni semivida. Mantener la ganancia evita aplicar una relación canal-energía que ya no corresponde al sistema."
     },
     {
         "id": "N_New_22",
         "bank": "extra",
         "origin": "new",
         "topic": "P6",
-        "text": "Dos gammas depositan 300 y 600 keV en un CZT con igual energía media por par y recogida completa. La electrónica es lineal. Si Q es la carga recogida y V la amplitud del impulso, ¿qué relación se espera entre el segundo suceso y el primero?",
+        "text": "Si domina la fluctuación estadística del número de portadores recogidos, ¿por qué un semiconductor puede ofrecer mejor resolución energética que un centelleador para la misma energía depositada?",
         "options": [
-            "Q₂ = 2Q₁ y V₂ = 2V₁.",
-            "Q₂ = 2Q₁ y V₂ = V₁.",
-            "Q₂ = Q₁ y V₂ = 2V₁.",
-            "Q₂ = 4Q₁ y V₂ = 4V₁."
+            "Genera más portadores útiles y la fluctuación relativa de la señal es menor.",
+            "Genera menos portadores útiles y la fluctuación relativa de la señal es menor.",
+            "Genera más portadores útiles y elimina toda contribución del ruido electrónico.",
+            "Genera menos portadores útiles y absorbe siempre toda la energía de los gammas."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
         "source_reference": "Elaboración propia a partir de los materiales docentes; no procede de un examen",
-        "matched_page": 131,
+        "matched_page": 13,
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P6, introducción",
+                "section": "Introducción, I4.1: portadores y resolución de detectores",
                 "pdf_pages": [
-                    131,
-                    132
+                    13,
+                    14,
+                    15
                 ]
             },
             {
-                "document": "Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
-                "section": "Detector semiconductor",
+                "document": "Guiones de prácticas de Física Nuclear.pdf",
+                "section": "P6, §6.3: comparación de resolución",
                 "pdf_pages": [
-                    15
+                    144,
+                    145
                 ]
             }
         ],
-        "justification": "El número de pares electrón-hueco es Edepositada/w y la carga recogida es proporcional a ese número. Si se mantiene la recogida y la ganancia, duplicar el depósito duplica carga y amplitud. Las condiciones excluyen saturación, atrapamiento distinto y multiplicación Geiger."
+        "justification": "La pequeña energía necesaria para producir un par electrón-hueco permite generar muchos portadores por evento. Cuando las fluctuaciones estadísticas dominan, una población mayor tiene menor variación relativa y permite separar mejor energías próximas. La comparación real también depende del ruido, la colección de carga y las propiedades del material; producir muchos portadores no elimina esos factores ni garantiza absorción completa."
     },
     {
         "id": "N_New_23",
         "bank": "extra",
         "origin": "new",
         "topic": "Introducción",
-        "text": "Se observa un fotón de 80 keV por una transición nuclear y otro de 120 keV por una transición electrónica atómica. Según su origen, ¿cómo se clasifican?",
+        "text": "Un fotón emitido en una transición electrónica puede tener más energía que otro emitido en una transición nuclear. ¿Cómo se distinguen en este caso los rayos X y los rayos gamma?",
         "options": [
-            "80 keV: rayos X; 120 keV: gamma.",
-            "80 keV: gamma; 120 keV: gamma.",
-            "80 keV: gamma; 120 keV: rayos X.",
-            "80 keV: rayos X; 120 keV: rayos X."
+            "Por su energía: el fotón más energético corresponde a un gamma y el menos a un rayo X.",
+            "Por su espectro: los rayos X siempre forman un continuo y los gammas siempre líneas.",
+            "Por su origen: la transición electrónica produce rayos X y la nuclear produce gammas.",
+            "Por su absorción: los rayos X solo producen fotoeléctrico y los gammas solo Compton."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -825,33 +885,33 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "Introducción, §I.1",
+                "section": "Introducción, I1: origen de rayos X y gamma",
                 "pdf_pages": [
                     3
                 ]
             },
             {
                 "document": "Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
-                "section": "Rayos X y espectros gamma",
+                "section": "Rayos X: transiciones electrónicas",
                 "pdf_pages": [
-                    11,
-                    12
+                    10,
+                    11
                 ]
             }
         ],
-        "justification": "La clasificación se hace por el mecanismo de producción: transición nuclear para gamma y transición electrónica para rayos X. Sus rangos de energía se solapan; ni el orden entre 80 y 120 keV ni un umbral de energía distinguen ambos orígenes."
+        "justification": "La distinción se basa en el proceso de emisión, no en un umbral universal de energía. Las transiciones de la corteza originan rayos X característicos y las transiciones entre niveles nucleares originan gammas; sus intervalos de energía pueden solaparse. Ambos son fotones sin carga y sus formas de interacción no se separan por esa etiqueta."
     },
     {
         "id": "N_New_24",
         "bank": "extra",
         "origin": "new",
         "topic": "Introducción",
-        "text": "En una desintegración β⁻ de un núcleo de número másico A y número atómico Z, ¿qué ocurre con el núcleo y por qué hay un continuo de energías beta aun fijando el estado final?",
+        "text": "Una transición beta alimenta un único estado del núcleo hijo. Aun así, los electrones emitidos presentan un espectro continuo de energías. ¿Cuál es la razón?",
         "options": [
-            "A constante, Z−1; energía compartida con el antineutrino.",
-            "A constante, Z+1; energía compartida con el antineutrino.",
-            "A−1, Z constante; energía compartida con el antineutrino.",
-            "A constante, Z+1; energía distribuida por pérdidas en aire."
+            "La energía disponible toma cualquier valor porque no se conserva en cada desintegración.",
+            "La energía disponible se reparte entre el electrón, el antineutrino y el retroceso nuclear.",
+            "La energía disponible depende de la tensión del detector y cambia para cada electrón.",
+            "La energía disponible corresponde a distintos niveles aunque el estado final sea único."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Guiones de prácticas de Física Nuclear.pdf",
@@ -860,33 +920,27 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "Introducción, §I.2.4",
+                "section": "Introducción, I2.4: espectro beta; P4: desintegración beta",
                 "pdf_pages": [
                     6,
-                    7
-                ]
-            },
-            {
-                "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P4, ecuación (4.1)",
-                "pdf_pages": [
+                    7,
                     95
                 ]
             }
         ],
-        "justification": "Un neutrón se transforma en protón, electrón y antineutrino. Se conserva A y aumenta Z. La cinemática de varios productos permite un reparto variable de la energía incluso para una misma transición; el continuo existe antes de cualquier pérdida de la beta en aire."
+        "justification": "Incluso fijado el estado final nuclear, el reparto de energía y momento entre las partículas finales puede variar. Por eso la energía del electrón no es única; el antineutrino transporta una parte variable y el núcleo también retrocede. El continuo pertenece a la emisión, no lo crea la tensión del detector ni una violación de la conservación de energía."
     },
     {
         "id": "N_New_25",
         "bank": "extra",
         "origin": "new",
         "topic": "Tema 5",
-        "text": "Una fuente tenía actividad inicial de 0,20 μCi y han transcurrido exactamente dos semividas. Con 1 Ci = 3,7×10¹⁰ Bq, ¿cuál es su actividad actual?",
+        "text": "Una fuente puntual se aleja del detector sin interponer absorbentes. Su tasa de cuentas disminuye, pero el decaimiento durante la medida es despreciable. ¿Qué ocurre con la actividad de la fuente?",
         "options": [
-            "1850 Bq.",
-            "3700 Bq.",
-            "7400 Bq.",
-            "925 Bq."
+            "Permanece igual; disminuye la fracción de radiación que alcanza el detector.",
+            "Disminuye; su actividad coincide con la tasa de cuentas registrada por el detector.",
+            "Permanece igual; el detector intercepta la misma fracción de emisiones.",
+            "No puede saberse; la actividad depende de la eficiencia del detector."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
@@ -895,33 +949,34 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
-                "section": "Actividad y ley de la desintegración",
+                "section": "Ley de desintegración radiactiva: actividad",
                 "pdf_pages": [
                     2
                 ]
             },
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P4, §§4.8.2 y 4.8.4",
+                "section": "P4, §4.8: eficiencia y factor geométrico",
                 "pdf_pages": [
+                    101,
                     102,
-                    103
+                    104
                 ]
             }
         ],
-        "justification": "Tras dos semividas queda 1/4 de la actividad: 0,20/4 = 0,050 μCi. Como 1 μCi = 3,7×10⁴ Bq, resulta 1850 Bq. Es una actividad de desintegración, no una tasa detectada: esta última requiere probabilidades de emisión, geometría y eficiencia."
+        "justification": "La actividad es el número de desintegraciones por unidad de tiempo en la fuente. Alejar el detector reduce el ángulo sólido y la fracción de emisiones que registra, sin modificar ese proceso nuclear. Para inferir actividad desde cuentas se necesitan, entre otros factores, geometría, eficiencia y probabilidad de emisión de la radiación considerada."
     },
     {
         "id": "N_New_26",
         "bank": "extra",
         "origin": "new",
         "topic": "Tema 5",
-        "text": "Para dos emisores alfa del mismo grupo se usa λ = K exp(−B/√E), con K y B constantes positivas. Al pasar de E₁ a E₂ > E₁ se obtiene ln(λ₂/λ₁) = ln 8. ¿Cómo se comparan sus semividas?",
+        "text": "Según la relación de Geiger–Nuttall, dentro de una familia de emisores alfa comparables, las emisiones más energéticas suelen corresponder a semividas mucho menores. ¿Qué explica esa gran sensibilidad a la energía?",
         "options": [
-            "T₂ = 8T₁.",
-            "T₂ = T₁/ln 8.",
-            "T₂ = T₁/8.",
-            "T₂ = (ln 8)T₁."
+            "La frecuencia de interacción en el detector depende muy fuertemente de la distancia a la fuente.",
+            "La energía cinética basta para superar clásicamente la barrera en estas desintegraciones.",
+            "La probabilidad de atravesar la barrera por efecto túnel depende muy fuertemente de la energía.",
+            "La actividad del núcleo se hace independiente de la barrera cuando aumenta la energía alfa."
         ],
         "correct_index": 2,
         "source_file": "Pregunta nueva · Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
@@ -930,25 +985,27 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
-                "section": "Ley de Geiger–Nuttall",
+                "section": "Relación de Geiger–Nuttall; interpretación de Gamow",
                 "pdf_pages": [
-                    4
+                    4,
+                    8,
+                    9
                 ]
             }
         ],
-        "justification": "La relación logarítmica implica λ₂/λ₁ = 8. Como T₁/₂ = ln 2/λ, el emisor con λ ocho veces mayor tiene semivida ocho veces menor. Esto trata de la probabilidad de emisión nuclear, no de frenado o dispersión de alfas en P2. La comparación exige K y B del mismo grupo."
+        "justification": "La probabilidad de transmisión cuántica a través de la barrera cambia de forma aproximadamente exponencial con los parámetros de esta y la energía. Una alfa más energética encuentra una región clásicamente prohibida menos desfavorable, por lo que la emisión puede ser mucho más probable y la semivida menor. La relación se compara entre emisores pertinentes; no es una afirmación universal sin condiciones sobre cualquier núcleo."
     },
     {
         "id": "N_New_27",
         "bank": "extra",
         "origin": "new",
         "topic": "Tema 5",
-        "text": "En el modelo de Gamow, dos estados alfa tienen la misma frecuencia de intentos ν. Sus probabilidades de transmisión son P y 2P, ambas mucho menores que uno. Si λ = νP, ¿cómo cambia la semivida?",
+        "text": "En el modelo de Gamow, la energía de una alfa emitida puede ser inferior a la altura de la barrera que la confina. ¿Cómo permite la mecánica cuántica que salga del núcleo?",
         "options": [
-            "Se duplica porque la transmisión reduce λ.",
-            "No cambia porque ν permanece constante.",
-            "Se reduce a la mitad porque se duplica ν.",
-            "Se reduce a la mitad porque se duplica λ."
+            "La alfa toma energía prestada durante el cruce y supera la barrera.",
+            "La interacción eléctrica desaparece al iniciarse la desintegración y deja libre la partícula.",
+            "La temperatura externa eleva la energía nuclear hasta superar la barrera en cada emisión.",
+            "La función de onda tiene transmisión a través de la región clásicamente prohibida."
         ],
         "correct_index": 3,
         "source_file": "Pregunta nueva · Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
@@ -957,26 +1014,26 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
-                "section": "Transmisión por efecto túnel",
+                "section": "Modelo de Gamow: transmisión cuántica de la barrera",
                 "pdf_pages": [
                     8,
                     9
                 ]
             }
         ],
-        "justification": "A frecuencia fija, duplicar la transmisión duplica λ y divide T₁/₂ por dos. La emisión subbarrera se explica por transmisión cuántica, sin acumulación de energía entre intentos ni necesidad de superar la barrera clásicamente. Es teoría de emisión radiactiva, no una cuestión del montaje de P2."
+        "justification": "El efecto túnel admite una amplitud de probabilidad al otro lado de una barrera finita aunque la energía sea menor que su máximo. La salida no requiere que la alfa tome prestada energía para saltar clásicamente: se conserva la energía en el estado final. Este es un modelo de emisión nuclear del Tema 5 y no una cuestión sobre la práctica excluida de dispersión."
     },
     {
         "id": "N_New_28",
         "bank": "extra",
         "origin": "new",
         "topic": "Tema 5",
-        "text": "En una órbita circular permitida del modelo de Bohr, la longitud de la circunferencia equivale a tres longitudes de onda del electrón. Con \\(\\lambda_{\\mathrm{dB}} = \\frac{h}{p}\\), siendo \\(p\\) su momento lineal y \\(r\\) el radio de la órbita, ¿cuánto vale su momento angular \\(L = p\\,r\\)?",
+        "text": "En la interpretación de de Broglie del modelo de Bohr, ¿por qué una órbita circular permitida debe contener un número entero de longitudes de onda \\(\\lambda_{\\mathrm{dB}}\\) en su circunferencia?",
         "options": [
-            "3ℏ.",
-            "3h.",
-            "ℏ/3.",
-            "h/3."
+            "La onda debe reproducir su fase tras una vuelta y formar un estado estacionario.",
+            "La onda debe perder su fase tras una vuelta y emitir continuamente radiación.",
+            "La onda debe aumentar su longitud tras una vuelta y compensar la atracción nuclear.",
+            "La onda debe reflejarse en el núcleo tras una vuelta y anular el movimiento orbital."
         ],
         "correct_index": 0,
         "source_file": "Pregunta nueva · Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
@@ -985,26 +1042,26 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
-                "section": "Modelo atómico de Bohr y de Broglie",
+                "section": "Modelo de Bohr y condición de de Broglie",
                 "pdf_pages": [
                     9,
                     10
                 ]
             }
         ],
-        "justification": "La condición de onda estacionaria es \\(2\\pi r = 3\\lambda_{\\mathrm{dB}} = 3h/p\\). Al despejar, \\(L = p\\,r = \\frac{3h}{2\\pi} = 3\\hbar\\). Aquí \\(p\\) es el módulo del momento lineal y \\(r\\) el radio de la órbita circular. Confundir \\(h\\) y \\(\\hbar\\) pierde el factor \\(2\\pi\\). Se pregunta por el modelo de Bohr, sin interpretar los orbitales cuánticos como trayectorias reales."
+        "justification": "Para que la onda asociada al electrón sea compatible consigo misma en la órbita, debe cerrar con la misma fase: \\(2\\pi r=n\\lambda_{\\mathrm{dB}}\\), con \\(n\\) entero positivo. Usando \\(\\lambda_{\\mathrm{dB}}=h/p\\), donde \\(p\\) es el módulo del momento lineal, resulta la cuantización \\(L=p\\,r=n\\hbar\\). La condición selecciona estados estacionarios del modelo; no supone pérdida continua de energía por vuelta."
     },
     {
         "id": "N_New_29",
         "bank": "extra",
         "origin": "new",
         "topic": "Tema 5",
-        "text": "Un tubo de rayos X con el mismo ánodo pasa de 40 a 60 kV. Se supone que ambas tensiones superan el umbral de excitación de la línea característica considerada. ¿Qué cambia en las energías del espectro?",
+        "text": "El espectro de un tubo de rayos X presenta un continuo y unas líneas características del material del blanco. ¿Qué mecanismos originan, respectivamente, esas dos partes?",
         "options": [
-            "Extremo en 40 keV; líneas a sus energías iniciales.",
-            "Extremo en 60 keV; líneas a sus energías iniciales.",
-            "Extremo en 60 keV; líneas con energía 1,5 veces mayor.",
-            "Extremo en 40 keV; líneas con energía 1,5 veces mayor."
+            "Transiciones entre niveles electrónicos atómicos y frenado de electrones en el blanco.",
+            "Frenado de electrones en el blanco y transiciones entre niveles electrónicos atómicos.",
+            "Frenado de electrones en el blanco y transiciones entre niveles energéticos nucleares.",
+            "Transiciones entre niveles energéticos nucleares y frenado de electrones en el blanco."
         ],
         "correct_index": 1,
         "source_file": "Pregunta nueva · Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
@@ -1013,7 +1070,7 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
-                "section": "Rayos X",
+                "section": "Rayos X: espectro continuo y líneas características",
                 "pdf_pages": [
                     10,
                     11,
@@ -1021,19 +1078,19 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
                 ]
             }
         ],
-        "justification": "Un electrón acelerado gana eU, energía máxima que puede ceder a un único fotón de frenado. Las líneas proceden de diferencias entre niveles del mismo ánodo, que no cambian al aumentar U. Pueden cambiar intensidades, pero no sus energías; el umbral explícito evita confundir energía de línea y posibilidad de excitarla."
+        "justification": "El frenado o desviación de los electrones en el campo del blanco permite emitir fotones de energías diversas y produce el continuo de bremsstrahlung. Si se crean vacantes en capas internas, las transiciones electrónicas que las rellenan originan líneas de energías propias del elemento. Cambiar el blanco cambia esas líneas; no convierte el continuo en un conjunto de transiciones nucleares."
     },
     {
         "id": "N_New_30",
         "bank": "extra",
         "origin": "new",
         "topic": "Tema 5",
-        "text": "Un gamma de 0,662 MeV se dispersa a 180° y el fotón resultante escapa del cristal. El electrón queda completamente frenado dentro. Con mec² = 0,511 MeV y E′ = E/(1+2E/mec²), ¿qué energía registra el detector?",
+        "text": "Un gamma sufre dispersión Compton dentro del detector y el fotón dispersado se absorbe después en él. Toda la energía de los electrones queda contenida y se integra en un solo pulso. ¿En qué parte del espectro se registra ese evento?",
         "options": [
-            "0,184 MeV.",
-            "0,662 MeV.",
-            "0,511 MeV.",
-            "0,478 MeV."
+            "En el continuo Compton, porque la primera interacción determina siempre la señal.",
+            "En un pico de escape, porque toda dispersión Compton elimina un fotón del detector.",
+            "En un pico de suma, porque dos interacciones internas corresponden a dos gammas.",
+            "En el fotopico de energía completa, porque no ha escapado energía del detector."
         ],
         "correct_index": 3,
         "source_file": "Pregunta nueva · Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
@@ -1042,7 +1099,7 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
         "references": [
             {
                 "document": "Física Cuántica - Tema 5 - Núcleos y átomos.pdf",
-                "section": "Espectros gamma y borde Compton",
+                "section": "Detección gamma: Compton y absorción",
                 "pdf_pages": [
                     12,
                     13
@@ -1050,13 +1107,13 @@ window.TEF_IV_EXTRA_QUIZ_DATABASE = [
             },
             {
                 "document": "Guiones de prácticas de Física Nuclear.pdf",
-                "section": "P5, ecuaciones (5.1)–(5.2)",
+                "section": "Introducción, I5: absorción completa por interacciones sucesivas",
                 "pdf_pages": [
-                    117,
-                    118
+                    16,
+                    17
                 ]
             }
         ],
-        "justification": "El fotón que escapa tiene E′ = 0,662/(1+2×0,662/0,511) = 0,184 MeV. El depósito es E−E′ = 0,478 MeV, borde Compton. Si ese fotón se absorbiera después en el mismo cristal y dentro de la integración temporal, el suceso iría al fotopico de 0,662 MeV."
+        "justification": "El espectro registra la energía total depositada durante el pulso, no solo la primera interacción. Si el fotón dispersado se absorbe y se contienen los electrones, la suma de depósitos es la energía del gamma incidente: el evento contribuye al fotopico. El continuo Compton aparece cuando parte de la energía, habitualmente la del fotón dispersado, escapa. Interacciones sucesivas de un único gamma no son una coincidencia de dos gammas."
     }
 ];
