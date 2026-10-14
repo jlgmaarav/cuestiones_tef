@@ -47,7 +47,9 @@ Se reescriben las 30 nuevas para pedir mecanismos, interpretación de medidas y 
 
 ## Comprobación funcional
 
-La suite sin dependencias se ejecuta con node --test tests/quiz.test.cjs. Comprueba 15 casos, incluido un centenar de barajados y la correspondencia entre cada opción válida y su texto después de barajar. Se verifica que las nuevas no contienen datos numéricos ni consignas de cálculo, y que sus figuras se muestran sin cifras o tablas y con descripciones y leyendas. Las pruebas estructurales de referencias comprueban rangos de página; la correspondencia con los apartados se revisa documentalmente.
+La suite sin dependencias se ejecuta con node --test tests/quiz.test.cjs. Comprueba 16 casos, incluido un centenar de barajados y la correspondencia entre cada opción válida y su texto después de barajar. Se verifica que las nuevas no contienen datos numéricos ni consignas de cálculo, y que sus figuras se muestran sin cifras o tablas y con descripciones y leyendas. Las pruebas estructurales de referencias comprueban rangos de página; la correspondencia con los apartados se revisa documentalmente.
+
+El examen de TEF IV dispone de una hora. Se comprueba que sigue abierto después de media hora, conserva el plazo al recargar y entrega automáticamente al cumplirse la hora. Las sesiones anteriores todavía en curso reciben la ampliación una sola vez, sin perder respuestas ni tiempo consumido. Los resultados ya entregados conservan su duración, y TEF III mantiene sus 30 minutos.
 
 Se comprueban las tres sesiones independientes (práctica anterior, práctica nueva y examen), la reconstrucción desde datos vigentes, el rechazo de identificadores retirados o de otro bloque, la actualización de opciones modificadas, el plazo real del examen y la recuperación del resumen final. Las claves v3/v4/v5 no se leen como v6; los rankings y salas también usan v6 para separar las notas de la versión numérica anterior. El banco de TEF III se verifica con una huella SHA-256 de sus 101 registros y se ejercitan sus grupos y la corrección de examen.
 
