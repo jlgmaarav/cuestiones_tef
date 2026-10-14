@@ -198,11 +198,13 @@ test('cambiar bloques y modos conserva las tres sesiones independientes y sus re
 
 test('recargar un examen conserva orden, respuestas, plazo real y resultados terminados', () => {
     const a=app(); a.run("initQuiz(); switchMode('exam'); selectOption(state.questions[0].correct_index);");
+    assert.equal(a.nodes.get('timer-val').textContent,'60:00');
     const order=a.json('state.questions.map(q=>q.id)');
     a.clock.now+=65000;
     const b=app('iv',a.storage,a.clock); b.run('initQuiz();');
     assert.deepEqual(b.json('state.questions.map(q=>q.id)'),order);
     assert.equal(b.run('state.examTimeElapsed'),65);
+    assert.equal(b.nodes.get('timer-val').textContent,'58:55');
     assert.equal(b.run('state.userAnswers[0]===state.questions[0].correct_index'),true);
     b.run('submitExam();');
     assert.equal(b.nodes.get('results-score-text').textContent,'1 / 68');
@@ -218,11 +220,47 @@ test('corrección de las 68 respuestas barajadas y entrega automática al agotar
     const a=app(); a.run("initQuiz(); switchMode('exam'); state.userAnswers=state.questions.map(q=>q.correct_index); saveStateToLocalStorage();");
     a.clock.now+=1801000;
     const b=app('iv',a.storage,a.clock); b.run('initQuiz();');
-    assert.equal(b.run('state.examSubmitted'),true);
-    assert.equal(b.nodes.get('results-score-text').textContent,'68 / 68');
-    assert.equal(b.nodes.get('results-percent-text').textContent,'100%');
-    assert.equal(b.nodes.get('results-time-text').textContent,'30:00');
-    assert.equal(b.intervals.size,0);
+    assert.equal(b.run('state.examSubmitted'),false);
+    assert.equal(b.nodes.get('timer-val').textContent,'29:59');
+    b.clock.now+=1800000;
+    const c=app('iv',b.storage,b.clock); c.run('initQuiz();');
+    assert.equal(c.run('state.examSubmitted'),true);
+    assert.equal(c.nodes.get('results-score-text').textContent,'68 / 68');
+    assert.equal(c.nodes.get('results-percent-text').textContent,'100%');
+    assert.equal(c.nodes.get('results-time-text').textContent,'60:00');
+    assert.equal(c.intervals.size,0);
+    const d=app('iv',c.storage,c.clock); d.run('initQuiz();');
+    assert.equal(d.nodes.get('results-time-text').textContent,'60:00');
+});
+
+test('los exámenes de media hora en curso se amplían una vez; los entregados conservan su tiempo', () => {
+    const a=app(); a.run("initQuiz(); switchMode('exam'); selectOption(0);");
+    const key=a.run('getLocalStorageKey()');
+    const saved=JSON.parse(a.storage.get(key));
+    delete saved.examTimeSeconds; // Las sesiones anteriores no guardaban esta propiedad.
+    saved.examDeadline=a.clock.now+1800000;
+    a.storage.set(key,JSON.stringify(saved));
+    a.clock.now+=300000;
+    const b=app('iv',a.storage,a.clock); b.run('initQuiz();');
+    assert.equal(b.nodes.get('timer-val').textContent,'55:00');
+    assert.equal(b.run('state.userAnswers[0]'),0);
+    const deadline=b.run('state.examDeadline');
+    assert.equal(JSON.parse(b.storage.get(key)).examTimeSeconds,3600);
+    const c=app('iv',b.storage,b.clock); c.run('initQuiz();');
+    assert.equal(c.run('state.examDeadline'),deadline);
+    c.clock.now+=1800000;
+    c.run('submitExam();');
+    const d=app('iv',c.storage,c.clock); d.run('initQuiz();');
+    assert.equal(d.nodes.get('results-time-text').textContent,'35:00');
+    const completed=JSON.parse(d.storage.get(key));
+    delete completed.examTimeSeconds;
+    completed.examTimeElapsed=1800;
+    completed.examDeadline=a.clock.now;
+    d.storage.set(key,JSON.stringify(completed));
+    const e=app('iv',d.storage,d.clock); e.run('initQuiz();');
+    assert.equal(e.run('state.examSubmitted'),true);
+    assert.equal(e.nodes.get('results-time-text').textContent,'30:00');
+    assert.equal(e.run('state.examDeadline'),completed.examDeadline);
 });
 
 test('un examen TEF IV nunca se reduce al subconjunto de fallos guardado', () => {
@@ -245,7 +283,9 @@ test('TEF III conserva íntegramente sus 101 preguntas, ambos bloques y la corre
     a.run('selectOption(state.questions[0].correct_index); verifyAnswer();');
     assert.equal(a.nodes.get('stat-correct').textContent,1);
     a.run("switchPool('extra');"); assert.equal(a.run('state.questions.length'),48);
-    a.run("switchMode('exam'); state.userAnswers=state.questions.map(q=>q.correct_index); submitExam();");
+    a.run("switchMode('exam');");
+    assert.equal(a.nodes.get('timer-val').textContent,'30:00');
+    a.run("state.userAnswers=state.questions.map(q=>q.correct_index); submitExam();");
     assert.equal(a.nodes.get('results-score-text').textContent,'48 / 48');
     assert.equal(a.run('getLocalStorageKey()'),'lab_physics_quiz_state_extra_v1');
 });

@@ -1537,7 +1537,7 @@ let state = {
     userAnswers: new Array(QUIZ_DATABASE.length).fill(null), // guarda índices 0-3 o null
     verified: new Array(QUIZ_DATABASE.length).fill(false),  // para modo práctica
     mode: 'practice', // 'practice' o 'exam'
-    examTimeSeconds: 1800, // 30 minutos
+    examTimeSeconds: COURSE_ID === 'iv' ? 3600 : 1800, // TEF IV: 1 hora; TEF III: 30 minutos
     examTimerInterval: null,
     examTimeElapsed: 0,
     examDeadline: null,
@@ -2674,6 +2674,7 @@ function saveStateToLocalStorage() {
             onlyFailedMode: state.onlyFailedMode,
             examSubmitted: state.examSubmitted,
             examTimeElapsed: state.examTimeElapsed,
+            examTimeSeconds: state.examTimeSeconds,
             examDeadline: state.examDeadline,
             currentIndex: state.currentIndex,
             // Guardamos la lista de preguntas completa (con su orden y opciones barajadas)
@@ -2780,8 +2781,14 @@ function loadCurrentTEFIVState(saved) {
     const currentId = saved.questions[saved.currentIndex]?.id;
     state.currentIndex = Math.max(0, state.questions.findIndex(question => question.id === currentId));
     state.examSubmitted = saved.examSubmitted === true && !bankChanged;
-    state.examTimeElapsed = Number.isFinite(saved.examTimeElapsed) ? Math.max(0, Math.min(1800, saved.examTimeElapsed)) : 0;
+    state.examTimeElapsed = Number.isFinite(saved.examTimeElapsed) ? Math.max(0, Math.min(state.examTimeSeconds, saved.examTimeElapsed)) : 0;
     state.examDeadline = !bankChanged && Number.isFinite(saved.examDeadline) ? saved.examDeadline : null;
+    // Ampliar también los exámenes en curso anteriores, conservando el tiempo consumido.
+    // Al persistir la duración vigente, la ampliación solo se aplica una vez.
+    const savedDuration = Number.isFinite(saved.examTimeSeconds) && saved.examTimeSeconds > 0 ? saved.examTimeSeconds : 1800;
+    if (state.mode === 'exam' && !state.examSubmitted && state.examDeadline !== null) {
+        state.examDeadline += (state.examTimeSeconds - savedDuration) * 1000;
+    }
     saveStateToLocalStorage();
     return true;
 }
